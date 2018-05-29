@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import javax.swing.JScrollPane;
 
 public class FRMModelo extends JPanel {
 	private JTextField txtModelo;
@@ -117,19 +118,12 @@ public class FRMModelo extends JPanel {
 			new String[] {
 				"Aviamento", "Quantidade", "Custo Aviamento", "A\u00E7\u00E3o"
 			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Object.class, Integer.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		)
+		);
 		table.getColumnModel().getColumn(0).setPreferredWidth(252);
 		table.getColumnModel().getColumn(1).setPreferredWidth(107);
 		table.getColumnModel().getColumn(2).setPreferredWidth(188);
 		table.setBounds(38, 289, 570, -53);
-		add(table);
 		
 		Label lblModelagem = new Label("Modelagem\r\n");
 		lblModelagem.setBounds(38, 318, 70, 24);
@@ -182,6 +176,12 @@ public class FRMModelo extends JPanel {
 		JButton btnCancelar = new JButton("Cancelar\r\n");
 		btnCancelar.setBounds(733, 350, 97, 25);
 		add(btnCancelar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(38, 211, 494, 83);
+		scrollPane.setViewportView(table);
+		add(scrollPane);
+		
 		
 
 	}
