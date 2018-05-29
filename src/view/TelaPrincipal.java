@@ -1,28 +1,17 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Graphics;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.SystemColor;
-import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
-import javax.swing.UIManager;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JMenu;
-import java.awt.Window.Type;
-import java.text.ParseException;
-import javax.swing.JScrollPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class TelaPrincipal extends JFrame implements ActionListener {
 
