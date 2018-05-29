@@ -26,7 +26,7 @@ public class FRMTecido extends JPanel {
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
 		
-		JLabel lblAviamento = new JLabel("Piloto");
+		JLabel lblAviamento = new JLabel("Tecido");
 		lblAviamento.setBounds(12, 0, 224, 34);
 		lblAviamento.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		add(lblAviamento);
