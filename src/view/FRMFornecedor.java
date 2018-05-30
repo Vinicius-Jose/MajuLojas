@@ -44,7 +44,7 @@ public class FRMFornecedor extends JPanel {
 		lblNome.setBounds(10, 95, 105, 26);
 		add(lblNome);
 		
-		txtFone = new JFormattedTextField(new MaskFormatter("(##)#####-####"));
+		txtFone = new JFormattedTextField(new MaskFormatter("(###)#####-####"));
 		txtFone.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtFone.setBounds(127, 208, 202, 22);
 		add(txtFone);

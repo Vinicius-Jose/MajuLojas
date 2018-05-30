@@ -1,10 +1,11 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,21 +13,23 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-public class FRMCliente extends JPanel {
+public class FRMMotorista extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtFone;
+	private JTextField txtPlaca;
 	/**
 	 * Create the panel.
 	 * @throws ParseException 
 	 */
-	public FRMCliente() throws ParseException {
+	public FRMMotorista() throws ParseException {
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
 		
-		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setBounds(12, 0, 224, 34);
-		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		add(lblCliente);
+		
+		JLabel lblMotorista = new JLabel("Motorista");
+		lblMotorista.setBounds(12, 0, 202, 34);
+		lblMotorista.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		add(lblMotorista);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 44, 1034, 11);
@@ -47,6 +50,7 @@ public class FRMCliente extends JPanel {
 		txtFone.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtFone.setBounds(127, 208, 202, 22);
 		add(txtFone);
+		
 		txtFone.setColumns(10);
 		
 		JLabel lblTelefone = new JLabel("Telefone");
@@ -57,14 +61,20 @@ public class FRMCliente extends JPanel {
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(218, 547, 97, 25);
 		add(btnSalvar);
-		
+	
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(496, 547, 97, 25);
 		add(btnCancelar);
 		
+		JLabel lblNumeroPlaca = new JLabel("N\u00FAmero da Placa");
+		lblNumeroPlaca.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNumeroPlaca.setBounds(12, 297, 134, 50);
+		add(lblNumeroPlaca);
 		
+		txtPlaca = new JTextField();
+		txtPlaca.setBounds(158, 312, 171, 22);
+		add(txtPlaca);
+		txtPlaca.setColumns(10);
+
 	}
-
-
-	}
-
+}
