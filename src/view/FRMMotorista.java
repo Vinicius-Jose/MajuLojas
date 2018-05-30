@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+
+import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 
 public class FRMMotorista extends JPanel {
@@ -59,12 +61,8 @@ public class FRMMotorista extends JPanel {
 		add(lblTelefone);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(218, 547, 97, 25);
+		btnSalvar.setBounds(635, 547, 97, 25);
 		add(btnSalvar);
-	
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(496, 547, 97, 25);
-		add(btnCancelar);
 		
 		JLabel lblNumeroPlaca = new JLabel("N\u00FAmero da Placa");
 		lblNumeroPlaca.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -75,6 +73,10 @@ public class FRMMotorista extends JPanel {
 		txtPlaca.setBounds(158, 312, 171, 22);
 		add(txtPlaca);
 		txtPlaca.setColumns(10);
+		
+		JButton btnCancelar = new JButton("Cancelar\r\n");
+		btnCancelar.setBounds(292, 547, 97, 25);
+		add(btnCancelar);
 
 	}
 }

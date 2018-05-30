@@ -182,6 +182,13 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if (a.getActionCommand().equals("Motorista")){
+			try {
+				trocaTela(new FRMMotorista());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
