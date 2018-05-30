@@ -61,11 +61,11 @@ public class FRMModelagem extends JPanel {
 		add(fttData);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(180, 554, 97, 25);
+		btnSalvar.setBounds(531, 564, 97, 25);
 		add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(485, 554, 97, 25);
+		btnCancelar.setBounds(203, 564, 97, 25);
 		add(btnCancelar);
 		
 		

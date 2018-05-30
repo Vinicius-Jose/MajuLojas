@@ -71,11 +71,11 @@ public class FRMGrade extends JPanel {
 		add(label);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(218, 547, 97, 25);
+		btnSalvar.setBounds(530, 547, 97, 25);
 		add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(496, 547, 97, 25);
+		btnCancelar.setBounds(238, 547, 97, 25);
 		add(btnCancelar);
 	}
 }

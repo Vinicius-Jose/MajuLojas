@@ -55,11 +55,11 @@ public class FRMCliente extends JPanel {
 		add(lblTelefone);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(218, 547, 97, 25);
+		btnSalvar.setBounds(546, 547, 97, 25);
 		add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(496, 547, 97, 25);
+		btnCancelar.setBounds(232, 547, 97, 25);
 		add(btnCancelar);
 		
 		

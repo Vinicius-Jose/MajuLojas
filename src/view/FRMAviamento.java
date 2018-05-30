@@ -59,11 +59,11 @@ public class FRMAviamento extends JPanel {
 		textField.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(122, 348, 97, 25);
+		btnSalvar.setBounds(368, 348, 97, 25);
 		add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(312, 348, 97, 25);
+		btnCancelar.setBounds(122, 348, 97, 25);
 		add(btnCancelar);
 		
 	}

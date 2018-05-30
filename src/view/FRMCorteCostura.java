@@ -100,11 +100,11 @@ public class FRMCorteCostura extends JPanel {
 		add(btnAtualizarEstoque);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(350, 538, 97, 25);
+		btnSalvar.setBounds(633, 538, 97, 25);
 		add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(627, 538, 97, 25);
+		btnCancelar.setBounds(338, 538, 97, 25);
 		add(btnCancelar);
 		
 	}

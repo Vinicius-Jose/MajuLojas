@@ -94,11 +94,11 @@ public class FRMTecido extends JPanel {
 		add(lblQuantidadeDeRolo);
 		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(233, 556, 97, 25);
+		btnSalvar.setBounds(594, 556, 97, 25);
 		add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(562, 556, 97, 25);
+		btnCancelar.setBounds(273, 556, 97, 25);
 		add(btnCancelar);
 	}
 
