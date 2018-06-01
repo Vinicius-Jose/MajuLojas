@@ -12,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
 
 public class TelaPrincipal extends JFrame implements ActionListener {
 
@@ -84,18 +85,22 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 		JMenuItem mntmGrade = new JMenuItem("Grade");
 		mntmGrade.addActionListener(this);
 		mnModelo.add(mntmGrade);
+		mntmGrade.addActionListener(this);
 		
-		JMenuItem mntmEncomenda = new JMenuItem("Encomenda\r\n");
+		JMenuItem mntmEncomenda = new JMenuItem("Encomenda");
 		mntmEncomenda.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		menuBar.add(mntmEncomenda);
+		mntmEncomenda.addActionListener(this);
 		
-		JMenuItem mntmVenda = new JMenuItem("Venda\r\n");
+		JMenuItem mntmVenda = new JMenuItem("Venda");
 		mntmVenda.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		menuBar.add(mntmVenda);
+		mntmVenda.addActionListener(this);
 		
 		JMenuItem mntmEstoque = new JMenuItem("Estoque");
 		mntmEstoque.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		menuBar.add(mntmEstoque);
+		mntmEstoque.addActionListener(this);
 		
 		JMenuItem mntmFornecedores = new JMenuItem("Fornecedores");
 		mntmFornecedores.addActionListener(this);
@@ -103,6 +108,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 		menuBar.add(mntmFornecedores);
 		
 		JMenuItem mntmCliente = new JMenuItem("Cliente");
+		mntmCliente.setHorizontalAlignment(SwingConstants.CENTER);
 		mntmCliente.addActionListener(this);
 		mntmCliente.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		menuBar.add(mntmCliente);
@@ -110,12 +116,14 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 		JMenuItem mntmMotorista = new JMenuItem("Motorista");
 		mntmMotorista.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		menuBar.add(mntmMotorista);
+		mntmMotorista.addActionListener(this);
 		
 		JMenuItem mntmRelatrio = new JMenuItem("Relat\u00F3rio");
 		mntmRelatrio.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		menuBar.add(mntmRelatrio);
+		mntmRelatrio.addActionListener(this);
 		
-		mntmMotorista.addActionListener(this);
+		
 		panel = new JPanel();
 		panel.setBounds(0, 31, 1040, 660);
 		contentPane.add(panel);
@@ -142,28 +150,24 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 			try {
 				trocaTela(new FRMCorteCostura());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if(a.getActionCommand().equals("Modelagem")){
 			try {
 				trocaTela(new FRMModelagem());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if(a.getActionCommand().equals("Piloto")){
 			try {
 				trocaTela(new FRMPiloto());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if(a.getActionCommand().equals("Tecido")){
 			try {
 				trocaTela(new FRMTecido());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if (a.getActionCommand().equals("Grade")){
@@ -172,23 +176,38 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 			try {
 				trocaTela(new FRMCliente());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if( a.getActionCommand().equals("Fornecedores")){
 			try {
 				trocaTela(new FRMFornecedor());
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else if (a.getActionCommand().equals("Motorista")){
 			try {
 				trocaTela(new FRMMotorista());
 			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}else if (a.getActionCommand().equals("Relat\u00F3rio")){
+			trocaTela(new FRMRelatorio());
+		}else if (a.getActionCommand().equals("Venda")){
+			try {
+				trocaTela(new FRMVenda());
+			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if (a.getActionCommand().equals("Encomenda")){
+			try {
+				trocaTela(new FRMEncomenda());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if (a.getActionCommand().equals("Estoque")){
+			trocaTela(new FRMEstoque());
 		}
 		
 	}

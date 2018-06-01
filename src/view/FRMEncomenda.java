@@ -136,6 +136,7 @@ public class FRMEncomenda extends JPanel {
 		add(lblRetiradaNaLoja);
 		
 		JRadioButton rdbtnSim = new JRadioButton("Sim");
+		rdbtnSim.setSelected(true);
 		rdbtnSim.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		rdbtnSim.setBounds(661, 70, 71, 23);
 		add(rdbtnSim);
