@@ -5,6 +5,8 @@ public class ItemVenda {
 	private int quantidade;
 	
 	private float valorTotalPeca;
+	
+	private Modelo modelo;
 
 	public int getQuantidade() {
 		return quantidade;
@@ -15,6 +17,7 @@ public class ItemVenda {
 	}
 
 	public float getValorTotalPeca() {
+		valorTotalPeca= quantidade * modelo.getMargemCusto();
 		return valorTotalPeca;
 	}
 
