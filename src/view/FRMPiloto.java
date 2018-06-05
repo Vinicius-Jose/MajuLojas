@@ -40,7 +40,7 @@ public class FRMPiloto extends JPanel {
 		cbModelo.setBounds(80, 85, 352, 22);
 		add(cbModelo);
 		
-		txtPrecoPiloto = new JTextField();
+		txtPrecoPiloto = new JFormattedTextField(new MaskFormatter("####.##"));
 		txtPrecoPiloto.setBounds(80, 210, 116, 22);
 		add(txtPrecoPiloto);
 		txtPrecoPiloto.setColumns(10);
