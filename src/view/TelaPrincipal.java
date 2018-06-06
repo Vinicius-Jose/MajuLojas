@@ -37,6 +37,7 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 
 	/**
 	 * Create the frame.
+	 * jhfdjsahflkjsafhdsajkfhdsakfhlsafhdlj
 	 */
 	public TelaPrincipal() {
 		setType(Type.POPUP);
