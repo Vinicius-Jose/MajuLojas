@@ -34,6 +34,7 @@ public class FRMModelo extends JPanel {
 	 * @throws ParseException 
 	 */
 	public FRMModelo() throws ParseException {
+		setBackground(Color.WHITE);
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
 		

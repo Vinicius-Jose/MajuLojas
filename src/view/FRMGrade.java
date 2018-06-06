@@ -26,7 +26,7 @@ public class FRMGrade extends JPanel {
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
 		
-		JLabel lblAviamento = new JLabel("Modelagem");
+		JLabel lblAviamento = new JLabel("Grade");
 		lblAviamento.setForeground(Color.BLACK);
 		lblAviamento.setBackground(Color.WHITE);
 		lblAviamento.setBounds(12, 0, 224, 34);
