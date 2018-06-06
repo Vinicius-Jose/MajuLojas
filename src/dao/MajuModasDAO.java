@@ -21,7 +21,7 @@ public interface MajuModasDAO {
 	public void Alterar(CorteCostura corteCostura);
 	
 	public void adicionar(Encomenda encomenda);
-	public void Remover(Encomenda encomenda);
+	public void Remover(Encomenda encomenda, Integer codigoEncomenda);
 	public void Alterar(Encomenda encomenda);
 
 	public void adicionar(Estoque estoque);
@@ -36,24 +36,12 @@ public interface MajuModasDAO {
 	public void Remover(Grade grade);
 	public void Alterar(Grade grade);
 	
-	public void adicionar(ItemEncomenda itemEncomenda);
-	public void Remover(ItemEncomenda itemEncomenda);
-	public void Alterar(ItemEncomenda itemEncomenda);
-	
-	public void adicionar(ItemPeca itemPeca);
-	public void Remover(ItemPeca itemPeca);
-	public void Alterar(ItemPeca itemPeca);
-	
-	public void adicionar(ItemVenda itemVenda);
-	public void Remover(ItemVenda itemVenda);
-	public void Alterar(ItemVenda itemVenda);
-	
 	public void adicionar(Modelagem modelagem);
 	public void Remover(Modelagem modelagem);
 	public void Alterar(Modelagem modelagem);
 	
 	public void adicionar(Modelo modelo);
-	public void Remover(Modelo modelo);
+	public void Remover(Modelo modelo, Integer codigoAviamento);
 	public void Alterar(Modelo modelo);
 	
 	public void adicionar(Motorista motorista);
@@ -65,7 +53,7 @@ public interface MajuModasDAO {
 	public void Alterar(Piloto piloto);
 
 	public void adicionar(RelatorioLucro lucro);
-	public void Remover(RelatorioLucro lucro);
+	public void Remover(Integer codigoVenda);
 	public void Alterar(RelatorioLucro lucro);
 	
 	public void adicionar(Tecido tecido);

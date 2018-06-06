@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import model.*;
 
 
@@ -31,8 +33,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	/**
 	 * Movimentação dos dados da tabela Motorista
-
-	 * 
+	 *
 	 */
 	
 	@Override
@@ -62,13 +63,11 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public void Remover(Motorista motorista) {
 		
 		try {			
-			String sql = "DELETE Motorista " +
-					" VALUES ( ?, ?, ? ) ";
+			String sql = "DELETE FROM Motorista " +
+					" WHERE num_Placa = ? ";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
-			stmt.setString(1, motorista.getNome() );
-			stmt.setString(2, motorista.getNumPlaca() );
-			stmt.setString(3, motorista.getTelefoneContato() );
+			stmt.setString(1, motorista.getNumPlaca() );
 			
 			stmt.executeUpdate();
 			
@@ -83,8 +82,30 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	
 	@Override
-	public void Alterar(Motorista motoriste) {
-		// TODO Auto-generated method stub
+	public void Alterar(Motorista motorista) {
+		
+		try {			
+			String sql = "UPDATE Motorista SET"
+					+ "nome = ?' , "
+					+ "num_Placa = ?, "
+					+ "telefone = ? "
+					+ "WHERE num_Placa = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setString(1, motorista.getNome() );
+			stmt.setString(2, motorista.getNumPlaca() );
+			stmt.setString(3, motorista.getTelefoneContato() );
+			stmt.setString(4, motorista.getNumPlaca());
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -127,7 +148,20 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Aviamento aviamento) {
-		// TODO Auto-generated method stub
+		try {			
+			String sql = "DELETE FROM Aviamento WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setInt(1, aviamento.getCodigo() );
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -138,7 +172,31 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Aviamento aviamento) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Aviamento SET"
+					+ " data = ?' ,"
+					+ " valor_Unitario = ?,"
+					+ " nome = ?,"
+					+ " FornecedorId = ? "
+					+ "WHERE codigo = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setDate(1, aviamento.getDataCompra() );
+			stmt.setDouble(2, aviamento.getValorCompra() );
+			stmt.setString(3, aviamento.getNome() );
+			stmt.setInt(4, aviamento.getFornecedor().getId());
+			stmt.setInt(5, aviamento.getCodigo());
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -180,7 +238,20 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Capital capital) {
-		// TODO Auto-generated method stub
+		try {			
+			String sql = "DELETE FROM Capital WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setInt(1, capital.getCodigo() );
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -191,7 +262,27 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Capital capital) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Capital SET"
+					+ " data = ?, "
+					+ " valor_Capital = ?"
+					+ "WHERE codigo = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setDate(1, capital.getMesAno() );
+			stmt.setDouble(2, capital.getValorCapital() );
+			stmt.setInt(3, capital.getCodigo() );
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -262,7 +353,27 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Cliente cliente) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Cliente SET"
+					+ " nome = ? ,"
+					+ " telefone = ?"
+					+ "WHERE id = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setString(1, cliente.getNome() );
+			stmt.setString(2, cliente.getTelefoneContato() );
+			stmt.setInt(3, cliente.getId() );
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -331,7 +442,32 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(CorteCostura corteCostura) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Corte_Costura SET"
+					+ " valor_Corte = ?, "
+					+ " valor_Costura = ?, "
+					+ "qtd_Peca_Cortada = ?, "
+					+ "data = ?"
+					+ "WHERE id = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setFloat(1, corteCostura.getValorCorte() );
+			stmt.setFloat(2, corteCostura.getValorCostura() );
+			stmt.setInt(3, corteCostura.getQuantidadePecasCortadas());
+			stmt.setDate(4, corteCostura.getDataCorte());
+			stmt.setInt(5, corteCostura.getCodigo());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -369,6 +505,29 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		}
 		
 		
+		try {			
+			String sql = "INSERT INTO Item_Encomenda " +
+					" VALUES ( ?, ?, ?, ? ) ";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			for (ItemEncomenda ie : encomenda.getItemEncomenda()) {
+				
+			
+			stmt.setInt(1, encomenda.getCliente().getId());
+			//pegar o codigo do modelo
+			stmt.setInt(2, ie.getModelo().getCodigo());
+			stmt.setInt(3, ie.getQuantidade() );
+			stmt.setDouble(4, ie.getValorItemEncomenda() );
+			
+			stmt.executeUpdate();
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 
@@ -377,12 +536,30 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 
 	@Override
-	public void Remover(Encomenda encomenda) {
+	public void Remover(Encomenda encomenda, Integer codigoEncomenda) {
 		try {			
 			String sql = "DELETE FROM Encomenda WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
 			stmt.setInt(1, encomenda.getCodigo() );
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {			
+			String sql = "DELETE FROM Item_Encomenda "
+					+ "WHERE EncomendaCliendeId = ? AND "
+					+ "ModeloCodigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setInt(1, encomenda.getCliente().getId());
+			stmt.setInt(2, codigoEncomenda);
 				
 			stmt.executeUpdate();
 			
@@ -402,7 +579,60 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Encomenda encomenda) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Encomenda SET"
+					+ " data_Encomenda = ?, "
+					+ " data_Retirada = ?, "
+					+ "valor_Total = ?,"
+					+ "status_Encomenda = ?, "
+					+ "motoristanum_Placa = ? "
+					+ "WHERE id = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setDate(1, encomenda.getDataEncomenda() );
+			stmt.setDate(2, encomenda.getDataRetirada() );
+			stmt.setFloat(3, encomenda.getValorTotalEncomenda());
+			stmt.setString(4, encomenda.getStatus().getValorEnum());
+			stmt.setString(5, encomenda.getMotorista().getNumPlaca());
+			stmt.setInt(6, encomenda.getCodigo());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {			
+			String sql = "UPDATE Item_Encomenda SET"
+					+ " qunatidade = ?,"
+					+ " valor_Item_Encomenda = ? "
+					+ "WHERE EncomendaCienteId = ? AND"
+					+ "ModeloCodigo = ?";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			for (ItemEncomenda ie : encomenda.getItemEncomenda()) {
+				
+				
+				stmt.setInt(1, encomenda.getCliente().getId());
+				stmt.setInt(2, ie.getQuantidade() );
+				stmt.setDouble(3, ie.getValorItemEncomenda() );
+				stmt.setInt(4, ie.getModelo().getCodigo());
+				
+				stmt.executeUpdate();
+				}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -467,7 +697,26 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Estoque estoque) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Estoque SET"
+					+ " qtd_Grade = ? "
+					+ "WHERE id = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setInt(1, estoque.getQuantidade() );
+			stmt.setInt(2, estoque.getId() );
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -511,7 +760,22 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Fornecedor fornecedor) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "DELETE FROM Fornecedor WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setInt(1, fornecedor.getId() );
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -522,7 +786,27 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Fornecedor fornecedor) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Fornecedor SET"
+					+ " nome = ?,"
+					+ "telefone = ? "
+					+ "WHERE id = ? ";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setString(1, fornecedor.getNome() );
+			stmt.setString(2, fornecedor.getTelefoneFornecedor() );
+			stmt.setInt(3, fornecedor.getId());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -566,7 +850,22 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Grade grade) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "DELETE FROM Grade WHERE codigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setInt(1, grade.getCodigo() );
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -577,31 +876,23 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Grade grade) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	/**
-	 * Movimentação dos dados da tabela Item_Encomenda
-	 * 
-	 */
-
-
-	@Override
-	public void adicionar(ItemEncomenda itemEncomenda) {
 		
 		try {			
-			String sql = "INSERT INTO Item_Encomenda " +
-					" VALUES ( ?, ? ) ";
+			String sql = "UPDATE Grade SET"
+					+ " num_Tamanho_Minimo = ?,"
+					+ " num_Tamanho_Maximo = ?, "
+					+ "letra = ? "
+					+ "WHERE codigo = ? ";
+			
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
-			stmt.setInt(1, itemEncomenda.getQuantidade() );
-			stmt.setDouble(2, itemEncomenda.getValorItemEncomenda() );
+			stmt.setInt(1, grade.getNumTamanhoMinimo() );
+			stmt.setInt(2, grade.getNumTamanhoMaximo() );
+			stmt.setString(3, grade.getLetra());
+			stmt.setInt(4, grade.getCodigo());
+			
 			
 			stmt.executeUpdate();
-			
 			
 			
 		} catch (SQLException e) {
@@ -613,118 +904,6 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	}
 
 
-
-
-
-
-	@Override
-	public void Remover(ItemEncomenda itemEncomenda) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-	@Override
-	public void Alterar(ItemEncomenda itemEncomenda) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	/**
-	 * Movimentação dos dados da tabela Item_Peca
-	 * 
-	 */
-
-
-	@Override
-	public void adicionar(ItemPeca itemPeca) {
-		
-		try {			
-			String sql = "INSERT INTO Item_Peca " +
-					" VALUES ( ?, ? ) ";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			
-			stmt.setDouble(1, itemPeca.getQuantidadeAviamento() );
-			stmt.setDouble(2, itemPeca.getValorAviamento() );
-			
-			stmt.executeUpdate();
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
-
-
-
-
-
-
-	@Override
-	public void Remover(ItemPeca itemPeca) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-	@Override
-	public void Alterar(ItemPeca itemPeca) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	/**
-	 * Movimentação dos dados da tabela Item_Venda
-	 * 
-	 */
-
-
-	@Override
-	public void adicionar(ItemVenda itemVenda) {
-		
-		
-		
-		
-	}
-
-
-
-
-
-
-	@Override
-	public void Remover(ItemVenda itemVenda) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-	@Override
-	public void Alterar(ItemVenda itemVenda) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 
@@ -739,15 +918,21 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public void adicionar(RelatorioLucro lucro) {
 		
 		try {			
+			
 			String sql = "INSERT INTO Lucro " +
 					" VALUES ( ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement( sql );
 		
+			for (Venda v : lucro.getVenda()) {
+				
+			
+			stmt.setInt(1, v.getCodigo());
+			stmt.setInt(2, 0);
 			stmt.setDate(3, lucro.getMesAno() );
 			stmt.setDouble(4, lucro.getLucroMes() );
 			
 			stmt.executeUpdate();
-			
+			}
 			
 			
 		} catch (SQLException e) {
@@ -760,15 +945,55 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(RelatorioLucro lucro) {
-		// TODO Auto-generated method stub
+	public void Remover(Integer codigoVenda) {
+		
+		try {			
+			String sql = "DELETE FROM Lucro WHERE VendaCodigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			// precisa pegar apenas um codigo de uma venda ja realizada
+			stmt.setInt(1, codigoVenda);
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 
 	@Override
 	public void Alterar(RelatorioLucro lucro) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Item_Peca SET"
+					+ " data = ?,"
+					+ " lucro_Mensal = ? "
+					+ "WHERE VendaCodigo = ?";
+					
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			for (Venda v : lucro.getVenda()) {
+				
+				
+				stmt.setDate(1, lucro.getMesAno() );
+				stmt.setDouble(2, lucro.getLucroMes() );
+				stmt.setInt(3, v.getCodigo());
+				
+				stmt.executeUpdate();
+				}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -812,7 +1037,24 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Modelagem modelagem) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "DELETE FROM Modelagem WHERE VendaCodigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			// precisa pegar apenas um codigo de uma venda ja realizada
+			stmt.setInt(1, modelagem.getCodigo());
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -823,7 +1065,29 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Modelagem modelagem) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Modelagem SET"
+					+ " valor_Unitario = ?,"
+					+ " data = ? "
+					+ "WHERE codigo = ?";
+					
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setFloat(1, modelagem.getValor() );
+			stmt.setDate(2, modelagem.getDataModelagem() );
+			stmt.setInt(3, modelagem.getCodigo());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -863,11 +1127,100 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		
 		
 		try {			
-			String sql = "INSERT INTO Modelo " +
-					" VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ) ";
+			String sql = "INSERT INTO Capital_Modelo " +
+					" VALUES ( ?, ? ) ";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			stmt.setInt(1, modelo.getCodigo());
+			stmt.setInt(2, 0);
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {			
+			String sql = "INSERT INTO Item_Peca " +
+					" VALUES ( ?, ?, ?, ? ) ";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			for (ItemPeca ip : modelo.getItemPeca()) {
+				
+			
+			stmt.setInt(1, ip.getAviamento().getCodigo());
+			//teria que pegar o codigo do modelo, ver onde pegar esse codigo depois
+			stmt.setInt(2, modelo.getCodigo());
+			stmt.setDouble(3, ip.getQuantidadeAviamento() );
+			stmt.setDouble(4, ip.getValorAviamento() );
+			
+			stmt.executeUpdate();
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+
+
+
+
+
+	@Override
+	public void Remover(Modelo modelo, Integer codigoAviamento) {
+		
+		try {			
+			String sql = "DELETE FROM Modelo WHERE Codigo = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
 			
+			stmt.setInt(1, modelo.getCodigo());
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		try {			
+			String sql = "DELETE FROM Capital_Modelo WHERE ModeloCodigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			
+			stmt.setInt(1, modelo.getCodigo());
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {			
+			String sql = "DELETE FROM Item_Peca WHERE AviamentoCodigo = ? AND"
+					+ "ModeloCodigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setInt(1, codigoAviamento);
+			stmt.setInt(2, modelo.getCodigo());
+				
+			stmt.executeUpdate();
 			
 			
 			
@@ -885,19 +1238,70 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Modelo modelo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-	@Override
 	public void Alterar(Modelo modelo) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Modelo SET"
+					+ " modelo = ?,"
+					+ " margem_Custo = ?,"
+					+ "preco_Custo = ?,"
+					+ "PilotoCodigo = ?,"
+					+ "ModelagemCodigo = ?,"
+					+ "Corte_CosturaCodigo = ?,"
+					+ "TecidoCodigo = ? "
+					+ "WHERE codigo = ?";
+					
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setString(1, modelo.getModelo() );
+			stmt.setFloat(2, modelo.getMargemCusto() );
+			stmt.setFloat(3, modelo.getCustoConfeccao());
+			stmt.setInt(4, modelo.getPiloto().getCodigo());
+			stmt.setInt(5, modelo.getModelagem().getCodigo());
+			stmt.setInt(6, modelo.getCorteCostura().getCodigo());
+			stmt.setInt(7, modelo.getTecido().getCodigo());
+			stmt.setInt(8, modelo.getCodigo());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		try {			
+			String sql = "UPDATE Item_Peca SET"
+					+ " qtd_Aviamento = ?,"
+					+ " valor_Item_Peca = ? "
+					+ "WHERE AviamentoCodigo = ? AND "
+					+ "ModeloCodigo = ?";
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			for (ItemPeca ip : modelo.getItemPeca()) {
+				
+				
+				stmt.setDouble(1, ip.getQuantidadeAviamento() );
+				stmt.setDouble(2, ip.getValorAviamento() );
+				stmt.setInt(3, ip.getAviamento().getCodigo());
+				stmt.setInt(4, modelo.getCodigo());
+				
+				stmt.executeUpdate();
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -920,6 +1324,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 			stmt.setInt(1, piloto.getCodigo() );
 			stmt.setDouble(2, piloto.getValorPiloto() );
 			stmt.setDate(3, piloto.getDataPiloto() );
+			stmt.setInt(4, 0);
 			
 			stmt.executeUpdate();
 			
@@ -940,7 +1345,24 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Piloto piloto) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "DELETE FROM Piloto WHERE Codigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			
+			stmt.setInt(1, piloto.getCodigo());
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -951,7 +1373,29 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Piloto piloto) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Modelagem SET"
+					+ " valor_Unitrio = ?,"
+					+ " data = ? "
+					+ "WHERE codigo = ?";
+					
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setFloat(1, piloto.getValorPiloto() );
+			stmt.setDate(2, piloto.getDataPiloto() );
+			stmt.setInt(3, piloto.getCodigo());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -998,7 +1442,24 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Tecido tecido) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "DELETE FROM Tecido WHERE Codigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			
+			stmt.setInt(1, tecido.getCodigo());
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -1009,7 +1470,36 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Tecido tecido) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Tecido SET"
+					+ " data = ?,"
+					+ " valor_Unitario = ?, "
+					+ "qtd_Rolo = ?, "
+					+ "tipo = ?, "
+					+ "cor = ?, "
+					+ "FornecedorId = ? "
+					+ "WHERE codigo = ?";
+					
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setDate(1, tecido.getData() );
+			stmt.setFloat(2, tecido.getValor() );
+			stmt.setInt(3, tecido.getQuantidade());
+			stmt.setString(4, tecido.getCor());
+			stmt.setInt(5, tecido.getFornecedor().getId());
+			stmt.setInt(6, tecido.getCodigo());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -1044,10 +1534,14 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		
 		try {			
 			String sql = "INSERT INTO Item_Venda " +
-					" VALUES ( ?, ? ) ";
+					" VALUES ( ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
-			for (venda.getItemVenda() a : venda.getItemVenda()) {
+			for (ItemVenda a : venda.getItemVenda()) {
+				stmt.setInt(1, a.getModelo().getCodigo());
+				stmt.setInt(2, venda.getCodigo());
+				stmt.setInt(3, a.getQuantidade());
+				stmt.setDouble(4, a.getValorTotalPeca());
 				
 			}
 				
@@ -1071,7 +1565,40 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Remover(Venda venda) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "DELETE FROM Venda WHERE Codigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			
+			stmt.setInt(1, venda.getCodigo());
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {			
+			String sql = "DELETE FROM Item_Venda WHERE Codigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			
+			stmt.setInt(1, venda.getCodigo());
+			
+				
+			stmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -1082,15 +1609,59 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public void Alterar(Venda venda) {
-		// TODO Auto-generated method stub
+		
+		try {			
+			String sql = "UPDATE Venda SET"
+					+ " data = ?,"
+					+ " valor_Total = ?"
+					+ "WHERE codigo = ?";
+					
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setDate(1, venda.getDtVenda() );
+			stmt.setFloat(2, venda.getValorTotal() );
+			stmt.setInt(3, venda.getCodigo());
+			
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {			
+			String sql = "UPDATE Item_Venda SET"
+					+ " qtd_Modelo_Vendido = ?,"
+					+ " valor_ItemVenda = ? "
+					+ "WHERE ModeloCodigo = ? AND "
+					+ "VendaCodigo = ?";
+					
+			
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			for (ItemVenda a : venda.getItemVenda()) {
+				stmt.setInt(1, a.getQuantidade());
+				stmt.setFloat(2, a.getValorTotalPeca());
+				stmt.setInt(3, a.getModelo().getCodigo());
+				stmt.setDouble(4, venda.getCodigo());
+				
+			}
+			
+			stmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
 
-	
-	
-	
-
-	
 
 }
