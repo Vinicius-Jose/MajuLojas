@@ -2,9 +2,10 @@ package controller;
 
 import model.Aviamento;
 import dao.MajuModasDAO;
+import dao.MajuModasDAOImpl;
 
 public class ControleAviamento {
-	private MajuModasDAO banco;
+	private MajuModasDAO banco = new MajuModasDAOImpl();
 	public void adicionarAviamento(Aviamento aviamento){
 		banco.adicionar(aviamento);
 	}

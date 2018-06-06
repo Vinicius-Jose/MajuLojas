@@ -2,9 +2,10 @@ package controller;
 
 import model.Motorista;
 import dao.MajuModasDAO;
+import dao.MajuModasDAOImpl;
 
 public class ControleMotorista {
-	private MajuModasDAO banco;
+	private MajuModasDAO banco = new MajuModasDAOImpl();
 	public void adicionarMotorista(Motorista motorista){
 		banco.adicionar(motorista);
 	}

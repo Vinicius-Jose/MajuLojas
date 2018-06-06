@@ -1,10 +1,11 @@
 package controller;
 
 import dao.MajuModasDAO;
+import dao.MajuModasDAOImpl;
 import model.Cliente;
 
 public class ControleCliente {
-	private MajuModasDAO banco;
+	private MajuModasDAO banco = new MajuModasDAOImpl();
 	public void adicionarCliente(Cliente cliente){
 		banco.adicionar(cliente);
 	}
