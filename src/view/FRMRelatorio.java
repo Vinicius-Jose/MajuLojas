@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import model.Capital;
+import java.awt.Color;
 
 public class FRMRelatorio extends JPanel implements ActionListener {
 	private JTable tabelaLucro;
@@ -33,10 +34,14 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public FRMRelatorio() {
+		setForeground(Color.BLACK);
+		setBackground(Color.WHITE);
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
 
 		JLabel lblRelatorio = new JLabel("Relatorio");
+		lblRelatorio.setForeground(Color.BLACK);
+		lblRelatorio.setBackground(Color.WHITE);
 		lblRelatorio.setBounds(12, 0, 224, 34);
 		lblRelatorio.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		add(lblRelatorio);
@@ -46,32 +51,44 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		add(separator);
 		
 		JLabel lblTipo = new JLabel("Tipo");
+		lblTipo.setForeground(Color.BLACK);
+		lblTipo.setBackground(Color.WHITE);
 		lblTipo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblTipo.setBounds(12, 93, 67, 34);
 		add(lblTipo);
 		
 		rdbCapital = new JRadioButton("Capital");
+		rdbCapital.setForeground(Color.BLACK);
+		rdbCapital.setBackground(Color.WHITE);
 		rdbCapital.setSelected(true);
 		rdbCapital.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbCapital.setBounds(85, 101, 109, 23);
 		add(rdbCapital);
 		
 		rdbtnLucro = new JRadioButton("Lucro");
+		rdbtnLucro.setForeground(Color.BLACK);
+		rdbtnLucro.setBackground(Color.WHITE);
 		rdbtnLucro.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnLucro.setBounds(85, 147, 109, 23);
 		add(rdbtnLucro);
 		
 		JLabel lblPerodo = new JLabel("Per\u00EDodo");
+		lblPerodo.setForeground(Color.BLACK);
+		lblPerodo.setBackground(Color.WHITE);
 		lblPerodo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblPerodo.setBounds(385, 101, 77, 18);
 		add(lblPerodo);
 		
 		cbMes = new JComboBox();
+		cbMes.setForeground(Color.BLACK);
+		cbMes.setBackground(Color.WHITE);
 		cbMes.setModel(new DefaultComboBoxModel(new String[] {"M\u00EAs"}));
 		cbMes.setBounds(485, 102, 86, 20);
 		add(cbMes);
 		
 		cbAno = new JComboBox();
+		cbAno.setForeground(Color.BLACK);
+		cbAno.setBackground(Color.WHITE);
 		cbAno.setModel(new DefaultComboBoxModel(new String[] {"Ano"}));
 		cbAno.setBounds(622, 102, 86, 20);
 		add(cbAno);
@@ -98,16 +115,22 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		scrollPane.setViewportView(tabelaCapital);
 		
 		txtCapital = new JTextField();
+		txtCapital.setForeground(Color.BLACK);
+		txtCapital.setBackground(Color.WHITE);
 		txtCapital.setBounds(787, 531, 86, 20);
 		add(txtCapital);
 		txtCapital.setColumns(10);
 		
 		lblCapitalMensal = new JLabel("Capital Mensal");
+		lblCapitalMensal.setForeground(Color.BLACK);
+		lblCapitalMensal.setBackground(Color.WHITE);
 		lblCapitalMensal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblCapitalMensal.setBounds(662, 530, 109, 18);
 		add(lblCapitalMensal);
 		
 		btnEmitirRelatrio = new JButton("Emitir Relat\u00F3rio");
+		btnEmitirRelatrio.setForeground(Color.BLACK);
+		btnEmitirRelatrio.setBackground(Color.WHITE);
 		btnEmitirRelatrio.setBounds(761, 101, 126, 23);
 		add(btnEmitirRelatrio);
 		

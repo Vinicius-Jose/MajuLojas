@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class FRMVenda extends JPanel {
 	private JTextField txtQtd;
@@ -27,10 +28,14 @@ public class FRMVenda extends JPanel {
 	 * @throws ParseException 
 	 */
 	public FRMVenda() throws ParseException {
+		setForeground(Color.BLACK);
+		setBackground(Color.WHITE);
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
 
 		JLabel lblVenda = new JLabel("Venda");
+		lblVenda.setForeground(Color.BLACK);
+		lblVenda.setBackground(Color.WHITE);
 		lblVenda.setBounds(12, 0, 224, 34);
 		lblVenda.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		add(lblVenda);
@@ -40,30 +45,42 @@ public class FRMVenda extends JPanel {
 		add(separator);
 
 		JLabel lblData = new JLabel("Data");
+		lblData.setForeground(Color.BLACK);
+		lblData.setBackground(Color.WHITE);
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblData.setBounds(736, 108, 61, 14);
 		add(lblData);
 		
 		JFormattedTextField fttDataEncomenda = new JFormattedTextField(
 				new MaskFormatter("##/##/####"));
+		fttDataEncomenda.setForeground(Color.BLACK);
+		fttDataEncomenda.setBackground(Color.WHITE);
 		fttDataEncomenda.setBounds(791, 106, 83, 22);
 		add(fttDataEncomenda);
 
 		JLabel lblModelo = new JLabel("Modelo");
+		lblModelo.setForeground(Color.BLACK);
+		lblModelo.setBackground(Color.WHITE);
 		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblModelo.setBounds(12, 114, 63, 14);
 		add(lblModelo);
 
 		JComboBox cbModelo = new JComboBox();
+		cbModelo.setForeground(Color.BLACK);
+		cbModelo.setBackground(Color.WHITE);
 		cbModelo.setBounds(85, 111, 168, 20);
 		add(cbModelo);
 		
 		JLabel lblQuantidade = new JLabel("Quantidade");
+		lblQuantidade.setForeground(Color.BLACK);
+		lblQuantidade.setBackground(Color.WHITE);
 		lblQuantidade.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblQuantidade.setBounds(309, 116, 103, 17);
 		add(lblQuantidade);
 		
 		txtQtd = new JTextField();
+		txtQtd.setForeground(Color.BLACK);
+		txtQtd.setBackground(Color.WHITE);
 		txtQtd.setBounds(439, 113, 46, 20);
 		add(txtQtd);
 		txtQtd.setColumns(10);
@@ -85,24 +102,34 @@ public class FRMVenda extends JPanel {
 		scrollPane.setViewportView(tabelaVenda);
 		
 		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.setForeground(Color.BLACK);
+		btnAdicionar.setBackground(Color.WHITE);
 		btnAdicionar.setBounds(509, 112, 89, 23);
 		add(btnAdicionar);
 		
 		txtValortotal = new JTextField();
+		txtValortotal.setForeground(Color.BLACK);
+		txtValortotal.setBackground(Color.WHITE);
 		txtValortotal.setBounds(446, 412, 86, 20);
 		add(txtValortotal);
 		txtValortotal.setColumns(10);
 		
 		JLabel lblValorTotal = new JLabel("Valor Total");
+		lblValorTotal.setForeground(Color.BLACK);
+		lblValorTotal.setBackground(Color.WHITE);
 		lblValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblValorTotal.setBounds(351, 413, 89, 14);
 		add(lblValorTotal);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setForeground(Color.BLACK);
+		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(153, 539, 112, 23);
 		add(btnCancelar);
 		
 		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setForeground(Color.BLACK);
+		btnFinalizar.setBackground(Color.WHITE);
 		btnFinalizar.setBounds(351, 539, 112, 23);
 		add(btnFinalizar);
 	

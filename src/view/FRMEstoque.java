@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class FRMEstoque extends JPanel {
 	private JTable table;
@@ -18,24 +19,33 @@ public class FRMEstoque extends JPanel {
 	 * Create the panel.
 	 */
 	public FRMEstoque() {
+		setForeground(Color.BLACK);
+		setBackground(Color.WHITE);
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
 
 		JLabel lblEstoque = new JLabel("Estoque");
+		lblEstoque.setForeground(Color.BLACK);
+		lblEstoque.setBackground(Color.WHITE);
 		lblEstoque.setBounds(12, 0, 224, 34);
 		lblEstoque.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		add(lblEstoque);
 
 		JSeparator separator = new JSeparator();
+		separator.setBackground(Color.WHITE);
 		separator.setBounds(0, 44, 1034, 11);
 		add(separator);
 		
 		JLabel lblModelo = new JLabel("Modelo");
+		lblModelo.setForeground(Color.BLACK);
+		lblModelo.setBackground(Color.WHITE);
 		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblModelo.setBounds(50, 84, 63, 14);
 		add(lblModelo);
 
 		JComboBox cbModelo = new JComboBox();
+		cbModelo.setForeground(Color.BLACK);
+		cbModelo.setBackground(Color.WHITE);
 		cbModelo.setBounds(123, 81, 224, 20);
 		add(cbModelo);
 		
@@ -55,6 +65,8 @@ public class FRMEstoque extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setForeground(Color.BLACK);
+		btnPesquisar.setBackground(Color.WHITE);
 		btnPesquisar.setBounds(421, 82, 108, 23);
 		add(btnPesquisar);
 	}
