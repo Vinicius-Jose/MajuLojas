@@ -55,7 +55,7 @@ public class FRMEstoque extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(421, 82, 89, 23);
+		btnPesquisar.setBounds(421, 82, 108, 23);
 		add(btnPesquisar);
 	}
 

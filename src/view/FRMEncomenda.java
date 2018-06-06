@@ -78,7 +78,7 @@ public class FRMEncomenda extends JPanel {
 		add(lblModelo);
 
 		JComboBox cbModelo = new JComboBox();
-		cbModelo.setBounds(83, 237, 168, 20);
+		cbModelo.setBounds(83, 237, 187, 20);
 		add(cbModelo);
 
 		JLabel lblQuantidadeEncomendada = new JLabel("Quantidade Encomendada");
