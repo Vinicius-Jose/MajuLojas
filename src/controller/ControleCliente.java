@@ -16,4 +16,5 @@ public class ControleCliente {
 	public void alterar(Cliente cliente){
 		banco.alterar(cliente);
 	}
+	
 }

@@ -4,6 +4,7 @@ public class Estoque {
 	
 	private int id;
 	private int quantidade;
+	private Grade grade;
 
 	
 	public int getId() {
@@ -20,6 +21,14 @@ public class Estoque {
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade += quantidade;
+	}
+
+	public Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
 	}
 
 }
