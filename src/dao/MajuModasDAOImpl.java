@@ -18,11 +18,20 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	private Connection con;
 	
+	
+	
 	public MajuModasDAOImpl() { 
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String urlDb = "jdbc:mariadb://localhost:3306/MajuModas?allowMultiQueries=true";
-			con = DriverManager.getConnection(urlDb, "root", "");
+			
+			String drivers = "org.mariadb.jdbc.Driver";
+			String server = "mariadb";
+			String banco = "MajuModas";
+			String usuario = "root";
+			String senha = "";
+			
+			Class.forName(drivers);
+			String urlDb = "jdbc:" + server + "://localhost:3306/"+ banco +"?allowMultiQueries=true";
+			con = DriverManager.getConnection(urlDb, usuario , senha);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
