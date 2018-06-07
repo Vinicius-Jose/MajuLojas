@@ -130,6 +130,12 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		try {
+			panel.add(new FRMModelo());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
 		
