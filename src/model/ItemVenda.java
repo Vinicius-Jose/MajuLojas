@@ -5,7 +5,7 @@ public class ItemVenda {
 	private int quantidade;
 	
 	private float valorTotalPeca;
-	
+
 	private Modelo modelo;
 
 	public int getQuantidade() {
@@ -17,7 +17,6 @@ public class ItemVenda {
 	}
 
 	public float getValorTotalPeca() {
-		valorTotalPeca= quantidade * modelo.getMargemCusto();
 		return valorTotalPeca;
 	}
 
@@ -25,6 +24,12 @@ public class ItemVenda {
 		this.valorTotalPeca = valorTotalPeca;
 	}
 	
-	
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
 
 }

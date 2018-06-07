@@ -5,6 +5,8 @@ public class ItemPeca {
 	private int quantidadeAviamento;
 	
 	private float valorAviamento;
+	
+	private Aviamento aviamento;
 
 	public int getQuantidadeAviamento() {
 		return quantidadeAviamento;
@@ -23,4 +25,11 @@ public class ItemPeca {
 		this.valorAviamento = valorAviamento;
 	}
 
+	public Aviamento getAviamento() {
+		return aviamento;
+	}
+
+	public void setAviamento(Aviamento aviamento) {
+		this.aviamento = aviamento;
+	}
 }
