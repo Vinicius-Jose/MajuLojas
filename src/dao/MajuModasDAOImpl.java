@@ -6,32 +6,37 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
-import model.*;
+import model.Aviamento;
+import model.Capital;
+import model.Cliente;
+import model.CorteCostura;
+import model.Encomenda;
+import model.Estoque;
+import model.Fornecedor;
+import model.Grade;
+import model.ItemEncomenda;
+import model.ItemPeca;
+import model.ItemVenda;
+import model.Modelagem;
+import model.Modelo;
+import model.Motorista;
+import model.Piloto;
+import model.RelatorioLucro;
+import model.Tecido;
+import model.Venda;
 
 
 public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	private Connection con;
 	
-	
-	
 	public MajuModasDAOImpl() { 
 		try {
-			
-			String drivers = "org.mariadb.jdbc.Driver";
-			String server = "mariadb";
-			String banco = "MajuModas";
-			String usuario = "root";
-			String senha = "";
-			
-			Class.forName(drivers);
-			String urlDb = "jdbc:" + server + "://localhost:3306/"+ banco +"?allowMultiQueries=true";
-			con = DriverManager.getConnection(urlDb, usuario , senha);
+			Class.forName("org.mariadb.jdbc.Driver");
+			String urlDb = "jdbc:mariadb://localhost:3306/MajuModas?allowMultiQueries=true";
+			con = DriverManager.getConnection(urlDb, "root", "");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -41,7 +46,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	
 	/**
-	 * Movimentação dos dados da tabela Motorista
+	 * MovimentaÃ§Ã£o dos dados da tabela Motorista
 	 *
 	 */
 	
@@ -69,7 +74,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	
 	@Override
-	public void remover(Motorista motorista) {
+	public void Remover(Motorista motorista) {
 		
 		try {			
 			String sql = "DELETE FROM Motorista " +
@@ -91,7 +96,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	
 	@Override
-	public void alterar(Motorista motorista) {
+	public void Alterar(Motorista motorista) {
 		
 		try {			
 			String sql = "UPDATE Motorista SET"
@@ -121,7 +126,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Aviamento
+	 * MovimentaÃ§Ã£o dos dados da tabela Aviamento
 	 * 
 	 */
 
@@ -156,7 +161,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Aviamento aviamento) {
+	public void Remover(Aviamento aviamento) {
 		try {			
 			String sql = "DELETE FROM Aviamento WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -180,7 +185,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Aviamento aviamento) {
+	public void Alterar(Aviamento aviamento) {
 		
 		try {			
 			String sql = "UPDATE Aviamento SET"
@@ -213,7 +218,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Capital
+	 * MovimentaÃ§Ã£o dos dados da tabela Capital
 	 * 
 	 */
 
@@ -246,7 +251,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Capital capital) {
+	public void Remover(Capital capital) {
 		try {			
 			String sql = "DELETE FROM Capital WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -270,7 +275,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Capital capital) {
+	public void Alterar(Capital capital) {
 		
 		try {			
 			String sql = "UPDATE Capital SET"
@@ -299,7 +304,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Cliente
+	 * MovimentaÃ§Ã£o dos dados da tabela Cliente
 	 * 
 	 */
 
@@ -334,7 +339,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Cliente cliente) {
+	public void Remover(Cliente cliente) {
 		
 		try {			
 			String sql = "DELETE FROM Cliente WHERE id = ?";
@@ -361,7 +366,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Cliente cliente) {
+	public void Alterar(Cliente cliente) {
 		
 		try {			
 			String sql = "UPDATE Cliente SET"
@@ -390,7 +395,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Corte_Costura
+	 * MovimentaÃ§Ã£o dos dados da tabela Corte_Costura
 	 * 
 	 */
 
@@ -426,7 +431,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(CorteCostura corteCostura) {
+	public void Remover(CorteCostura corteCostura) {
 		try {			
 			String sql = "DELETE FROM Corte_Costura WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -450,7 +455,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(CorteCostura corteCostura) {
+	public void Alterar(CorteCostura corteCostura) {
 		
 		try {			
 			String sql = "UPDATE Corte_Costura SET"
@@ -483,7 +488,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Encomenda
+	 * MovimentaÃ§Ã£o dos dados da tabela Encomenda
 	 * 
 	 */
 
@@ -545,7 +550,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 
 	@Override
-	public void remover(Encomenda encomenda, Integer codigoEncomenda) {
+	public void Remover(Encomenda encomenda, Integer codigoEncomenda) {
 		try {			
 			String sql = "DELETE FROM Encomenda WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -587,7 +592,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Encomenda encomenda) {
+	public void Alterar(Encomenda encomenda) {
 		
 		try {			
 			String sql = "UPDATE Encomenda SET"
@@ -648,7 +653,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Estoque
+	 * MovimentaÃ§Ã£o dos dados da tabela Estoque
 	 * 
 	 */
 
@@ -681,7 +686,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Estoque estoque) {
+	public void Remover(Estoque estoque) {
 		try {			
 			String sql = "DELETE FROM Estoque WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -705,7 +710,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Estoque estoque) {
+	public void Alterar(Estoque estoque) {
 		
 		try {			
 			String sql = "UPDATE Estoque SET"
@@ -732,7 +737,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Fornecedor
+	 * MovimentaÃ§Ã£o dos dados da tabela Fornecedor
 	 * 
 	 */
 
@@ -768,7 +773,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Fornecedor fornecedor) {
+	public void Remover(Fornecedor fornecedor) {
 		
 		try {			
 			String sql = "DELETE FROM Fornecedor WHERE id = ?";
@@ -794,7 +799,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Fornecedor fornecedor) {
+	public void Alterar(Fornecedor fornecedor) {
 		
 		try {			
 			String sql = "UPDATE Fornecedor SET"
@@ -822,7 +827,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Grade
+	 * MovimentaÃ§Ã£o dos dados da tabela Grade
 	 * 
 	 */
 
@@ -858,7 +863,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Grade grade) {
+	public void Remover(Grade grade) {
 		
 		try {			
 			String sql = "DELETE FROM Grade WHERE codigo = ?";
@@ -884,7 +889,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Grade grade) {
+	public void Alterar(Grade grade) {
 		
 		try {			
 			String sql = "UPDATE Grade SET"
@@ -917,7 +922,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Lucro
+	 * MovimentaÃ§Ã£o dos dados da tabela Lucro
 	 * 
 	 */
 
@@ -954,7 +959,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Integer codigoVenda) {
+	public void Remover(Integer codigoVenda) {
 		
 		try {			
 			String sql = "DELETE FROM Lucro WHERE VendaCodigo = ?";
@@ -977,7 +982,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(RelatorioLucro lucro) {
+	public void Alterar(RelatorioLucro lucro) {
 		
 		try {			
 			String sql = "UPDATE Item_Peca SET"
@@ -1010,7 +1015,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 
 	/**
-	 * Movimentação dos dados da tabela Modelagem
+	 * MovimentaÃ§Ã£o dos dados da tabela Modelagem
 	 * 
 	 */
 
@@ -1045,7 +1050,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Modelagem modelagem) {
+	public void Remover(Modelagem modelagem) {
 		
 		try {			
 			String sql = "DELETE FROM Modelagem WHERE VendaCodigo = ?";
@@ -1073,7 +1078,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Modelagem modelagem) {
+	public void Alterar(Modelagem modelagem) {
 		
 		try {			
 			String sql = "UPDATE Modelagem SET"
@@ -1103,7 +1108,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Modelo
+	 * MovimentaÃ§Ã£o dos dados da tabela Modelo
 	 * 
 	 */
 
@@ -1182,7 +1187,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Modelo modelo, Integer codigoAviamento) {
+	public void Remover(Modelo modelo, Integer codigoAviamento) {
 		
 		try {			
 			String sql = "DELETE FROM Modelo WHERE Codigo = ?";
@@ -1247,7 +1252,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Modelo modelo) {
+	public void Alterar(Modelo modelo) {
 		
 		try {			
 			String sql = "UPDATE Modelo SET"
@@ -1317,7 +1322,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Piloto
+	 * MovimentaÃ§Ã£o dos dados da tabela Piloto
 	 * 
 	 */
 
@@ -1353,7 +1358,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Piloto piloto) {
+	public void Remover(Piloto piloto) {
 		
 		try {			
 			String sql = "DELETE FROM Piloto WHERE Codigo = ?";
@@ -1381,7 +1386,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Piloto piloto) {
+	public void Alterar(Piloto piloto) {
 		
 		try {			
 			String sql = "UPDATE Modelagem SET"
@@ -1411,7 +1416,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Tecido
+	 * MovimentaÃ§Ã£o dos dados da tabela Tecido
 	 * 
 	 */
 
@@ -1450,7 +1455,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Tecido tecido) {
+	public void Remover(Tecido tecido) {
 		
 		try {			
 			String sql = "DELETE FROM Tecido WHERE Codigo = ?";
@@ -1478,7 +1483,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Tecido tecido) {
+	public void Alterar(Tecido tecido) {
 		
 		try {			
 			String sql = "UPDATE Tecido SET"
@@ -1515,7 +1520,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Venda
+	 * MovimentaÃ§Ã£o dos dados da tabela Venda
 	 * 
 	 */
 
@@ -1573,7 +1578,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void remover(Venda venda) {
+	public void Remover(Venda venda) {
 		
 		try {			
 			String sql = "DELETE FROM Venda WHERE Codigo = ?";
@@ -1617,7 +1622,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void alterar(Venda venda) {
+	public void Alterar(Venda venda) {
 		
 		try {			
 			String sql = "UPDATE Venda SET"
@@ -1669,6 +1674,133 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		}
 		
 		
+	}
+
+
+	@Override
+	public List<Aviamento> buscarAviamento() {
+
+		List<Aviamento> aviamento = new ArrayList<>();
+		try {
+			String sql = 
+				"select * from selecao";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Aviamento a = new Aviamento();
+				a.setCodigo( rs.getInt("codigo")  );
+				a.setDataCompra( rs.getDate("data")  );
+				a.setValorCompra( rs.getFloat("valor_Unitario")  );
+				a.setNome( rs.getString("nome")  );
+				/** ver depois como fazer				*
+				*/
+				a.setFornecedor(  );
+				aviamento.add( a );
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return aviamento;
+		
+	}
+
+
+	@Override
+	public List<Capital> buscarCapital() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Cliente> buscarCliente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<CorteCostura> buscarCorteCostura() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Encomenda> buscarEncomenda() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Estoque> buscarEstoque() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Fornecedor> buscarFornecedor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Grade> buscarGrade() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Modelagem> buscarModelagem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Modelo> buscarModelo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Motorista> buscarMotorista() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Piloto> buscarPiloto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<RelatorioLucro> buscarRelatorioLucro() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Tecido> buscarTecido() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Venda> buscarVenda() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
