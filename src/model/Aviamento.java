@@ -8,7 +8,7 @@ public class Aviamento {
 	
 	private String nome;
 	
-	private int valorCompra;
+	private float valorCompra;
 	
 	private Date dataCompra;
 	
@@ -23,11 +23,11 @@ public class Aviamento {
 		this.nome = nome;
 	}
 
-	public int getValorCompra() {
+	public float getValorCompra() {
 		return valorCompra;
 	}
 
-	public void setValorCompra(int valorCompra) {
+	public void setValorCompra(float valorCompra) {
 		this.valorCompra = valorCompra;
 	}
 

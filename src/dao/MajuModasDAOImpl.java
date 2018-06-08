@@ -74,7 +74,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	
 	@Override
-	public void Remover(Motorista motorista) {
+	public void remover(Motorista motorista) {
 		
 		try {			
 			String sql = "DELETE FROM Motorista " +
@@ -96,7 +96,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	
 	@Override
-	public void Alterar(Motorista motorista) {
+	public void alterar(Motorista motorista) {
 		
 		try {			
 			String sql = "UPDATE Motorista SET"
@@ -161,7 +161,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Aviamento aviamento) {
+	public void remover(Aviamento aviamento) {
 		try {			
 			String sql = "DELETE FROM Aviamento WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -185,7 +185,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Aviamento aviamento) {
+	public void alterar(Aviamento aviamento) {
 		
 		try {			
 			String sql = "UPDATE Aviamento SET"
@@ -251,7 +251,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Capital capital) {
+	public void remover(Capital capital) {
 		try {			
 			String sql = "DELETE FROM Capital WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -275,7 +275,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Capital capital) {
+	public void alterar(Capital capital) {
 		
 		try {			
 			String sql = "UPDATE Capital SET"
@@ -339,7 +339,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Cliente cliente) {
+	public void remover(Cliente cliente) {
 		
 		try {			
 			String sql = "DELETE FROM Cliente WHERE id = ?";
@@ -366,7 +366,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Cliente cliente) {
+	public void alterar(Cliente cliente) {
 		
 		try {			
 			String sql = "UPDATE Cliente SET"
@@ -431,7 +431,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(CorteCostura corteCostura) {
+	public void remover(CorteCostura corteCostura) {
 		try {			
 			String sql = "DELETE FROM Corte_Costura WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -455,7 +455,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(CorteCostura corteCostura) {
+	public void alterar(CorteCostura corteCostura) {
 		
 		try {			
 			String sql = "UPDATE Corte_Costura SET"
@@ -550,7 +550,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 
 	@Override
-	public void Remover(Encomenda encomenda, Integer codigoEncomenda) {
+	public void remover(Encomenda encomenda, Integer codigoEncomenda) {
 		try {			
 			String sql = "DELETE FROM Encomenda WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -592,7 +592,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Encomenda encomenda) {
+	public void alterar(Encomenda encomenda) {
 		
 		try {			
 			String sql = "UPDATE Encomenda SET"
@@ -686,7 +686,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Estoque estoque) {
+	public void remover(Estoque estoque) {
 		try {			
 			String sql = "DELETE FROM Estoque WHERE id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -710,7 +710,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Estoque estoque) {
+	public void alterar(Estoque estoque) {
 		
 		try {			
 			String sql = "UPDATE Estoque SET"
@@ -773,7 +773,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Fornecedor fornecedor) {
+	public void remover(Fornecedor fornecedor) {
 		
 		try {			
 			String sql = "DELETE FROM Fornecedor WHERE id = ?";
@@ -799,7 +799,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Fornecedor fornecedor) {
+	public void alterar(Fornecedor fornecedor) {
 		
 		try {			
 			String sql = "UPDATE Fornecedor SET"
@@ -863,7 +863,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Grade grade) {
+	public void remover(Grade grade) {
 		
 		try {			
 			String sql = "DELETE FROM Grade WHERE codigo = ?";
@@ -889,7 +889,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Grade grade) {
+	public void alterar(Grade grade) {
 		
 		try {			
 			String sql = "UPDATE Grade SET"
@@ -959,7 +959,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Integer codigoVenda) {
+	public void remover(Integer codigoVenda) {
 		
 		try {			
 			String sql = "DELETE FROM Lucro WHERE VendaCodigo = ?";
@@ -982,7 +982,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(RelatorioLucro lucro) {
+	public void alterar(RelatorioLucro lucro) {
 		
 		try {			
 			String sql = "UPDATE Item_Peca SET"
@@ -1050,7 +1050,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Modelagem modelagem) {
+	public void remover(Modelagem modelagem) {
 		
 		try {			
 			String sql = "DELETE FROM Modelagem WHERE VendaCodigo = ?";
@@ -1078,7 +1078,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Modelagem modelagem) {
+	public void alterar(Modelagem modelagem) {
 		
 		try {			
 			String sql = "UPDATE Modelagem SET"
@@ -1187,7 +1187,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Modelo modelo, Integer codigoAviamento) {
+	public void remover(Modelo modelo, Integer codigoAviamento) {
 		
 		try {			
 			String sql = "DELETE FROM Modelo WHERE Codigo = ?";
@@ -1252,7 +1252,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Modelo modelo) {
+	public void alterar(Modelo modelo) {
 		
 		try {			
 			String sql = "UPDATE Modelo SET"
@@ -1358,7 +1358,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Piloto piloto) {
+	public void remover(Piloto piloto) {
 		
 		try {			
 			String sql = "DELETE FROM Piloto WHERE Codigo = ?";
@@ -1386,7 +1386,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Piloto piloto) {
+	public void alterar(Piloto piloto) {
 		
 		try {			
 			String sql = "UPDATE Modelagem SET"
@@ -1455,7 +1455,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Tecido tecido) {
+	public void remover(Tecido tecido) {
 		
 		try {			
 			String sql = "DELETE FROM Tecido WHERE Codigo = ?";
@@ -1483,7 +1483,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Tecido tecido) {
+	public void alterar(Tecido tecido) {
 		
 		try {			
 			String sql = "UPDATE Tecido SET"
@@ -1578,7 +1578,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Remover(Venda venda) {
+	public void remover(Venda venda) {
 		
 		try {			
 			String sql = "DELETE FROM Venda WHERE Codigo = ?";
@@ -1622,7 +1622,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	@Override
-	public void Alterar(Venda venda) {
+	public void alterar(Venda venda) {
 		
 		try {			
 			String sql = "UPDATE Venda SET"
