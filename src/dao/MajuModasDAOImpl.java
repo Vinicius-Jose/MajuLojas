@@ -31,12 +31,20 @@ import model.Venda;
 public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	private Connection con;
+	private String tipoBanco;
 	
 	public MajuModasDAOImpl() { 
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String urlDb = "jdbc:mariadb://localhost:3306/MajuModas?allowMultiQueries=true";
-			con = DriverManager.getConnection(urlDb, "root", "");
+			tipoBanco = "mariadb";
+			String drivers = "org.mariadb.jdbc.Driver";
+			String porta = "3306";
+			String nomeBanco = "MajuModas";
+			String usuario = "root";
+			String senha = "";
+			
+			Class.forName(drivers);
+			String urlDb = "jdbc:"+ tipoBanco +"//localhost:"+ porta +"/"+ nomeBanco +"?allowMultiQueries=true";
+			con = DriverManager.getConnection(urlDb, usuario , senha);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -46,7 +54,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 	
 	/**
-	 * Movimentação dos dados da tabela Motorista
+	 * MovimentaÃ§Ã£o dos dados da tabela Motorista
 	 *
 	 */
 	
@@ -126,7 +134,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Aviamento
+	 * MovimentaÃ§Ã£o dos dados da tabela Aviamento
 	 * 
 	 */
 
@@ -218,7 +226,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Capital
+	 * MovimentaÃ§Ã£o dos dados da tabela Capital
 	 * 
 	 */
 
@@ -304,7 +312,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Cliente
+	 * MovimentaÃ§Ã£o dos dados da tabela Cliente
 	 * 
 	 */
 
@@ -395,7 +403,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Corte_Costura
+	 * MovimentaÃ§Ã£o dos dados da tabela Corte_Costura
 	 * 
 	 */
 
@@ -488,7 +496,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Encomenda
+	 * MovimentaÃ§Ã£o dos dados da tabela Encomenda
 	 * 
 	 */
 
@@ -653,7 +661,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Estoque
+	 * MovimentaÃ§Ã£o dos dados da tabela Estoque
 	 * 
 	 */
 
@@ -737,7 +745,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Fornecedor
+	 * MovimentaÃ§Ã£o dos dados da tabela Fornecedor
 	 * 
 	 */
 
@@ -827,7 +835,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Grade
+	 * MovimentaÃ§Ã£o dos dados da tabela Grade
 	 * 
 	 */
 
@@ -922,7 +930,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Lucro
+	 * MovimentaÃ§Ã£o dos dados da tabela Lucro
 	 * 
 	 */
 
@@ -1015,7 +1023,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	
 
 	/**
-	 * Movimentação dos dados da tabela Modelagem
+	 * MovimentaÃ§Ã£o dos dados da tabela Modelagem
 	 * 
 	 */
 
@@ -1108,7 +1116,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Modelo
+	 * MovimentaÃ§Ã£o dos dados da tabela Modelo
 	 * 
 	 */
 
@@ -1322,7 +1330,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Piloto
+	 * MovimentaÃ§Ã£o dos dados da tabela Piloto
 	 * 
 	 */
 
@@ -1416,7 +1424,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Tecido
+	 * MovimentaÃ§Ã£o dos dados da tabela Tecido
 	 * 
 	 */
 
@@ -1520,7 +1528,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 	/**
-	 * Movimentação dos dados da tabela Venda
+	 * MovimentaÃ§Ã£o dos dados da tabela Venda
 	 * 
 	 */
 
@@ -1715,8 +1723,27 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public List<Cliente> buscarCliente() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Cliente> cliente = new ArrayList<>();
+		try {
+			String sql = 
+				"select * from cliente";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Cliente a = new Cliente();
+				a.setId( rs.getInt("id")  );
+				a.setNome( rs.getString("nome")  );
+				a.setTelefoneContato( rs.getString("telefone")  );
+				
+				cliente.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cliente;
+		
 	}
 
 
@@ -1771,8 +1798,26 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public List<Motorista> buscarMotorista() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Motorista> motorista = new ArrayList<>();
+		try {
+			String sql = 
+				"select * from motorista";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Motorista a = new Motorista();
+				a.setNumPlaca( rs.getString("num_Placa")  );
+				a.setNome( rs.getString("nome")  );
+				a.setTelefoneContato( rs.getString("telefone")  );
+				
+				motorista.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return motorista;
+		
 	}
 
 
@@ -1801,6 +1846,41 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public List<Venda> buscarVenda() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public boolean verificarUsuario(String usuario, String senha) {
+		boolean existe = false;
+		String sql;
+		
+		try {
+			
+			if( tipoBanco == "mariadb"){
+				sql =  "select * from usuario "
+							+ "WHERE nome = ? AND "
+							+ "senha = MD5(?)";
+			}else{
+				sql =  "select * from usuario "
+						+ "WHERE nome = ? AND "
+						+ "senha = PWDCOMPARE(?)";	
+			}
+			PreparedStatement stmt = con.prepareStatement( sql );
+			stmt.setString(1, usuario);
+			stmt.setString(2, senha);
+			
+			ResultSet rs = stmt.executeQuery();
+			if(rs.isFirst()){
+				existe = true;
+			}else{
+				existe = false;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return existe;
 	}
 
 
