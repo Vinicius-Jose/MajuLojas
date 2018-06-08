@@ -19,6 +19,8 @@ import model.Tecido;
 import model.Venda;
 
 public interface MajuModasDAO {
+
+	public boolean verificarUsuario(String usuario, String senha);
 	
 	public void adicionar(Aviamento aviamento);
 	public void remover(Aviamento aviamento);
