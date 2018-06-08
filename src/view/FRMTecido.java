@@ -17,7 +17,11 @@ public class FRMTecido extends JPanel {
 	private JTextField txtTecido;
 	private JTextField txtPrecoUni;
 	private JTextField txtValorTotal;
-	private JTextField textField;
+	private JTextField txtQtdRolo;
+	private JComboBox cbFornecedor ;
+	private JFormattedTextField fttData;
+	private  JButton btnSalvar;
+	private JButton btnCancelar;
 
 	/**
 	 * Create the panel.
@@ -47,11 +51,11 @@ public class FRMTecido extends JPanel {
 		lblFornecedor.setBounds(12, 68, 119, 16);
 		add(lblFornecedor);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setForeground(Color.BLACK);
-		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(147, 68, 530, 23);
-		add(comboBox);
+		cbFornecedor = new JComboBox();
+		cbFornecedor.setForeground(Color.BLACK);
+		cbFornecedor.setBackground(Color.WHITE);
+		cbFornecedor.setBounds(147, 68, 530, 23);
+		add(cbFornecedor);
 		
 		txtTecido = new JTextField();
 		txtTecido.setForeground(Color.BLACK);
@@ -102,18 +106,18 @@ public class FRMTecido extends JPanel {
 		lblData.setBounds(679, 146, 44, 16);
 		add(lblData);
 		
-		JFormattedTextField fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 		fttData.setForeground(Color.BLACK);
 		fttData.setBackground(Color.WHITE);
 		fttData.setBounds(735, 143, 83, 22);
 		add(fttData);
 		
-		textField = new JTextField();
-		textField.setForeground(Color.BLACK);
-		textField.setBackground(Color.WHITE);
-		textField.setBounds(735, 216, 116, 22);
-		add(textField);
-		textField.setColumns(10);
+		txtQtdRolo = new JTextField();
+		txtQtdRolo.setForeground(Color.BLACK);
+		txtQtdRolo.setBackground(Color.WHITE);
+		txtQtdRolo.setBounds(735, 216, 116, 22);
+		add(txtQtdRolo);
+		txtQtdRolo.setColumns(10);
 		
 		JLabel lblQuantidadeDeRolo = new JLabel("Quantidade de Rolo");
 		lblQuantidadeDeRolo.setForeground(Color.BLACK);
@@ -122,13 +126,13 @@ public class FRMTecido extends JPanel {
 		lblQuantidadeDeRolo.setBounds(562, 218, 161, 16);
 		add(lblQuantidadeDeRolo);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(594, 556, 97, 25);
 		add(btnSalvar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(273, 556, 97, 25);

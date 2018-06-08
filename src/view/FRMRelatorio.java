@@ -30,6 +30,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 	private JComboBox cbAno,cbMes;
 	private JScrollPane scrollPane;
 	private JLabel lblCapitalMensal;
+	private ButtonGroup grupo;
 	/**
 	 * Create the panel.
 	 */
@@ -149,7 +150,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		tabelaLucro.getColumnModel().getColumn(3).setPreferredWidth(116);
 		
 		
-		ButtonGroup grupo = new ButtonGroup();
+		grupo = new ButtonGroup();
 		grupo.add(rdbCapital);
 		grupo.add(rdbtnLucro);
 		rdbCapital.addActionListener(this);

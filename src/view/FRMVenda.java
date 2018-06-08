@@ -21,6 +21,9 @@ public class FRMVenda extends JPanel {
 	private JTextField txtQtd;
 	private JTable tabelaVenda;
 	private JTextField txtValortotal;
+	private JFormattedTextField fttDataEncomenda;
+	private JComboBox cbModelo;
+	private JButton btnAdicionar, btnFinalizar,btnCancelar ;
 
 
 	/**
@@ -51,7 +54,7 @@ public class FRMVenda extends JPanel {
 		lblData.setBounds(736, 108, 61, 14);
 		add(lblData);
 		
-		JFormattedTextField fttDataEncomenda = new JFormattedTextField(
+		fttDataEncomenda = new JFormattedTextField(
 				new MaskFormatter("##/##/####"));
 		fttDataEncomenda.setForeground(Color.BLACK);
 		fttDataEncomenda.setBackground(Color.WHITE);
@@ -65,7 +68,7 @@ public class FRMVenda extends JPanel {
 		lblModelo.setBounds(12, 114, 63, 14);
 		add(lblModelo);
 
-		JComboBox cbModelo = new JComboBox();
+		cbModelo = new JComboBox();
 		cbModelo.setForeground(Color.BLACK);
 		cbModelo.setBackground(Color.WHITE);
 		cbModelo.setBounds(85, 111, 168, 20);
@@ -101,7 +104,7 @@ public class FRMVenda extends JPanel {
 		add(scrollPane);
 		scrollPane.setViewportView(tabelaVenda);
 		
-		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setForeground(Color.BLACK);
 		btnAdicionar.setBackground(Color.WHITE);
 		btnAdicionar.setBounds(509, 112, 89, 23);
@@ -121,13 +124,13 @@ public class FRMVenda extends JPanel {
 		lblValorTotal.setBounds(351, 413, 89, 14);
 		add(lblValorTotal);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(153, 539, 112, 23);
 		add(btnCancelar);
 		
-		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.setForeground(Color.BLACK);
 		btnFinalizar.setBackground(Color.WHITE);
 		btnFinalizar.setBounds(351, 539, 112, 23);
