@@ -12,8 +12,10 @@ import java.awt.Color;
 
 public class FRMAviamento extends JPanel {
 	private JTextField txtAviamento;
-	private JTextField textField;
-
+	private JTextField txtPreco;
+	private JComboBox cbFornecedor ;
+	private JButton btnCancelar ;
+	private JButton btnSalvar;
 	/**
 	 * Create the panel.
 	 */
@@ -41,7 +43,7 @@ public class FRMAviamento extends JPanel {
 		lblFornecedor.setBounds(12, 79, 113, 16);
 		add(lblFornecedor);
 		
-		JComboBox cbFornecedor = new JComboBox();
+		cbFornecedor = new JComboBox();
 		cbFornecedor.setForeground(Color.BLACK);
 		cbFornecedor.setBackground(Color.WHITE);
 		cbFornecedor.setBounds(144, 79, 200, 22);
@@ -68,20 +70,20 @@ public class FRMAviamento extends JPanel {
 		lblPreoUnitrio.setBounds(12, 203, 107, 16);
 		add(lblPreoUnitrio);
 		
-		textField = new JTextField();
-		textField.setForeground(Color.BLACK);
-		textField.setBackground(Color.WHITE);
-		textField.setBounds(144, 201, 75, 22);
-		add(textField);
-		textField.setColumns(10);
+		txtPreco = new JTextField();
+		txtPreco.setForeground(Color.BLACK);
+		txtPreco.setBackground(Color.WHITE);
+		txtPreco.setBounds(144, 201, 75, 22);
+		add(txtPreco);
+		txtPreco.setColumns(10);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(368, 348, 97, 25);
 		add(btnSalvar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(122, 348, 97, 25);

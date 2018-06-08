@@ -176,7 +176,6 @@ public class TelaPrincipal extends JFrame implements ActionListener {
 			painel.add(modelo);
 
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
