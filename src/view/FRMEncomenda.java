@@ -157,12 +157,16 @@ public class FRMEncomenda extends JPanel {
 		lblMotorista.setBackground(Color.WHITE);
 		lblMotorista.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMotorista.setBounds(12, 129, 89, 14);
+		lblMotorista.setEnabled(false);
+		lblMotorista.setVisible(false);
 		add(lblMotorista);
 		
 		cbMotorista = new JComboBox();
 		cbMotorista.setForeground(Color.BLACK);
 		cbMotorista.setBackground(Color.WHITE);
 		cbMotorista.setBounds(111, 128, 206, 20);
+		cbMotorista.setEnabled(false);
+		cbMotorista.setVisible(false);
 		add(cbMotorista);
 		
 		JLabel lblRetiradaNaLoja = new JLabel("Retirada na Loja ?");
@@ -197,6 +201,8 @@ public class FRMEncomenda extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				lblMotorista.setVisible(false);
 				cbMotorista.setVisible(false);
+				cbMotorista.setEnabled(false);
+				
 				
 			}
 		});
@@ -208,7 +214,8 @@ public class FRMEncomenda extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				lblMotorista.setVisible(true);
 				cbMotorista.setVisible(true);
-				
+				cbMotorista.setEnabled(true);
+				lblMotorista.setVisible(true);
 			}
 		});
 		
