@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -106,7 +108,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 			new Object[][] {
 			},
 			new String[] {
-				"Modelo", "Aviamento", "Corte & Costura", "Modelagem", "Piloto", "Tecido", "Custo Confec\u00E7\u00E3o"
+				"Modelo", "Corte", "Costura", "Quantidade Cortada", "Modelagem", "Piloto", "Tecido", "Custo Confec\u00E7\u00E3o"
 			}
 		));
 		tabelaCapital.getColumnModel().getColumn(0).setPreferredWidth(157);
@@ -196,6 +198,11 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		cbAno.removeAllItems();
 		for(Integer b: ano){
 			cbAno.addItem(b.intValue());
+		}
+		List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(0,0);
+		for(HashMap<String,Object> b : dados){
+			DefaultTableModel modelo = tabelaCapital.getModel();
+			modelo.addRow(b);
 		}
 	}
 

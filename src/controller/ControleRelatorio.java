@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import model.Capital;
@@ -19,5 +20,9 @@ public class ControleRelatorio {
 	
 	public double buscarCapital(int mes, int ano){
 		return rela.buscarCapital(mes, ano);
+	}
+	
+	public List<HashMap<String,Object>> buscaDadosCapital(int mes, int ano){
+		return rela.buscaDadosCapital(mes, ano);
 	}
 }
