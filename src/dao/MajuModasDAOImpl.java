@@ -49,6 +49,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 //			String urlDb = "jdbc:"+ tipoBanco +"//localhost:"+ porta +"/"+ nomeBanco +"?allowMultiQueries=true";
 //			con = DriverManager.getConnection(urlDb, usuario , senha);
 			con  = DriverManager.getConnection(String.format("jdbc:jtds:sqlserver://localhost:1433;database=%s;user=%s;password=%s;", nomeBanco, usuario, senha));
+			System.out.println("Conectado");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -1861,19 +1862,18 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		try {
 			
 			if( tipoBanco == "mariadb"){
-				sql =  "select * from usuario "
+				sql =  "select * from usuarios "
 							+ "WHERE nome = ? AND "
 							+ "senha = MD5(?)";
 			}else{
-				sql =  "select PWDCOMPARE(?, senha) from usuario "
+				sql =  "select PWDCOMPARE(?, senha) as valido from usuarios "
 						+ "WHERE nome = ?";	
 			}
 			PreparedStatement stmt = con.prepareStatement( sql );
-			stmt.setString(2, usuario);
 			stmt.setString(1, senha);
-			
+			stmt.setString(2, usuario);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.isFirst()){
+			if(rs.next()){
 				existe = true;
 			}else{
 				existe = false;
