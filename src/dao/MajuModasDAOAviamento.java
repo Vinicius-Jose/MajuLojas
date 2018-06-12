@@ -10,5 +10,6 @@ public interface MajuModasDAOAviamento {
 	public void remover(Aviamento aviamento);
 	public void alterar(Aviamento aviamento);
 	public List<Aviamento> buscarAviamento();
+	public Aviamento buscaEspecifico(Aviamento aviamento);
 	
 }
