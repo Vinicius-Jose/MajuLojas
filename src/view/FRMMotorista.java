@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleMotorista;
+
 import java.awt.Color;
 
 public class FRMMotorista extends JPanel {
@@ -98,6 +101,18 @@ public class FRMMotorista extends JPanel {
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(292, 547, 97, 25);
 		add(btnCancelar);
+		
+		ControleMotorista ctrlMotorista = new ControleMotorista(txtNome, txtFone, txtPlaca, btnSalvar, btnCancelar);
+		btnSalvar.addActionListener(ctrlMotorista);
+		btnCancelar.addActionListener(ctrlMotorista);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBounds(360, 99, 89, 23);
+		add(btnPesquisar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(470, 548, 97, 25);
+		add(btnAlterar);
 
 	}
 }

@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleModelo;
+
 import javax.swing.JScrollPane;
 import java.awt.Color;
 
@@ -28,6 +31,7 @@ public class FRMModelo extends JPanel {
 	private JTextField qtdRolo;
 	private JTextField txtMargemCusto;
 	private JTextField txtCustoConfecção;
+	private JTextField txtPiloto;
 
 	/**
 	 * Create the panel.
@@ -238,6 +242,26 @@ public class FRMModelo extends JPanel {
 		scrollPane.setViewportView(table);
 		add(scrollPane);
 		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(733, 275, 89, 23);
+		add(btnAlterar);
+		
+		JLabel lblPiloto = new JLabel("Piloto");
+		lblPiloto.setForeground(Color.BLACK);
+		lblPiloto.setBackground(Color.WHITE);
+		lblPiloto.setBounds(310, 328, 70, 10);
+		add(lblPiloto);
+		
+		txtPiloto = new JTextField();
+		txtPiloto.setForeground(Color.BLACK);
+		txtPiloto.setBackground(Color.WHITE);
+		txtPiloto.setBounds(369, 322, 86, 20);
+		add(txtPiloto);
+		txtPiloto.setColumns(10);
+		
+		ControleModelo ctrlModelo = new ControleModelo(txtModelo, txtQtd, qtdRolo, fttData, qtdRolo, qtdRolo, qtdRolo, qtdRolo, rdbtnNo, rdbtnNo, cbTecido, btnAlterar, btnAlterar, btnAlterar, btnAlterar, cbTecido);
 		
 
 	}

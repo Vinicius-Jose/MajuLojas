@@ -18,6 +18,16 @@ public class Tecido {
 	
 	private Fornecedor fornecedor;
 	
+	private float valorTotal;
+	
+
+	public float getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(float valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 	public int getQuantidade() {
 		return quantidade;

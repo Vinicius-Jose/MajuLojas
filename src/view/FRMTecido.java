@@ -10,6 +10,10 @@ import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleTecido;
+import model.Fornecedor;
+
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -18,10 +22,11 @@ public class FRMTecido extends JPanel {
 	private JTextField txtPrecoUni;
 	private JTextField txtValorTotal;
 	private JTextField txtQtdRolo;
-	private JComboBox cbFornecedor ;
+	private JComboBox<Fornecedor> cbFornecedor ;
 	private JFormattedTextField fttData;
 	private  JButton btnSalvar;
 	private JButton btnCancelar;
+	private JButton btnAlterar;
 
 	/**
 	 * Create the panel.
@@ -137,6 +142,18 @@ public class FRMTecido extends JPanel {
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(273, 556, 97, 25);
 		add(btnCancelar);
+		
+		btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(442, 557, 97, 25);
+		add(btnAlterar);
+		
+		ControleTecido ctrlTecido = new ControleTecido(cbFornecedor, txtTecido, fttData, txtPrecoUni, txtQtdRolo, txtValorTotal, btnSalvar, btnCancelar, btnAlterar);
+		cbFornecedor.addActionListener(ctrlTecido);
+		btnSalvar.addActionListener(ctrlTecido);
+		btnCancelar.addActionListener(ctrlTecido);
+		btnAlterar.addActionListener(ctrlTecido);
 	}
 
 }

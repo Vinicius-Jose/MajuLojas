@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleCliente;
+
 import java.awt.Color;
 
 public class FRMCliente extends JPanel {
@@ -78,6 +81,26 @@ public class FRMCliente extends JPanel {
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(232, 547, 97, 25);
 		add(btnCancelar);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setForeground(Color.BLACK);
+		btnPesquisar.setBackground(Color.WHITE);
+		btnPesquisar.setBounds(349, 95, 89, 23);
+		add(btnPesquisar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(397, 548, 97, 25);
+		add(btnAlterar);
+		
+		ControleCliente ctrlCliente = new ControleCliente(txtNome, txtFone, btnSalvar, btnCancelar, btnPesquisar, btnAlterar);
+		btnSalvar.addActionListener(ctrlCliente);
+		btnCancelar.addActionListener(ctrlCliente);
+		btnPesquisar.addActionListener(ctrlCliente);
+		btnAlterar.addActionListener(ctrlCliente);
+		
+		
 		
 		
 	}

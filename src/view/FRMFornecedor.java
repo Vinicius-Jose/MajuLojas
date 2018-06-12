@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleFornecedor;
+
 import java.awt.Color;
 
 public class FRMFornecedor extends JPanel {
@@ -79,6 +82,25 @@ public class FRMFornecedor extends JPanel {
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(247, 547, 97, 25);
 		add(btnCancelar);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setForeground(Color.BLACK);
+		btnPesquisar.setBackground(Color.WHITE);
+		btnPesquisar.setBounds(355, 99, 89, 23);
+		add(btnPesquisar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(420, 548, 97, 25);
+		add(btnAlterar);
+		
+		ControleFornecedor ctrlFornecedor = new ControleFornecedor(txtNome, txtFone, btnSalvar, btnCancelar, btnPesquisar, btnAlterar);
+		btnSalvar.addActionListener(ctrlFornecedor);
+		btnCancelar.addActionListener(ctrlFornecedor);
+		btnPesquisar.addActionListener(ctrlFornecedor);
+		btnAlterar.addActionListener(ctrlFornecedor);
+
 	}
 
 }

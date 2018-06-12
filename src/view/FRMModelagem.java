@@ -10,6 +10,9 @@ import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleModelagem;
+
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -89,7 +92,17 @@ public class FRMModelagem extends JPanel {
 		btnCancelar.setBounds(203, 564, 97, 25);
 		add(btnCancelar);
 		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(370, 565, 97, 25);
+		add(btnAlterar);
 		
+		ControleModelagem ctrlModelagem = new ControleModelagem(txtPrecoModelagem, cbModelo, fttData, btnSalvar, btnAlterar, btnCancelar);
+		cbModelo.addActionListener(ctrlModelagem);
+		btnSalvar.addActionListener(ctrlModelagem);
+		btnAlterar.addActionListener(ctrlModelagem);
+		btnCancelar.addActionListener(ctrlModelagem);
 	}
 
 }

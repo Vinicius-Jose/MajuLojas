@@ -1,14 +1,22 @@
 package view;
 
 import java.awt.Font;
+import java.text.ParseException;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
+
+import controller.ControleAviamento;
+
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FRMAviamento extends JPanel {
 	private JTextField txtAviamento;
@@ -16,6 +24,8 @@ public class FRMAviamento extends JPanel {
 	private JComboBox cbFornecedor ;
 	private JButton btnCancelar ;
 	private JButton btnSalvar;
+	private JFormattedTextField fttData;
+	private JFormattedTextField formattedTextField;
 	/**
 	 * Create the panel.
 	 */
@@ -77,6 +87,21 @@ public class FRMAviamento extends JPanel {
 		add(txtPreco);
 		txtPreco.setColumns(10);
 		
+		JLabel lblData = new JLabel("Data");
+		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblData.setBounds(736, 108, 61, 14);
+		add(lblData);
+		
+		try {
+			fttData = new JFormattedTextField(
+					new MaskFormatter("##/##/####"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		fttData.setBounds(791, 106, 83, 22);
+		add(fttData);
+		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
@@ -89,6 +114,25 @@ public class FRMAviamento extends JPanel {
 		btnCancelar.setBounds(122, 348, 97, 25);
 		add(btnCancelar);
 		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setForeground(Color.BLACK);
+		btnPesquisar.setBackground(Color.WHITE);
+		btnPesquisar.setBounds(365, 131, 89, 23);
+		add(btnPesquisar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(250, 349, 97, 25);
+		add(btnAlterar);
+		
+		ControleAviamento ctrlAviamento = new ControleAviamento(txtAviamento, txtPreco, cbFornecedor, btnCancelar, btnSalvar,
+		btnPesquisar, btnAlterar);
+		cbFornecedor.addActionListener(ctrlAviamento);
+		btnCancelar.addActionListener(ctrlAviamento);
+		btnSalvar.addActionListener(ctrlAviamento);
+		btnPesquisar.addActionListener(ctrlAviamento);
+		btnAlterar.addActionListener(ctrlAviamento);
+		
 	}
-
 }

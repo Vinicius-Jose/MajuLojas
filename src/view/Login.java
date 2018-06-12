@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.ControlleLogin;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -71,6 +74,9 @@ public class Login extends JFrame {
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(221, 197, 97, 25);
 		contentPane.add(btnEntrar);
+		
+		ControlleLogin ctrlLogin = new ControlleLogin(txtUsuario, pswSenha, btnEntrar);
+		btnEntrar.addActionListener(ctrlLogin);
 	}
 
 }

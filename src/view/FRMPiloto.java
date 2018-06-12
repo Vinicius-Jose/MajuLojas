@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControlePiloto;
+
 import java.awt.Color;
 
 public class FRMPiloto extends JPanel {
@@ -88,6 +91,17 @@ public class FRMPiloto extends JPanel {
 		btnCancelar.setBounds(155, 554, 97, 25);
 		add(btnCancelar);
 		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(327, 555, 97, 25);
+		add(btnAlterar);
+		
+		ControlePiloto ctrlPiloto = new ControlePiloto(cbModelo, txtPrecoPiloto, fttData, btnSalvar, btnAlterar, btnCancelar);
+		cbModelo.addActionListener(ctrlPiloto);
+		btnSalvar.addActionListener(ctrlPiloto);
+        btnAlterar.addActionListener(ctrlPiloto);
+        btnCancelar.addActionListener(ctrlPiloto);
 	}
 
 }

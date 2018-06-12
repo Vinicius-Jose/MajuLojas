@@ -12,6 +12,9 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.text.MaskFormatter;
+
+import controller.ControleCorteCostura;
+
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -141,6 +144,19 @@ public class FRMCorteCostura extends JPanel {
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(338, 538, 97, 25);
 		add(btnCancelar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(489, 539, 97, 25);
+		add(btnAlterar);
+		
+		ControleCorteCostura ctrlCorteCostura = new ControleCorteCostura(txtGrade, txtQtd, txtCorte, txtCostura, fttData, comboBox, btnSalvar, btnCancelar, btnAtualizarEstoque, btnAlterar);
+		comboBox.addActionListener(ctrlCorteCostura);
+		btnSalvar.addActionListener(ctrlCorteCostura);
+		btnCancelar.addActionListener(ctrlCorteCostura);
+		btnAtualizarEstoque.addActionListener(ctrlCorteCostura);
+		btnAlterar.addActionListener(ctrlCorteCostura);
 		
 	}
 

@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+
+import controller.ControleGrade;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -102,5 +105,17 @@ public class FRMGrade extends JPanel {
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(238, 547, 97, 25);
 		add(btnCancelar);
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setForeground(Color.BLACK);
+		btnAlterar.setBackground(Color.WHITE);
+		btnAlterar.setBounds(391, 548, 97, 25);
+		add(btnAlterar);
+		
+		ControleGrade ctrlGrade = new ControleGrade(cbModelo, textField, txtMin, txtMax, btnSalvar, btnCancelar, btnAlterar);
+		cbModelo.addActionListener(ctrlGrade);
+		btnSalvar.addActionListener(ctrlGrade);
+		btnCancelar.addActionListener(ctrlGrade);
+		btnAlterar.addActionListener(ctrlGrade);
 	}
 }

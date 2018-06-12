@@ -9,6 +9,9 @@ import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import controller.ControleEstoque;
+
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -69,6 +72,9 @@ public class FRMEstoque extends JPanel {
 		btnPesquisar.setBackground(Color.WHITE);
 		btnPesquisar.setBounds(421, 82, 108, 23);
 		add(btnPesquisar);
+		
+		ControleEstoque ctrlEstoque = new ControleEstoque(btnPesquisar, cbModelo);
+		btnPesquisar.addActionListener(ctrlEstoque);
 	}
 
 }
