@@ -205,22 +205,20 @@ insert into Capital values
 ('06/12/2017',3000)
 
 insert into Fornecedor values
-('Alberto Gonçalves', '971763490'),
+('Alberto GonÃ§alves', '971763490'),
 ('Carlos Alberto de Andrade', '982867455'),
 ('Bruno Marcondes', '980867523'),
 ('Joana Albuquerque', '984200567')
 
  insert into Aviamento values
- ('12/01/2018', 0.20, 'Zíper', 1),
- ('12/01/2018', 9.80, 'Elástico', 1),
- ('07/02/2018', 0.20, 'Zíper', 1),
- ('07/02/2018', 9.80, 'Elástico', 1),
- ('09/03/2018', 0.20, 'Zíper', 1),
- ('09/03/2018', 9.80, 'Elástico', 1),
- ('10/04/2018', 0.20, 'Zíper', 1),
- ('10/04/2018', 9.80, 'Elástico', 1),
- ('08/05/2018', 0.20, 'Zíper', 1),
- ('08/05/2018', 9.80, 'Elástico', 1)
+ ('12/01/2018', 0.20, 'Ziper', 1),
+ ('12/01/2018', 9.80, 'Elastico comum', 1),
+ ('07/02/2018', 0.20, 'Ziper De ouro', 1),
+ ('07/02/2018', 9.80, 'Elastico para moletom', 1),
+ ('09/03/2018', 0.20, 'Ziper de prata', 1),
+ ('09/03/2018', 9.80, 'Elastico para calca', 1),
+ ('10/04/2018', 0.20, 'Ziper para moletom', 1),
+
 
  insert into Modelagem values
 (40.00, '10/01/2018', 1000),
@@ -280,15 +278,15 @@ insert into Estoque values
 
 
 insert into Cliente values
-('José Pereira Souza', '947296576'),
+('JosÃ© Pereira Souza', '947296576'),
 ('Sabrina Alencar', '989342390'),
 ('Caroline Batista', '956576320'),
 ('Fernando Augusto Brito', '997621024'),
 ('Marcela da Silva', '976429807')
 
 insert into Motorista values
-('João Pedro da Silva', 'KDB6632','986872340'),
-('Marcos Antônio de Oliveira', 'CJK2052', '980742301'),
+('JoÃ£o Pedro da Silva', 'KDB6632','986872340'),
+('Marcos AntÃ´nio de Oliveira', 'CJK2052', '980742301'),
 ('Gilberto dos Santos', 'FJM9067', '981845645')
 
 
@@ -360,7 +358,7 @@ insert into Item_Venda values
 (1, 1009, 4, 50.00)
 
 
---essa aq é a unica q da erro
+--essa aq Ã© a unica q da erro
 insert into Item_Peca values
 (100, 1, 100, 0.20, 1000),
 (101, 2, 100, 9.80, 1000)
@@ -394,6 +392,24 @@ where MONTH(data_Capital) = 02 and YEAR(data_Capital) = 2018 and md.Tecidocodigo
 
 
 Select valor_Capital  from Capital where MONTH(data_Capital) = 4 and YEAR(data_Capital) = 2018
+
+select PWDCOMPARE('admin',senha) as valido from Usuarios WHERE nome = 'admin'
+
+Select valor_Capital  from Capital where MONTH(data_Capital) = 4 and YEAR(data_Capital) = 2018
+
+select md.modelo as modelo,Count(ien.valor_Item_Encomenda) + Count(iv.valor_Item_Venda)as qtd, md.margem_Custo as preco,  SUM(ien.valor_Item_Encomenda) + SUM(iv.valor_Item_Venda) as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv
+where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and MONTH(en.data_Encomenda) = 4 and YEAR(en.data_Encomenda) = 2018
+and MONTH(vd.data_Venda) = 4 and YEAR(vd.data_Venda) = 2018
+group by md.modelo, md.margem_Custo
+
+select lucro_Mensal, data from Lucro
+select * from Lucro
+
+select * from Aviamento where nome like 'zi%'
+
+
+
+
 --ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
 
 --ALTER TABLE Modelo ADD CONSTRAINT FKModelo467655 FOREIGN KEY (Pilotocodigo) REFERENCES Piloto (codigo);
