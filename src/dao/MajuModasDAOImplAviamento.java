@@ -129,7 +129,7 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 		try {
 			String sql = 
 				  "select av.codigo, av.data, av.valor_Unitario,"
-			    + "forn.id AS codigo_fornecedor "
+			    + "forn.id AS codigo_fornecedor, forn.nome AS nome_fornecedor "
 			    + "from aviamento av, fornecedor forn"
 			    + "where forn.id = av.Fornecedorid";
 			PreparedStatement stmt = con.prepareStatement( sql );
@@ -143,6 +143,7 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 				a.setValorCompra( rs.getFloat("valor_Unitario")  );
 				a.setNome( rs.getString("nome")  );
 				forn.setId(rs.getInt("codigo_fornecedor"));
+				forn.setNome(rs.getString("nome_fornecedor"));
 				a.setFornecedor( forn );
 				aviamento.add( a );
 			}
@@ -153,6 +154,40 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 		
 	}
 
+
+
+
+	@Override
+	public Aviamento buscaEspecifico(Aviamento aviamento) {
+		
+		try {
+			String sql = 
+				  "select av.codigo, av.data, av.valor_Unitario,"
+			    + "forn.id AS codigo_fornecedor, forn.nome AS nome_fornecedor "
+			    + "from aviamento av, fornecedor forn"
+			    + "where forn.id = av.Fornecedorid AND av.nome like %?%";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setString(1, aviamento.getNome());
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Fornecedor forn = new Fornecedor();
+				aviamento.setCodigo( rs.getInt("codigo")  );
+				aviamento.setDataCompra( rs.getDate("data")  );
+				aviamento.setValorCompra( rs.getFloat("valor_Unitario")  );
+				forn.setId(rs.getInt("codigo_fornecedor"));
+				forn.setNome(rs.getString("nome_fornecedor"));
+				aviamento.setFornecedor( forn );
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return aviamento;
+		
+	}
 
 
 }
