@@ -36,15 +36,19 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public MajuModasDAOImpl() { 
 		try {
 			tipoBanco = "mariadb";
+			tipoBanco = "SQLSERVER";
 			String drivers = "org.mariadb.jdbc.Driver";
+			drivers = "net.sourceforge.jtds.jdbc.Driver";
 			String porta = "3306";
-			String nomeBanco = "MajuModas";
+			String nomeBanco = "MajuLoja";
 			String usuario = "root";
 			String senha = "";
-			
+			senha = "root";
+			String urlMS = "jdbc:jtds:sqlserver://%s:1433;database=%s;user=%s;password=%s;";
 			Class.forName(drivers);
-			String urlDb = "jdbc:"+ tipoBanco +"//localhost:"+ porta +"/"+ nomeBanco +"?allowMultiQueries=true";
-			con = DriverManager.getConnection(urlDb, usuario , senha);
+//			String urlDb = "jdbc:"+ tipoBanco +"//localhost:"+ porta +"/"+ nomeBanco +"?allowMultiQueries=true";
+//			con = DriverManager.getConnection(urlDb, usuario , senha);
+			con  = DriverManager.getConnection(String.format("jdbc:jtds:sqlserver://localhost:1433;database=%s;user=%s;password=%s;", nomeBanco, usuario, senha));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -1703,7 +1707,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 				a.setNome( rs.getString("nome")  );
 				/** ver depois como fazer				*
 				*/
-				a.setFornecedor(  );
+				a.setFornecedor(null  );
 				aviamento.add( a );
 			}
 		} catch (SQLException e) {
@@ -1861,13 +1865,12 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 							+ "WHERE nome = ? AND "
 							+ "senha = MD5(?)";
 			}else{
-				sql =  "select * from usuario "
-						+ "WHERE nome = ? AND "
-						+ "senha = PWDCOMPARE(?)";	
+				sql =  "select PWDCOMPARE(?, senha) from usuario "
+						+ "WHERE nome = ?";	
 			}
 			PreparedStatement stmt = con.prepareStatement( sql );
-			stmt.setString(1, usuario);
-			stmt.setString(2, senha);
+			stmt.setString(2, usuario);
+			stmt.setString(1, senha);
 			
 			ResultSet rs = stmt.executeQuery();
 			if(rs.isFirst()){

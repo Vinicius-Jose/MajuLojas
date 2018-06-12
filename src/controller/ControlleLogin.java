@@ -35,6 +35,7 @@ public class ControlleLogin implements ActionListener{
 	public void actionPerformed(ActionEvent a) {
 		String usuario = txtUsuario.getText();
 		String senha = pswSenha.getText();
+		System.out.println(senha);
 		if(a.getActionCommand().equals("Entrar")) {
 			if(verificarUsuario(usuario, senha)) {
 				TelaPrincipal principal = new TelaPrincipal();

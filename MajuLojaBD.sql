@@ -192,12 +192,17 @@ FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo),
 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo)
 );
 
+Create Table Usuarios(
+nome varchar(200) not null Primary key,
+senha varchar(200) not null
+)
+
 insert into Capital values
-(0,0),
-(0,0),
-(0,0),
-(0,0),
-(0,0)
+('10/04/2018',5000),
+('09/03/2018',6000),
+('08/02/2018',7000),
+('07/01/2018',9000),
+('06/12/2018',3000)
 
 insert into Fornecedor values
 ('Alberto Gonçalves', '971763490'),
@@ -287,12 +292,12 @@ insert into Motorista values
 ('Gilberto dos Santos', 'FJM9067', '981845645')
 
 
-insert into lucro(Capitalcodigo) values
-(1000),
-(1002),
-(1001),
-(1003),
-(1004)
+insert into lucro(data_Lucro,lucro_Mensal,Capitalcodigo) values
+('10/04/2018',5000,1000),
+('09/03/2018',60000,1002),
+('08/02/2018',70000,1001),
+('07/01/2018',10000,1003),
+('06/12/2018',30000,1004)
 
 
 
@@ -358,15 +363,23 @@ insert into Item_Venda values
 --essa aq é a unica q da erro
 insert into Item_Peca values
 (100, 1, 100, 0.20, 1000),
-(100, 1, 60, 0.20, 1001),
-(100, 1, 70, 0.20, 1002),
-(100, 1, 50, 0.20, 1003),
-(100, 1, 60, 0.20, 1004),
-(101, 2, 100, 9.80, 1000),
-(101, 2, 60, 9.80, 1001),
-(101, 2, 70, 9.80, 1002),
-(101, 2, 50, 9.80, 1003),
-(101, 2, 60, 9.80, 1004)
+(101, 2, 100, 9.80, 1000)
+
+insert into Usuarios values
+('root', PWDENCRYPT('root')),
+('admin',PWDENCRYPT('admin')),
+('Maju' , PWDENCRYPT('Lojas'))
+
+
+--(100, 1, 60, 0.20, 1001),
+--(100, 1, 70, 0.20, 1002),
+--(100, 1, 50, 0.20, 1003),
+--(100, 1, 60, 0.20, 1004),
+
+--(101, 2, 60, 9.80, 1001),
+--(101, 2, 70, 9.80, 1002),
+--(101, 2, 50, 9.80, 1003),
+--(101, 2, 60, 9.80, 1004)
 
 --ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
 
