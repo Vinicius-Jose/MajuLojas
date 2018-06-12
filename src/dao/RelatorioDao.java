@@ -5,11 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import model.Encomenda;
+
 import model.CorteCostura;
 import model.Tecido;
+import model.Venda;
 
 public class RelatorioDao {
 	MajuModasDAOImpl banco = new MajuModasDAOImpl();
@@ -179,13 +183,96 @@ public class RelatorioDao {
 	}
 
 	public Set<CorteCostura> buscarCorte() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from Corte_Costura where DATEDIFF(MONTH,data,getdate()) = 1";
+		PreparedStatement stmt = null;
+		Set<CorteCostura> lista = new HashSet();
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				CorteCostura corte = new CorteCostura();
+				corte.setCodigo(rt.getInt("codigo"));
+				corte.setDataCorte(rt.getDate("data"));
+				corte.setQuantidadePecasCortadas(rt.getInt("qtd_Peca_Cortada"));
+				corte.setValorCorte(rt.getFloat("valor_Corte"));
+				corte.setValorCostura(rt.getFloat("valor_Costura"));
+				lista.add(corte);
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 	public Set<Tecido> buscarTecidos() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from Tecido where DATEDIFF(MONTH,data_Tecido,getdate()) = 1";
+		PreparedStatement stmt = null;
+		Set<Tecido> lista = new HashSet();
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				Tecido tecido = new Tecido();
+				tecido.setCodigo(rt.getInt("codigo"));
+				tecido.setData(rt.getDate("data_Tecido"));
+				tecido.setValor(rt.getFloat("valor_Unitario"));
+				tecido.setTipo((rt.getString("tipo")));
+				tecido.setCor(rt.getString("cor"));
+				tecido.setQuantidade(rt.getInt("qtd_Rolo"));
+				lista.add(tecido);
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+
+	public Set<Venda> buscarVenda() {
+		String sql = "select * from Tecido where DATEDIFF(MONTH,data_Tecido,getdate()) = 1";
+		PreparedStatement stmt = null;
+		Set<Venda> lista = new HashSet();
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				Venda venda = new Venda();
+				venda.setCodigo(rt.getInt("codigo"));
+				venda.setDtVenda(rt.getDate("data_Venda"));
+				venda.setValorTotal(rt.getFloat("valor_Total"));
+				lista.add(venda);
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	public Set<Encomenda> buscarEncomendas() {
+		String sql = "select * from Tecido where DATEDIFF(MONTH,data_Tecido,getdate()) = 1";
+		PreparedStatement stmt = null;
+		Set<Encomenda> lista = new HashSet();
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				Encomenda encomenda = new Encomenda();
+				encomenda.setCodigo(rt.getInt("codigo"));
+				encomenda.setDataEncomenda(rt.getDate("data_Encomenda"));
+				encomenda.setValorTotalEncomenda(rt.getFloat("valor_Total"));
+				lista.add(encomenda);
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 }

@@ -4,21 +4,20 @@ import java.sql.Date;
 import java.util.List;
 
 public class Venda {
-	
+
 	private int codigo;
-	
+
 	private float valorTotal;
-	
+
 	private Date dtVenda;
-	
+
 	private List<ItemVenda> item;
-	
 
 	public float getValorTotal() {
-		if(valorTotal == 0){
-		for (ItemVenda a : item) {
-			valorTotal += a.getValorTotalPeca();
-		}
+		if (valorTotal == 0) {
+			for (ItemVenda a : item) {
+				valorTotal += a.getValorTotalPeca();
+			}
 		}
 		return valorTotal;
 	}
@@ -35,12 +34,12 @@ public class Venda {
 		this.dtVenda = dtVenda;
 	}
 
-	public List<ItemVenda> getItemVenda(){
+	public List<ItemVenda> getItemVenda() {
 		return item;
 	}
-	
+
 	public void setItemVenda(List<ItemVenda> item) {
-		
+
 		this.item = item;
 	}
 

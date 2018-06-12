@@ -5,19 +5,18 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class Capital {
-	
+
 	private int codigo;
-	
+
 	private Date mesAno;
-	
+
 	private float valorCapital;
-	
+
 	private Set<Modelo> modelo;
-	
+
 	private Set<CorteCostura> corteCostura;
-	
+
 	private Set<Tecido> tecido;
-	
 
 	public Date getMesAno() {
 		return mesAno;
@@ -28,23 +27,25 @@ public class Capital {
 	}
 
 	public float getValorCapital() {
-		if(valorCapital == 0){
-		Iterator<Modelo> a = modelo.iterator();
-		while(a.hasNext()){
-			Modelo b = a.next();
-			valorCapital+=b.getCustoConfeccao();
-		}
-		Iterator<CorteCostura> it = corteCostura.iterator();
-		while(it.hasNext()){
-			CorteCostura c = it.next();
-			valorCapital+= (c.getValorCorte() * c.getQuantidadePecasCortadas());
-			valorCapital+=(c.getValorCostura()*c.getQuantidadePecasCortadas());
-		}
-		Iterator<Tecido> itTec = tecido.iterator();
-		while(itTec.hasNext()){
-			Tecido tec = itTec.next();
-			valorCapital+=tec.getValor();
-		}
+		if (valorCapital == 0 ) {
+			Iterator<Modelo> a = modelo.iterator();
+			while (a.hasNext()) {
+				Modelo b = a.next();
+				valorCapital += b.getCustoConfeccao();
+			}
+			Iterator<CorteCostura> it = corteCostura.iterator();
+			while (it.hasNext()) {
+				CorteCostura c = it.next();
+				valorCapital += (c.getValorCorte() * c
+						.getQuantidadePecasCortadas());
+				valorCapital += (c.getValorCostura() * c
+						.getQuantidadePecasCortadas());
+			}
+			Iterator<Tecido> itTec = tecido.iterator();
+			while (itTec.hasNext()) {
+				Tecido tec = itTec.next();
+				valorCapital += tec.getValor();
+			}
 		}
 		return valorCapital;
 	}
@@ -52,24 +53,24 @@ public class Capital {
 	public void setValorCapital(float valorCapital) {
 		this.valorCapital = valorCapital;
 	}
-	
-	public Set<Modelo> getModelo(){
-		
+
+	public Set<Modelo> getModelo() {
+
 		return modelo;
 	}
 
 	public void setModelo(Set<Modelo> modelo) {
-		
+
 		this.modelo = modelo;
 	}
-	
-	public Set<CorteCostura> getCorteCostura(){
-		
+
+	public Set<CorteCostura> getCorteCostura() {
+
 		return corteCostura;
 	}
-	
-	public void setCorteCostura (Set<CorteCostura> corteCostura) {
-		
+
+	public void setCorteCostura(Set<CorteCostura> corteCostura) {
+
 		this.corteCostura = corteCostura;
 	}
 
