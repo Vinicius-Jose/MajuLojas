@@ -6,8 +6,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
+import model.Tecido;
 
 import model.Capital;
+import model.CorteCostura;
+import model.Modelo;
 
 public class RelatorioDao {
 	MajuModasDAOImpl banco = new MajuModasDAOImpl();
@@ -102,5 +107,37 @@ public class RelatorioDao {
 		}
 
 		return info;
+	}
+
+	public boolean ultimoCapital() {
+
+		String sql = "select DATEDIFF(month,max(data_capital), getDate()) as data from Capital";
+		PreparedStatement stmt = null;
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			if (rt.next()) {
+				if (rt.getInt("data") > 1) {
+					return true;
+				}
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+
+	public Set<CorteCostura> buscarCorte() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Set<Tecido> buscarTecidos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
