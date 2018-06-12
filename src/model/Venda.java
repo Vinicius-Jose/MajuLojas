@@ -15,8 +15,10 @@ public class Venda {
 	
 
 	public float getValorTotal() {
+		if(valorTotal == 0){
 		for (ItemVenda a : item) {
 			valorTotal += a.getValorTotalPeca();
+		}
 		}
 		return valorTotal;
 	}

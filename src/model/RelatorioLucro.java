@@ -25,6 +25,7 @@ public class RelatorioLucro {
 	}
 
 	public float getLucroMes() {
+		if(lucroMes == 0){
 	    Iterator<Venda> a = venda1.iterator();
 	    while(a.hasNext()){
 	    	Venda b = a.next();
@@ -36,6 +37,7 @@ public class RelatorioLucro {
 	    	lucroMes+=encomendas.getValorTotalEncomenda();
 	    }
 	    lucroMes-= capital.getValorCapital();
+		}
 		return lucroMes;
 	}
 

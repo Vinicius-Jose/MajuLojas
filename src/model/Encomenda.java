@@ -39,12 +39,15 @@ public class Encomenda {
 	}
 
 	public float getValorTotalEncomenda() {
+		if(valorTotalEncomenda == 0){
 		Iterator<ItemEncomenda> a = itemEncomenda.iterator();
 		while(a.hasNext()){
 			ItemEncomenda item = a.next();
 			valorTotalEncomenda+=item.getValorItemEncomenda();
 		}
+		}
 		return valorTotalEncomenda;
+		
 	}
 
 	public void setValorTotalEncomenda(float valorTotalEncomenda) {

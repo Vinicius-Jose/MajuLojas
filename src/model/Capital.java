@@ -28,6 +28,7 @@ public class Capital {
 	}
 
 	public float getValorCapital() {
+		if(valorCapital == 0){
 		Iterator<Modelo> a = modelo.iterator();
 		while(a.hasNext()){
 			Modelo b = a.next();
@@ -43,6 +44,7 @@ public class Capital {
 		while(itTec.hasNext()){
 			Tecido tec = itTec.next();
 			valorCapital+=tec.getValor();
+		}
 		}
 		return valorCapital;
 	}

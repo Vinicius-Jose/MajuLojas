@@ -17,7 +17,9 @@ public class ItemEncomenda {
 	}
 
 	public float getValorItemEncomenda() {
+		if(valorItemEncomenda == 0){
 		valorItemEncomenda = quantidade * modelo.getMargemCusto();
+		}
 		return valorItemEncomenda;
 	}
 

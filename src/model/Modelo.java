@@ -39,6 +39,7 @@ public class Modelo {
 	}
 
 	public float getCustoConfeccao() {
+		if(custoConfeccao == 0){
 		Iterator<ItemPeca> a = itemPeca.iterator();
 		while(a.hasNext()){
 			ItemPeca b = a.next();
@@ -48,6 +49,7 @@ public class Modelo {
 		custoConfeccao+=piloto.getValorPiloto();
 		custoConfeccao+=corteCostura.getValorCorte();
 		custoConfeccao+=corteCostura.getValorCostura();
+		}
 		return custoConfeccao;
 	}
 
@@ -56,8 +58,10 @@ public class Modelo {
 	}
 
 	public float getMargemCusto() {
+		if(margemCusto ==0){
 		margemCusto = getCustoConfeccao()/corteCostura.getQuantidadePecasCortadas();
 		margemCusto = custoConfeccao * 2;
+		}
 		return margemCusto;
 	}
 

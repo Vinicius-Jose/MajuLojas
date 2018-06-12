@@ -17,6 +17,9 @@ public class ItemVenda {
 	}
 
 	public float getValorTotalPeca() {
+		if(valorTotalPeca == 0){
+			valorTotalPeca*=quantidade;
+		}
 		return valorTotalPeca;
 	}
 
