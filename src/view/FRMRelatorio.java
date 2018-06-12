@@ -118,6 +118,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		tabelaCapital.getColumnModel().getColumn(4).setPreferredWidth(104);
 		tabelaCapital.getColumnModel().getColumn(5).setPreferredWidth(101);
 		tabelaCapital.getColumnModel().getColumn(6).setPreferredWidth(110);
+		tabelaCapital.getColumnModel().getColumn(7).setPreferredWidth(110);
 		scrollPane.setViewportView(tabelaCapital);
 		
 		txtCapital = new JTextField();
@@ -180,19 +181,22 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 			int ano = (int) cbAno.getSelectedItem();
 			int mes = (int) cbMes.getSelectedItem();
 			txtCapital.setText(Double.toString(ctrlRelatorio.buscarCapital(mes, ano)));
-			List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(0,0);
+			List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(mes, ano);
+			DefaultTableModel modelo = (DefaultTableModel) tabelaCapital.getModel();
+			modelo.setRowCount(0);
 			for(HashMap<String,Object> b : dados){
-				DefaultTableModel modelo = (DefaultTableModel) tabelaCapital.getModel();
-				Object[] linha = new Object[b.size()];
-				linha[1] =b.get("Modelo");
-				linha[2] =b.get("Corte");
-				linha[3] =b.get("Costura");
-				linha[4] =b.get("Quantidade Cortada");
-				linha[5] =b.get("Modelagem");
-				linha[6] =b.get("Piloto");
-				linha[7] =b.get("Tecido");
-				linha[8] =b.get("Custo Confec\u00E7\u00E3o");
+				Object[] linha = new Object[9];
+				System.out.println(b.get("Modelo"));
+				linha[0] =b.get("Modelo");
+				linha[1] =b.get("Corte");
+				linha[2] =b.get("Costura");
+				linha[3] =b.get("Quantidade Cortada");
+				linha[4] =b.get("Modelagem");
+				linha[5] =b.get("Piloto");
+				linha[6] =b.get("Tecido");
+				linha[7] =b.get("Custo Confec\u00E7\u00E3o");
 				modelo.addRow(linha);
+				
 			}
 		}
 		
@@ -213,20 +217,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		for(Integer b: ano){
 			cbAno.addItem(b.intValue());
 		}
-		List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(0,0);
-		for(HashMap<String,Object> b : dados){
-			DefaultTableModel modelo = (DefaultTableModel) tabelaCapital.getModel();
-			Object[] linha = new Object[b.size()];
-			linha[1] =b.get("Modelo");
-			linha[2] =b.get("Corte");
-			linha[3] =b.get("Costura");
-			linha[4] =b.get("Quantidade Cortada");
-			linha[5] =b.get("Modelagem");
-			linha[6] =b.get("Piloto");
-			linha[7] =b.get("Tecido");
-			linha[8] =b.get("Custo Confec\u00E7\u00E3o");
-			modelo.addRow(linha);
-		}
+		
 	}
 
 }
