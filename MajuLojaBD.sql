@@ -202,7 +202,7 @@ insert into Capital values
 ('09/03/2018',6000),
 ('08/02/2018',7000),
 ('07/01/2018',9000),
-('06/12/2018',3000)
+('06/12/2017',3000)
 
 insert into Fornecedor values
 ('Alberto Gonçalves', '971763490'),
@@ -297,7 +297,7 @@ insert into lucro(data_Lucro,lucro_Mensal,Capitalcodigo) values
 ('09/03/2018',60000,1002),
 ('08/02/2018',70000,1001),
 ('07/01/2018',10000,1003),
-('06/12/2018',30000,1004)
+('06/12/2017',30000,1004)
 
 
 
@@ -371,6 +371,12 @@ insert into Usuarios values
 ('Maju' , PWDENCRYPT('Lojas'))
 
 
+Select Month(data_Capital) as meses from Capital
+Order by meses
+
+UPdate Capital
+set data_Capital = '06/12/2017'
+where MONTH(data_Capital) =12
 --(100, 1, 60, 0.20, 1001),
 --(100, 1, 70, 0.20, 1002),
 --(100, 1, 50, 0.20, 1003),
@@ -381,6 +387,8 @@ insert into Usuarios values
 --(101, 2, 50, 9.80, 1003),
 --(101, 2, 60, 9.80, 1004)
 
+
+Select distinct (Year(data_Capital) )as ano from Capital Order by ano
 --ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
 
 --ALTER TABLE Modelo ADD CONSTRAINT FKModelo467655 FOREIGN KEY (Pilotocodigo) REFERENCES Piloto (codigo);

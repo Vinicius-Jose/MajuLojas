@@ -1,24 +1,26 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
-import model.Capital;
-import java.awt.Color;
+import controller.ControleRelatorio;
 
 public class FRMRelatorio extends JPanel implements ActionListener {
 	private JTable tabelaLucro;
@@ -31,6 +33,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 	private JScrollPane scrollPane;
 	private JLabel lblCapitalMensal;
 	private ButtonGroup grupo;
+	private ControleRelatorio ctrlRelatorio = new ControleRelatorio();
 	/**
 	 * Create the panel.
 	 */
@@ -116,6 +119,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		scrollPane.setViewportView(tabelaCapital);
 		
 		txtCapital = new JTextField();
+		txtCapital.setEditable(false);
 		txtCapital.setForeground(Color.BLACK);
 		txtCapital.setBackground(Color.WHITE);
 		txtCapital.setBounds(787, 531, 86, 20);
@@ -155,6 +159,9 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		grupo.add(rdbtnLucro);
 		rdbCapital.addActionListener(this);
 		rdbtnLucro.addActionListener(this);
+		btnEmitirRelatrio.addActionListener(this);
+		
+		montaTelaCapital();
 	}
 	
 	
@@ -162,13 +169,34 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		if (a.getActionCommand().equals("Capital")){
-			scrollPane.setViewportView(tabelaCapital);
-		    lblCapitalMensal.setText("Capital Mensal");
+			montaTelaCapital();
+		    
 		}else if(a.getActionCommand().equals("Lucro")){
 			scrollPane.setViewportView(tabelaLucro);
 		    lblCapitalMensal.setText("Lucro Mensal");
+		}else if(a.getActionCommand().contains("Emitir")){
+			int ano = (int) cbAno.getSelectedItem();
+			int mes = (int) cbMes.getSelectedItem();
+			txtCapital.setText(Double.toString(ctrlRelatorio.buscarCapital(mes, ano)));
 		}
 		
+	}
+
+
+
+	private void montaTelaCapital() {
+		scrollPane.setViewportView(tabelaCapital);
+		lblCapitalMensal.setText("Capital Mensal");
+		cbMes.removeAll();
+		List<Integer> meses  = ctrlRelatorio.mesesCapital();
+		for(Integer b : meses){
+			cbMes.addItem(b.intValue());
+		}
+		List<Integer> ano = ctrlRelatorio.anosCapital();
+		cbAno.removeAllItems();
+		for(Integer b: ano){
+			cbAno.addItem(b.intValue());
+		}
 	}
 
 }

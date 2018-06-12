@@ -443,6 +443,16 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 
 
+	public Connection getCon() {
+		return con;
+	}
+
+
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+
+
 	@Override
 	public void remover(CorteCostura corteCostura) {
 		try {			
