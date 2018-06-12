@@ -180,26 +180,33 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		}else if(a.getActionCommand().contains("Emitir")){
 			int ano = (int) cbAno.getSelectedItem();
 			int mes = (int) cbMes.getSelectedItem();
-			txtCapital.setText(Double.toString(ctrlRelatorio.buscarCapital(mes, ano)));
-			List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(mes, ano);
-			DefaultTableModel modelo = (DefaultTableModel) tabelaCapital.getModel();
-			modelo.setRowCount(0);
-			for(HashMap<String,Object> b : dados){
-				Object[] linha = new Object[9];
-				System.out.println(b.get("Modelo"));
-				linha[0] =b.get("Modelo");
-				linha[1] =b.get("Corte");
-				linha[2] =b.get("Costura");
-				linha[3] =b.get("Quantidade Cortada");
-				linha[4] =b.get("Modelagem");
-				linha[5] =b.get("Piloto");
-				linha[6] =b.get("Tecido");
-				linha[7] =b.get("Custo Confec\u00E7\u00E3o");
-				modelo.addRow(linha);
-				
+			if(rdbCapital.isSelected()){
+				preencherTabelaCapital(ano,mes);
 			}
 		}
 		
+	}
+
+
+
+	private void preencherTabelaCapital(int mes, int ano) {
+		txtCapital.setText(Double.toString(ctrlRelatorio.buscarCapital(mes, ano)));
+		List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(mes, ano);
+		DefaultTableModel modelo = (DefaultTableModel) tabelaCapital.getModel();
+		modelo.setRowCount(0);
+		for(HashMap<String,Object> b : dados){
+			Object[] linha = new Object[9];
+			linha[0] =b.get("Modelo");
+			linha[1] =b.get("Corte");
+			linha[2] =b.get("Costura");
+			linha[3] =b.get("Quantidade Cortada");
+			linha[4] =b.get("Modelagem");
+			linha[5] =b.get("Piloto");
+			linha[6] =b.get("Tecido");
+			linha[7] =b.get("Custo Confec\u00E7\u00E3o");
+			modelo.addRow(linha);
+			
+		}
 	}
 
 
