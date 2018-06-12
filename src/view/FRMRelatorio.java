@@ -180,6 +180,20 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 			int ano = (int) cbAno.getSelectedItem();
 			int mes = (int) cbMes.getSelectedItem();
 			txtCapital.setText(Double.toString(ctrlRelatorio.buscarCapital(mes, ano)));
+			List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(0,0);
+			for(HashMap<String,Object> b : dados){
+				DefaultTableModel modelo = (DefaultTableModel) tabelaCapital.getModel();
+				Object[] linha = new Object[b.size()];
+				linha[1] =b.get("Modelo");
+				linha[2] =b.get("Corte");
+				linha[3] =b.get("Costura");
+				linha[4] =b.get("Quantidade Cortada");
+				linha[5] =b.get("Modelagem");
+				linha[6] =b.get("Piloto");
+				linha[7] =b.get("Tecido");
+				linha[8] =b.get("Custo Confec\u00E7\u00E3o");
+				modelo.addRow(linha);
+			}
 		}
 		
 	}
@@ -201,8 +215,17 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 		}
 		List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosCapital(0,0);
 		for(HashMap<String,Object> b : dados){
-			DefaultTableModel modelo = tabelaCapital.getModel();
-			modelo.addRow(b);
+			DefaultTableModel modelo = (DefaultTableModel) tabelaCapital.getModel();
+			Object[] linha = new Object[b.size()];
+			linha[1] =b.get("Modelo");
+			linha[2] =b.get("Corte");
+			linha[3] =b.get("Costura");
+			linha[4] =b.get("Quantidade Cortada");
+			linha[5] =b.get("Modelagem");
+			linha[6] =b.get("Piloto");
+			linha[7] =b.get("Tecido");
+			linha[8] =b.get("Custo Confec\u00E7\u00E3o");
+			modelo.addRow(linha);
 		}
 	}
 

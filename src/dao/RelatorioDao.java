@@ -75,7 +75,7 @@ public class RelatorioDao {
 		List<HashMap<String, Object>> info = new ArrayList<>();
 
 		String sql = "Select  md.modelo, md.preco_Custo as custoConfeccao, cc.qtd_Peca_Cortada as cortado, cc.valor_Corte as valCorte,  cc.valor_Costura as costura,case when (tec.Capitalcodigo!= cap.codigo) then 0 else tec.valor_Unitario  end as tecido,case when (pl.Capitalcodigo!= cap.codigo) then 0 else pl.valor_Unitario end as piloto , case  when (ml.CapitalCodigo != cap.codigo) then 0 else ml.valor_Unitario end as modelagem from Capital cap , Modelo md , Corte_Costura cc, Tecido tec, Modelagem ml,Piloto pl "
-				+ "where MONTH(data_Capital) = 02 and YEAR(data_Capital) = 2018 and md.Tecidocodigo = tec.codigo and cc.codigo = md.Corte_Costuracodigo and ml.codigo = md.Modelagemcodigo";
+				+ "where MONTH(data_Capital) = ? and YEAR(data_Capital) = ? and md.Tecidocodigo = tec.codigo and cc.codigo = md.Corte_Costuracodigo and ml.codigo = md.Modelagemcodigo";
 		PreparedStatement stmt = null;
 		try {
 			stmt = banco.getCon().prepareStatement(sql);
