@@ -1,8 +1,12 @@
 package controller;
 
 import model.Aviamento;
+
 import java.util.List;
+
 import javax.swing.JOptionPane;
+
+import model.Fornecedor;
 import dao.MajuModasDAO;
 import dao.MajuModasDAOImpl;
 
@@ -25,6 +29,12 @@ public class ControleAviamento{
 		bdAviamento.alterar(aviamento);
 		JOptionPane.showMessageDialog(null, "Aviamento alterado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
+
+	public List<Fornecedor> buscarFornecedor() {
+		return bdAviamento.buscarFornecedor();
+	}
+
+	
 }
 	
 

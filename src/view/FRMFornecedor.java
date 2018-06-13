@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleFornecedor;
@@ -100,6 +101,10 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 		btnAlterar.setBounds(420, 548, 97, 25);
 		add(btnAlterar);
 		
+		btnSalvar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnAlterar.addActionListener(this);
+		btnPesquisar.addActionListener(this);
 	
 
 	}
@@ -107,7 +112,14 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 	private Fornecedor dadosFornecedor() {
 		Fornecedor fornecedor = new Fornecedor();
 		fornecedor.setNome(txtNome.getText());
-		fornecedor.setTelefoneFornecedor(txtFone.getText());
+		try {
+			String fone  = txtFone.getText(1,3) + txtFone.getText(5,5) + txtFone.getText(11,4); ;
+			System.out.println(fone);
+			fornecedor.setTelefoneFornecedor(fone);
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return fornecedor;
 	}
 	

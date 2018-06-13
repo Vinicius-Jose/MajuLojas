@@ -136,14 +136,14 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public void adicionar(Aviamento aviamento) {
 		try {
 			String sql = "INSERT INTO Aviamento "
-					+ " VALUES ( ?, ?, ?, ?, ? ) ";
+					+ " VALUES ( ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, aviamento.getCodigo());
-			stmt.setDate(2, aviamento.getDataCompra());
-			stmt.setDouble(3, aviamento.getValorCompra());
-			stmt.setString(4, aviamento.getNome());
-			stmt.setInt(5, aviamento.getFornecedor().getId());
+
+			stmt.setDate(1, aviamento.getDataCompra());
+			stmt.setDouble(2, aviamento.getValorCompra());
+			stmt.setString(3, aviamento.getNome());
+			stmt.setInt(4, aviamento.getFornecedor().getId());
 
 			stmt.executeUpdate();
 
@@ -602,12 +602,12 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public void adicionar(Fornecedor fornecedor) {
 
 		try {
-			String sql = "INSERT INTO Fornecedor " + " VALUES ( ?, ?, ? ) ";
+			String sql = "INSERT INTO Fornecedor " + " VALUES ( ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, fornecedor.getId());
-			stmt.setString(2, fornecedor.getNome());
-			stmt.setString(3, fornecedor.getTelefoneFornecedor());
+
+			stmt.setString(1, fornecedor.getNome());
+			stmt.setString(2, fornecedor.getTelefoneFornecedor());
 
 			stmt.executeUpdate();
 
@@ -1342,7 +1342,6 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 				a.setId(rs.getInt("id"));
 				a.setNome(rs.getString("nome"));
 				a.setTelefoneContato(rs.getString("telefone"));
-
 				cliente.add(a);
 			}
 		} catch (SQLException e) {
@@ -1372,8 +1371,25 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public List<Fornecedor> buscarFornecedor() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Fornecedor> fornecedor = new ArrayList<>();
+		try {
+			String sql = 
+				"select * from fornecedor";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Fornecedor a = new Fornecedor();
+				a.setId( rs.getInt("id")  );
+				a.setNome( rs.getString("nome")  );
+				a.setTelefoneFornecedor( rs.getString("telefone")  );
+				
+				fornecedor.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return fornecedor;
 	}
 
 	@Override
@@ -1493,7 +1509,6 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public boolean verificarUsuario(String usuario, String senha) {
 		boolean existe = false;
 		String sql;
-
 		try {
 
 			if (tipoBanco == "mariadb") {
@@ -1512,7 +1527,6 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 			} else {
 				existe = false;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-
 import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 
@@ -99,7 +98,7 @@ public class FRMMotorista extends JPanel implements ActionListener{
 		add(txtPlaca);
 		txtPlaca.setColumns(10);
 		
-		JButton btnCancelar = new JButton("Cancelar\r\n");
+		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(292, 547, 97, 25);
@@ -113,12 +112,25 @@ public class FRMMotorista extends JPanel implements ActionListener{
 		btnAlterar.setBounds(470, 548, 97, 25);
 		add(btnAlterar);
 
+		btnSalvar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnAlterar.addActionListener(this);
+		btnPesquisar.addActionListener(this);
 	}
 	
 	private Motorista dadosMotorista() {
 		Motorista motorista = new Motorista();
 		motorista.setNome(txtNome.getText());
-		motorista.setTelefoneContato(txtFone.getText());
+		String fone;
+		try {
+			fone = txtFone.getText(1,3) + txtFone.getText(5,5) + txtFone.getText(11,4);
+			motorista.setTelefoneContato(fone);
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} ;
+
+		
 		motorista.setNumPlaca(txtPlaca.getText());
 		return motorista;
 	}
@@ -139,8 +151,7 @@ public class FRMMotorista extends JPanel implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
-		}else 
-			if(a.getActionCommand().equals("Cancelar")) {
+		}else if(a.getActionCommand().contains("Cancelar")) {
 				txtNome.setText("");
 				txtFone.setText("");
 				txtPlaca.setText("");

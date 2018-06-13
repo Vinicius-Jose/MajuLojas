@@ -3,6 +3,7 @@ package view;
 import java.awt.Font;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -15,8 +16,10 @@ import javax.swing.text.MaskFormatter;
 
 import controller.ControleAviamento;
 import model.Aviamento;
+import model.Fornecedor;
 
 import javax.swing.JButton;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -130,6 +133,13 @@ public class FRMAviamento extends JPanel implements ActionListener {
 		btnAlterar.setBounds(250, 349, 97, 25);
 		add(btnAlterar);
 		
+		btnSalvar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnAlterar.addActionListener(this);
+		btnPesquisar.addActionListener(this);
+		
+		preencherCombo();
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent a) {
@@ -138,6 +148,7 @@ public class FRMAviamento extends JPanel implements ActionListener {
 				ctrlAviamento.adicionarAviamento(dadosAviamento());
 			}catch(Exception e) {
 				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+				e.printStackTrace();
 			}	
 		}else
 			if(a.getActionCommand().equals("Cancelar")) {
@@ -182,9 +193,19 @@ public class FRMAviamento extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 		if(cbFornecedor.getSelectedItem() != null) {
-			aviamento = (Aviamento) cbFornecedor.getSelectedItem();
+			aviamento.setFornecedor((Fornecedor) cbFornecedor.getSelectedItem());
+			Fornecedor f = (Fornecedor) cbFornecedor.getSelectedItem();
+			System.out.println(f.getNome() + " " + f.getId());
 		}
 		return aviamento;
+	}
+	
+	private void preencherCombo(){
+		List<Fornecedor> a = ctrlAviamento.buscarFornecedor();
+		cbFornecedor.removeAllItems();
+		for(Fornecedor b : a){
+			cbFornecedor.addItem(b);
+		}
 	}
 	
 }

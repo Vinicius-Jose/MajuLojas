@@ -33,5 +33,10 @@ public class Fornecedor {
 		this.id = id;
 	} 
 	
+	
+	@Override
+	public String toString() {
+		return getNome();
+	}
 
 }
