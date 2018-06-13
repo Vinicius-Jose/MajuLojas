@@ -1186,13 +1186,12 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public void adicionar(Venda venda) {
 
 		try {
-			String sql = "INSERT INTO Venda " + " VALUES ( ?, ?, ? ) ";
+			String sql = "INSERT INTO Venda(data_Venda, valor_Total) " + " VALUES ( ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, venda.getCodigo());
-			stmt.setDate(2, venda.getDtVenda());
-			stmt.setDouble(3, venda.getValorTotal());
 
+			stmt.setDate(1, venda.getDtVenda());
+			stmt.setDouble(2, venda.getValorTotal());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -1201,15 +1200,20 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		}
 
 		try {
-			String sql = "INSERT INTO Item_Venda " + " VALUES ( ?, ?, ?, ? ) ";
+			String sql = "select Max(codigo) as maximo from venda";
 			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			rt.next();
+			venda.setCodigo(rt.getInt("maximo"));
+			sql = "INSERT INTO Item_Venda " + " VALUES ( ?, ?, ?, ? ) ";
+			stmt = con.prepareStatement(sql);
 
 			for (ItemVenda a : venda.getItemVenda()) {
 				stmt.setInt(1, a.getModelo().getCodigo());
 				stmt.setInt(2, venda.getCodigo());
 				stmt.setInt(3, a.getQuantidade());
 				stmt.setDouble(4, a.getValorTotalPeca());
-
+				stmt.execute();
 			}
 
 		} catch (SQLException e) {
