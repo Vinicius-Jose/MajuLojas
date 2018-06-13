@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 public class Aviamento {
 	
@@ -15,6 +16,14 @@ public class Aviamento {
 	private Fornecedor fornecedor;
 
 	
+	public Aviamento() {
+		this.codigo = 0;
+		this.nome = "";
+		this.valorCompra = 0;
+		this.dataCompra = new java.sql.Date(00);
+		this.fornecedor = null;
+	}
+
 	public String getNome() {
 		return nome;
 	}
