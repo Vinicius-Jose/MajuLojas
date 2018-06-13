@@ -8,11 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import model.Tecido;
-
-import model.Capital;
 import model.CorteCostura;
-import model.Modelo;
+import model.Tecido;
 
 public class RelatorioDao {
 	MajuModasDAOImpl banco = new MajuModasDAOImpl();
@@ -78,7 +75,6 @@ public class RelatorioDao {
 
 	public List<HashMap<String, Object>> buscaDadosCapital(int mes, int ano) {
 		List<HashMap<String, Object>> info = new ArrayList<>();
-
 		String sql = "Select  DISTINCT(md.modelo), md.preco_Custo as custoConfeccao, cc.qtd_Peca_Cortada as cortado, cc.valor_Corte as valCorte,  cc.valor_Costura as costura, tec.valor_Unitario  as tecido,case when (pl.Capitalcodigo!= cap.codigo) then 0 else pl.valor_Unitario end as piloto , case  when (ml.CapitalCodigo != cap.codigo) then 0 else ml.valor_Unitario end as modelagem from Capital cap , Modelo md , Corte_Costura cc, Tecido tec, Modelagem ml,Piloto pl "
 				+ "where MONTH(data_Capital) = ? and YEAR(data_Capital) = ? and md.Tecidocodigo = tec.codigo and cc.codigo = md.Corte_Costuracodigo and ml.codigo = md.Modelagemcodigo";
 		PreparedStatement stmt = null;

@@ -1,15 +1,7 @@
 package controller;
 
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-
-import model.Capital;
-import model.CorteCostura;
-import model.Modelo;
-import model.Tecido;
 
 import dao.MajuModasDAO;
 import dao.MajuModasDAOImpl;
@@ -21,18 +13,18 @@ public class ControleRelatorio {
 	
 	
 	public ControleRelatorio() {
-		if(ultimoCapital()){
-			Set<Modelo> modelo =(Set<Modelo>) banco.buscarModelo();
-			Set<CorteCostura> corte  = rela.buscarCorte();
-			Set<Tecido> tecidos  = rela.buscarTecidos();
-			Capital capital = new Capital();
-			capital.setCorteCostura(corte);
-			capital.setModelo(modelo);
-			capital.setTecido(tecidos);
-			capital.setMesAno((java.sql.Date) Calendar.getInstance().getTime());
-			banco.adicionar(capital);
-			
-		}
+//		if(ultimoCapital()){
+//			Set<Modelo> modelo =(Set<Modelo>) banco.buscarModelo();
+//			Set<CorteCostura> corte  = rela.buscarCorte();
+//			Set<Tecido> tecidos  = rela.buscarTecidos();
+//			Capital capital = new Capital();
+//			capital.setCorteCostura(corte);
+//			capital.setModelo(modelo);
+//			capital.setTecido(tecidos);
+//			capital.setMesAno((java.sql.Date) Calendar.getInstance().getTime());
+//			banco.adicionar(capital);
+//			
+//		}
 	}
 
 	public List<Integer> mesesCapital(){

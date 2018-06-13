@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -181,7 +179,7 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 			int ano = (int) cbAno.getSelectedItem();
 			int mes = (int) cbMes.getSelectedItem();
 			if(rdbCapital.isSelected()){
-				preencherTabelaCapital(ano,mes);
+				preencherTabelaCapital(mes,ano);
 			}
 		}
 		
