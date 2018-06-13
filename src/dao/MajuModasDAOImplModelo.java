@@ -3,7 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.ItemPeca;
@@ -244,10 +246,41 @@ public class MajuModasDAOImplModelo implements MajuModasDAOModelo {
 
 
 	@Override
+	public List<Modelo> buscarModeloInfoBasica() {
+		List<Modelo> modelos = new ArrayList();
+		String sql = "Select *   from Modelo ";
+		PreparedStatement stmt = null;
+		try {
+			stmt = con.prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				Modelo mod = new Modelo();
+				mod.setCodigo(rt.getInt("codigo"));
+				mod.setCustoConfeccao(rt.getFloat("preco_Custo"));
+				mod.setMargemCusto(rt.getFloat("margem_Custo"));
+				mod.setModelo(rt.getString("modelo"));
+				modelos.add(mod);
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return modelos;
+	}
+
+
+
+	@Override
 	public List<Modelo> buscarModelo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	
 
 
 

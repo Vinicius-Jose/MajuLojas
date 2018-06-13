@@ -1,6 +1,5 @@
 package controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +14,6 @@ import model.Modelo;
 import model.RelatorioLucro;
 import model.Tecido;
 import model.Venda;
-
 import dao.MajuModasDAO;
 import dao.MajuModasDAOImpl;
 import dao.RelatorioDao;
@@ -23,11 +21,12 @@ import dao.RelatorioDao;
 public class ControleRelatorio {
 	private RelatorioDao rela = new RelatorioDao();
 	private MajuModasDAO banco = new MajuModasDAOImpl();
+//	private MajuModasDAOModelo bancoModelo = new MajuModasDAOImplModelo();
 	
 	
 	public ControleRelatorio() {
 		if(ultimoCapital()){
-			Set<Modelo> modelo =(Set<Modelo>) banco.buscarModelo();
+			Set<Modelo> modelo =(Set<Modelo>) banco.buscarModelo1();
 			Set<CorteCostura> corte  = rela.buscarCorte();
 			Set<Tecido> tecidos  = rela.buscarTecidos();
 			Capital capital = new Capital();
@@ -38,12 +37,15 @@ public class ControleRelatorio {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			capital.setMesAno(new java.sql.Date(dataAtual.getTime()));
 			banco.adicionar(capital);
+			capital.setCodigo(rela.getMaxIdCapital());
 			Set<Venda> vendas = rela.buscarVenda();
 			Set<Encomenda> encomendas = rela.buscarEncomendas();
 			RelatorioLucro lucro = new RelatorioLucro();
 			lucro.setVenda(vendas);
 			lucro.setEncomenda(encomendas);
 			lucro.setCapital(capital);
+			lucro.setCodigo(rela.getMaxIdLucro());
+			lucro.setMesAno(new java.sql.Date(dataAtual.getTime()));
 			banco.adicionar(lucro);
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class RelatorioLucro {
 	
+	private int codigo;
 	private Date mesAno;
 	
 	private float lucroMes;
@@ -67,5 +68,13 @@ public class RelatorioLucro {
 	
 	public void setEncomenda(Set<Encomenda> encomenda) {
 		this.encomenda = encomenda;
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 }

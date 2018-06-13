@@ -20,7 +20,7 @@ public class RelatorioDao {
 
 	public List<Integer> buscaMesesCapital() {
 		List<Integer> meses = new ArrayList();
-		String sql = "Select Month(data_Capital) as meses from Capital Order by meses";
+		String sql = "Select Distinct(Month(data_Capital)) as meses from Capital Order by meses";
 		PreparedStatement stmt = null;
 		try {
 			stmt = banco.getCon().prepareStatement(sql);
@@ -153,17 +153,13 @@ public class RelatorioDao {
 
 	public List<HashMap<String, Object>> buscaDadosLucro(int mes, int ano) {
 		List<HashMap<String, Object>> info = new ArrayList<>();
-		String sql = "select md.modelo as modelo,Count(ien.valor_Item_Encomenda) + Count(iv.valor_Item_Venda)as qtd, md.margem_Custo as preco,  SUM(ien.valor_Item_Encomenda) + SUM(iv.valor_Item_Venda) as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv "
-				+ "where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and MONTH(en.data_Encomenda) = ? and YEAR(en.data_Encomenda) = ? "
-				+ "and MONTH(vd.data_Venda) = ? and YEAR(vd.data_Venda) = ? "
-				+ "group by md.modelo, md.margem_Custo";
+		String sql = "select md.modelo as modelo,Count(ien.valor_Item_Encomenda) + Count(iv.valor_Item_Venda)as qtd, md.margem_Custo as preco,  SUM(ien.valor_Item_Encomenda) + SUM(iv.valor_Item_Venda) as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv , lucro l where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and l.codigo = vd.Lucrocodigo and en.Lucrocodigo = l.codigo and Month(l.data_Lucro) = ? and YEAR(l.data_Lucro) = ?"
+				+" group by md.modelo, md.margem_Custo";
 		PreparedStatement stmt = null;
 		try {
 			stmt = banco.getCon().prepareStatement(sql);
 			stmt.setInt(1, mes);
 			stmt.setInt(2, ano);
-			stmt.setInt(3, mes);
-			stmt.setInt(4, ano);
 			ResultSet rt = stmt.executeQuery();
 			while (rt.next()) {
 				HashMap<String, Object> dados = new HashMap<>();
@@ -233,7 +229,7 @@ public class RelatorioDao {
 	
 
 	public Set<Venda> buscarVenda() {
-		String sql = "select * from Tecido where DATEDIFF(MONTH,data_Tecido,getdate()) = 1";
+		String sql = "select * from Venda where DATEDIFF(MONTH,data_Venda,getdate()) = 1";
 		PreparedStatement stmt = null;
 		Set<Venda> lista = new HashSet();
 		try {
@@ -254,7 +250,7 @@ public class RelatorioDao {
 		return lista;
 	}
 	public Set<Encomenda> buscarEncomendas() {
-		String sql = "select * from Tecido where DATEDIFF(MONTH,data_Tecido,getdate()) = 1";
+		String sql = "select * from Encomenda where DATEDIFF(MONTH,data_Encomenda,getdate()) = 1";
 		PreparedStatement stmt = null;
 		Set<Encomenda> lista = new HashSet();
 		try {
@@ -273,6 +269,42 @@ public class RelatorioDao {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+
+	public int getMaxIdCapital() {
+		String sql = "select Max(codigo) AS maximo from Capital";
+		PreparedStatement stmt = null;
+		int codigo = 1000;
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				codigo = rt.getInt("maximo");
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codigo;
+	}
+	
+	public int getMaxIdLucro(){
+		String sql = "select Max(codigo)+1 AS maximo from Lucro";
+		PreparedStatement stmt = null;
+		int codigo = 0;
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				codigo = rt.getInt("maximo");
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codigo;
 	}
 
 }

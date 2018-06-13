@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import java.util.Set;
 
 import model.Aviamento;
 import model.Capital;
@@ -96,5 +97,7 @@ public interface MajuModasDAO {
 	public void remover(Venda venda);
 	public void alterar(Venda venda);
 	public List<Venda> buscarVenda();
+
+	Set<Modelo> buscarModelo1();
 	
 }
