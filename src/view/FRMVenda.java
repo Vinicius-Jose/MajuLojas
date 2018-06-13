@@ -1,9 +1,13 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.Set;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -11,20 +15,21 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.Color;
 
-public class FRMVenda extends JPanel {
+import model.Modelo;
+import controller.ControleVenda;
+
+public class FRMVenda extends JPanel implements ActionListener {
 	private JTextField txtQtd;
 	private JTable tabelaVenda;
 	private JTextField txtValortotal;
 	private JFormattedTextField fttDataEncomenda;
 	private JComboBox cbModelo;
 	private JButton btnAdicionar, btnFinalizar,btnCancelar ;
-
+	private ControleVenda ctrlVenda = new ControleVenda();
 
 	/**
 	 * Create the panel.
@@ -135,7 +140,36 @@ public class FRMVenda extends JPanel {
 		btnFinalizar.setBackground(Color.WHITE);
 		btnFinalizar.setBounds(351, 539, 112, 23);
 		add(btnFinalizar);
-	
 		
+		btnAdicionar.addActionListener(this);
+		preencherCombo();
+	}
+	
+	
+	private void preencherCombo() {
+		Set<Modelo> mod  = ctrlVenda.buscarModelos();
+		cbModelo.removeAllItems();
+		for(Modelo a : mod ){
+			cbModelo.addItem(a);
+		}
+
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent a) {
+		DefaultTableModel df = (DefaultTableModel) tabelaVenda.getModel();
+		if(a.getActionCommand().equals("Adicionar")){
+			Object[] linha = new Object[3];
+			linha[0] = cbModelo.getSelectedItem();
+			linha[1] = Integer.parseInt(txtQtd.getText());
+			linha[2] = (((Modelo) cbModelo.getSelectedItem()).getMargemCusto()) * Integer.parseInt(txtQtd.getText());
+			df.addRow(linha);
+			float valor = 0;
+			for(int i = 0; i<tabelaVenda.getRowCount(); i++){
+				valor += Float.parseFloat((tabelaVenda.getValueAt(i,2).toString()));
+			}
+			txtValortotal.setText(Float.toString(valor));
+		}
 	}
 }
