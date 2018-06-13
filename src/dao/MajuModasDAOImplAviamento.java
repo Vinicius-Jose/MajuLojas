@@ -139,7 +139,7 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 				Aviamento a = new Aviamento();
 				Fornecedor forn = new Fornecedor();
 				a.setCodigo( rs.getInt("codigo")  );
-				a.setDataCompra( rs.getDate("data")  );
+				a.setDataCompra( rs.getDate("data_Aviamento")  );
 				a.setValorCompra( rs.getFloat("valor_Unitario")  );
 				a.setNome( rs.getString("nome")  );
 				forn.setId(rs.getInt("codigo_fornecedor"));

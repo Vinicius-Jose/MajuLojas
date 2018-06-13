@@ -49,7 +49,7 @@ public class ControleAviamento implements ActionListener{
 
 	public Aviamento buscar(Aviamento aviamento){
 		List<Aviamento> listaAviamento= banco.buscarAviamento();
-		return (Aviamento) listaAviamento;
+		return listaAviamento.get(0);
 	}
 	
 	public void alterar(Aviamento aviamento){
@@ -60,20 +60,11 @@ public class ControleAviamento implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Aviamento aviamento = new Aviamento();
-		aviamento.setNome(txtAviamento.getText());
-		aviamento.setValorCompra(Float.parseFloat(txtPreco.getText()));
-		try {
-			aviamento.setDataCompra((new java.sql.Date(sdf.parse(fttData.getText()).getTime())));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-		if(cbFornecedor.getSelectedItem() != null) {
-			aviamento = (Aviamento) cbFornecedor.getSelectedItem();
-		}
+
+		
+		
 		if(a.getActionCommand().equals("Salvar")) {
-			adicionarAviamento(aviamento);	
+			adicionarAviamento(montarAviamento());	
 		}else
 			if(a.getActionCommand().equals("Cancelar")) {
 				cbFornecedor.getItemAt(-1);
@@ -82,12 +73,41 @@ public class ControleAviamento implements ActionListener{
 				fttData.setText(null);
 		}else 
 			if(a.getActionCommand().equals("Pesquisar")) {
-				buscar(aviamento);
+				Aviamento av = new Aviamento();
+				av.setNome(txtAviamento.getText());
+					colocaTela(banco.buscarAviamento().get(0));
+
 		    } 
 			if(a.getActionCommand().equals("Alterar")) {
-					alterar(aviamento);
+					alterar(montarAviamento());
 			}
 		}   
+	private void colocaTela(Aviamento av) {
+		if(av!=null){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		txtAviamento.setText(av.getNome());
+		txtPreco.setText(Float.toString(av.getValorCompra()));
+		cbFornecedor.setSelectedItem(av.getFornecedor());
+		fttData.setText(sdf.format(av.getDataCompra()));
+		}
 	}
+	
+
+private Aviamento montarAviamento(){
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	Aviamento aviamento = new Aviamento();
+	aviamento.setNome(txtAviamento.getText());
+	aviamento.setValorCompra(Float.parseFloat(txtPreco.getText()));
+	try {
+		aviamento.setDataCompra((new java.sql.Date(sdf.parse(fttData.getText()).getTime())));
+	} catch (ParseException e1) {
+		e1.printStackTrace();
+	}
+	if(cbFornecedor.getSelectedItem() != null) {
+		aviamento = (Aviamento) cbFornecedor.getSelectedItem();
+	}
+	return aviamento;
+}
+}
 	
 

@@ -1713,7 +1713,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 			while (rs.next()) { 
 				Aviamento a = new Aviamento();
 				a.setCodigo( rs.getInt("codigo")  );
-				a.setDataCompra( rs.getDate("data")  );
+				a.setDataCompra( rs.getDate("data_Aviamento")  );
 				a.setValorCompra( rs.getFloat("valor_Unitario")  );
 				a.setNome( rs.getString("nome")  );
 				/** ver depois como fazer				*
