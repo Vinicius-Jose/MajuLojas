@@ -32,5 +32,10 @@ public class Cliente {
 		this.id = id;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return getNome();
+	}
 
 }

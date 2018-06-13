@@ -14,25 +14,11 @@ import model.Motorista;
 public class MajuModasDAOImplMotorista implements MajuModasDAOMotorista {
 	
 	private Connection con;
-	private String tipoBanco;
+
 	
 	public MajuModasDAOImplMotorista() { 
-		try {
-			tipoBanco = "mariadb";
-			String drivers = "org.mariadb.jdbc.Driver";
-			String porta = "3306";
-			String nomeBanco = "MajuModas";
-			String usuario = "root";
-			String senha = "";
-			
-			Class.forName(drivers);
-			String urlDb = "jdbc:"+ tipoBanco +"//localhost:"+ porta +"/"+ nomeBanco +"?allowMultiQueries=true";
-			con = DriverManager.getConnection(urlDb, usuario , senha);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Conexao conB = new Conexao();
+		con = conB.getConnection();
 	}
 	
 	

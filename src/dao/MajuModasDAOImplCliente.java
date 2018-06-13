@@ -17,22 +17,8 @@ public class MajuModasDAOImplCliente implements MajuModasDAOCliente {
 	private String tipoBanco;
 	
 	public MajuModasDAOImplCliente() { 
-		try {
-			tipoBanco = "mariadb";
-			String drivers = "org.mariadb.jdbc.Driver";
-			String porta = "3306";
-			String nomeBanco = "MajuModas";
-			String usuario = "root";
-			String senha = "";
-			
-			Class.forName(drivers);
-			String urlDb = "jdbc:"+ tipoBanco +"//localhost:"+ porta +"/"+ nomeBanco +"?allowMultiQueries=true";
-			con = DriverManager.getConnection(urlDb, usuario , senha);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Conexao banco = new Conexao();
+		con = banco.getConnection();
 	}
 	
 	

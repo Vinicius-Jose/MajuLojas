@@ -6,12 +6,6 @@ public enum Status {
 
 	private String valorEnum;
 
-	public String getValorEnum() {
-		return valorEnum;
-	}
 
-	public void setStatus(String valorEnum) {
-		this.valorEnum = valorEnum;
-	}
 	
 }

@@ -28,6 +28,7 @@ import model.Piloto;
 import model.RelatorioLucro;
 import model.Tecido;
 import model.Venda;
+import model.Status;
 
 public class MajuModasDAOImpl implements MajuModasDAO {
 
@@ -409,18 +410,18 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public void adicionar(Encomenda encomenda) {
 
 		try {
-			String sql = "INSERT INTO Encomenda "
-					+ " VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
+			String sql = "INSERT INTO Encomenda(clienteId, data_Encomenda, data_Retirada, valor_Total, Status_encomenda, Motoristanum_Placa) "
+					+ " VALUES ( ?, ?, ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, encomenda.getCodigo());
-			stmt.setInt(2, encomenda.getCliente().getId());
-			stmt.setDate(3, encomenda.getDataEncomenda());
-			stmt.setDate(4, encomenda.getDataRetirada());
-			stmt.setDouble(5, encomenda.getValorTotalEncomenda());
-			stmt.setString(6, encomenda.getStatus().getValorEnum());
-			stmt.setString(7, encomenda.getMotorista().getNumPlaca());
-
+			stmt.setInt(1, encomenda.getCliente().getId());
+			stmt.setDate(2, encomenda.getDataEncomenda());
+			stmt.setDate(3, encomenda.getDataRetirada());
+			stmt.setDouble(4, encomenda.getValorTotalEncomenda());
+			stmt.setString(5, encomenda.getStatus().toString());
+			if(encomenda.getMotorista() != null){
+			stmt.setString(6, encomenda.getMotorista().getNumPlaca());
+			}else stmt.setString(6, null);
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -429,17 +430,21 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		}
 
 		try {
-			String sql = "INSERT INTO Item_Encomenda "
-					+ " VALUES ( ?, ?, ?, ? ) ";
+			String sql = "select max(codigo) as maximo from encomenda";
 			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rt  = stmt.executeQuery();
+			rt.next();
+			encomenda.setCodigo(rt.getInt("maximo"));
+			sql = "INSERT INTO Item_Encomenda "
+					+ " VALUES ( ?, ?, ?, ? ) ";
+			stmt = con.prepareStatement(sql);
 
 			for (ItemEncomenda ie : encomenda.getItemEncomenda()) {
 
-				stmt.setInt(1, encomenda.getCliente().getId());
-				// pegar o codigo do modelo
-				stmt.setInt(2, ie.getModelo().getCodigo());
-				stmt.setInt(3, ie.getQuantidade());
-				stmt.setDouble(4, ie.getValorItemEncomenda());
+				stmt.setInt(1, ie.getModelo().getCodigo());
+				stmt.setInt(2, ie.getQuantidade());
+				stmt.setFloat(3, ie.getValorItemEncomenda());
+				stmt.setInt(4, encomenda.getCodigo());
 
 				stmt.executeUpdate();
 			}
@@ -497,7 +502,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 			stmt.setDate(1, encomenda.getDataEncomenda());
 			stmt.setDate(2, encomenda.getDataRetirada());
 			stmt.setFloat(3, encomenda.getValorTotalEncomenda());
-			stmt.setString(4, encomenda.getStatus().getValorEnum());
+			stmt.setString(4, encomenda.getStatus().toString());
 			stmt.setString(5, encomenda.getMotorista().getNumPlaca());
 			stmt.setInt(6, encomenda.getCodigo());
 

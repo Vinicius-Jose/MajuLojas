@@ -462,6 +462,8 @@ select sum(vd.valor_Total) , sum(en.valor_Total) from Venda vd, Lucro l, Encomen
 vd.Lucrocodigo = l.codigo and en.Lucrocodigo = l.codigo 
 group by en.codigo
 
+alter table encomenda
+alter column lucrocodigo int null
 
 --ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
 

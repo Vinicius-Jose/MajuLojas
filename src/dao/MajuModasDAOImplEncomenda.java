@@ -10,6 +10,7 @@ import java.util.List;
 
 import model.Encomenda;
 import model.ItemEncomenda;
+import model.Status;
 
 
 public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
@@ -216,7 +217,7 @@ public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
 				/*
 				 * Ver como ficaria o Status depois
 				 */
-				en.setStatus(rs.getString("data"));
+				en.setStatus(Status.valueOf(rs.getString("status")));
 				
 				
 				encomenda.add(en);

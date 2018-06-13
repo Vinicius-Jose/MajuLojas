@@ -1,79 +1,50 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Set;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
 import model.Cliente;
 import model.Encomenda;
 import model.Modelo;
 import model.Motorista;
+import dao.MajuModasDAO;
+import dao.MajuModasDAOCliente;
+import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplCliente;
+import dao.MajuModasDAOImplMotorista;
+import dao.MajuModasDAOMotorista;
 
-public class ControleEncomenda implements ActionListener{
-	private JRadioButton rdbtnSim;
-	private JRadioButton rdbtnNao;
-	private JComboBox<Cliente> cbCliente;
-	private JComboBox<Motorista> cbMotorista;
-	private JFormattedTextField fttDataEncomenda;
-	private JFormattedTextField fttDataRetirada;
-	private JComboBox<Modelo> cbModelo;
-	private JTextField txtQtdEncomendada;
-	private JButton btnAdicionar;
-	private JTable tabela;
-	private JButton btnFinalizar;
-	private JButton btnCancelar;
-	
-	
+public class ControleEncomenda {
 
-	public ControleEncomenda(JRadioButton rdbtnSim, JRadioButton rdbtnNao, JComboBox<Cliente> cbCliente,
-			JComboBox<Motorista> cbMotorista, JFormattedTextField fttDataEncomenda, JFormattedTextField fttDataRetirada,
-			JComboBox<Modelo> cbModelo, JTextField txtQtdEncomendada, JButton btnAdicionar, JTable tabela,
-			JButton btnFinalizar, JButton btnCancelar) {
-		super();
-		this.rdbtnSim = rdbtnSim;
-		this.rdbtnNao = rdbtnNao;
-		this.cbCliente = cbCliente;
-		this.cbMotorista = cbMotorista;
-		this.fttDataEncomenda = fttDataEncomenda;
-		this.fttDataRetirada = fttDataRetirada;
-		this.cbModelo = cbModelo;
-		this.txtQtdEncomendada = txtQtdEncomendada;
-		this.btnAdicionar = btnAdicionar;
-		this.tabela = tabela;
-		this.btnFinalizar = btnFinalizar;
-		this.btnCancelar = btnCancelar;
-	}
-	
+
+	private MajuModasDAOCliente bdCliente = new MajuModasDAOImplCliente();
 	private MajuModasDAO banco = new MajuModasDAOImpl();
-	
+	private MajuModasDAOMotorista bdMotorista = new MajuModasDAOImplMotorista();
+
 	public void finalizarEncomenda(Encomenda encomenda) {
 		banco.adicionar(encomenda);
-		JOptionPane.showMessageDialog(null, "Encomenda adicionado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Encomenda adicionado com sucesso",
+				"Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public List<Cliente> buscarClientes() {
+		return bdCliente.buscarCliente();
 	}
 	
-	
-	
-
-
-
-	@Override
-	public void actionPerformed(ActionEvent a) {
-		Encomenda encomenda = new Encomenda();
-		if(rdbtnNao.isSelected()) {
-			
-		}
-		
+	public List<Motorista> buscarMotoristas(){
+		return bdMotorista.buscarMotorista();
 	}
+	
+	public Set<Modelo> buscarModelos(){
+		return banco.buscarModelo1();
+	}
+
+	public List<Encomenda> buscarEncomendas(Cliente selectedItem) {
+		return banco.buscarEncomenda();
+	}
+	
 	
 
 }
-

@@ -33,7 +33,7 @@ public class FRMVenda extends JPanel implements ActionListener {
 	private JTextField txtQtd;
 	private JTable tabelaVenda;
 	private JTextField txtValortotal;
-	private JFormattedTextField fttDataEncomenda;
+	private JFormattedTextField fttDataVenda;
 	private JComboBox cbModelo;
 	private JButton btnAdicionar, btnFinalizar,btnCancelar ;
 	private ControleVenda ctrlVenda = new ControleVenda();
@@ -67,12 +67,12 @@ public class FRMVenda extends JPanel implements ActionListener {
 		lblData.setBounds(736, 108, 61, 14);
 		add(lblData);
 		
-		fttDataEncomenda = new JFormattedTextField(
+		fttDataVenda = new JFormattedTextField(
 				new MaskFormatter("##/##/####"));
-		fttDataEncomenda.setForeground(Color.BLACK);
-		fttDataEncomenda.setBackground(Color.WHITE);
-		fttDataEncomenda.setBounds(791, 106, 83, 22);
-		add(fttDataEncomenda);
+		fttDataVenda.setForeground(Color.BLACK);
+		fttDataVenda.setBackground(Color.WHITE);
+		fttDataVenda.setBounds(791, 106, 83, 22);
+		add(fttDataVenda);
 
 		JLabel lblModelo = new JLabel("Modelo");
 		lblModelo.setForeground(Color.BLACK);
@@ -115,11 +115,9 @@ public class FRMVenda extends JPanel implements ActionListener {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, true, false
-			};
+			
 			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
+				return false;
 			}
 		});
 		tabelaVenda.getColumnModel().getColumn(0).setResizable(false);
@@ -164,8 +162,8 @@ public class FRMVenda extends JPanel implements ActionListener {
 		add(btnFinalizar);
 		
 		btnAdicionar.addActionListener(this);
-		fttDataEncomenda.setEditable(false);
-		fttDataEncomenda.setText(sdf.format(Calendar.getInstance().getTime()));
+		fttDataVenda.setEditable(false);
+		fttDataVenda.setText(sdf.format(Calendar.getInstance().getTime()));
 		
 		btnFinalizar.addActionListener(this);
 		btnCancelar.addActionListener(this);
@@ -217,7 +215,7 @@ public class FRMVenda extends JPanel implements ActionListener {
 
 	private Venda montarVenda() throws ParseException {
 		Venda venda = new Venda();
-		venda.setDtVenda(new java.sql.Date (sdf.parse(fttDataEncomenda.getText()).getTime()));
+		venda.setDtVenda(new java.sql.Date (sdf.parse(fttDataVenda.getText()).getTime()));
 		venda.setValorTotal(Float.parseFloat(txtValortotal.getText()));
 		List<ItemVenda> itens = new LinkedList<>();
 		for(int i = 0; i<tabelaVenda.getRowCount(); i++){
