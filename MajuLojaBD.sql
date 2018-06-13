@@ -1,6 +1,7 @@
 create database MajuLoja 
 go 
 use MajuLoja
+GRANT execute,select,insert,update,delete TO root
 
 CREATE TABLE Fornecedor (
 id int IDENTITY (1,1) NOT NULL,
@@ -132,9 +133,9 @@ data_Encomenda datetime NULL,
 data_Retirada datetime NULL,
 valor_Total decimal(7, 2) NULL,
 Status_encomenda varchar(50) NULL,
-Lucrocodigo int NOT NULL,
+Lucrocodigo int  NULL,
 Clienteid int NOT NULL,
-Motoristanum_Placa varchar(7) NOT NULL
+Motoristanum_Placa varchar(7)  NULL
 PRIMARY KEY (codigo)
 FOREIGN KEY (Motoristanum_Placa) REFERENCES Motorista (num_Placa),
 FOREIGN KEY (Clienteid) REFERENCES Cliente (id),
@@ -205,7 +206,7 @@ insert into Capital values
 ('06/12/2017',3000)
 
 insert into Fornecedor values
-('Alberto GonÃ§alves', '971763490'),
+('Alberto Gon�alves', '971763490'),
 ('Carlos Alberto de Andrade', '982867455'),
 ('Bruno Marcondes', '980867523'),
 ('Joana Albuquerque', '984200567')
@@ -217,7 +218,7 @@ insert into Fornecedor values
  ('07/02/2018', 9.80, 'Elastico para moletom', 1),
  ('09/03/2018', 0.20, 'Ziper de prata', 1),
  ('09/03/2018', 9.80, 'Elastico para calca', 1),
- ('10/04/2018', 0.20, 'Ziper para moletom', 1),
+ ('10/04/2018', 0.20, 'Ziper para moletom', 1)
 
 
  insert into Modelagem values
@@ -257,7 +258,7 @@ insert into Corte_Costura values
 (0.40, 2.80, 220, '05/02/2018', 1001),
 (0.40, 2.80, 240, '01/03/2018', 1002),
 (0.40, 2.80, 320, '01/04/2018', 1003),
-(0.40, 2.80, 400, '01/05/2018', 1004)
+(0.40, 2.80, 400, '01/04/2018', 1004)
 
  insert into Modelo values
 ('Conjunto de Moletom', 50.00, 25.00, 100, 100, 100, 100),
@@ -278,15 +279,15 @@ insert into Estoque values
 
 
 insert into Cliente values
-('JosÃ© Pereira Souza', '947296576'),
+('Jos� Pereira Souza', '947296576'),
 ('Sabrina Alencar', '989342390'),
 ('Caroline Batista', '956576320'),
 ('Fernando Augusto Brito', '997621024'),
 ('Marcela da Silva', '976429807')
 
 insert into Motorista values
-('JoÃ£o Pedro da Silva', 'KDB6632','986872340'),
-('Marcos AntÃ´nio de Oliveira', 'CJK2052', '980742301'),
+('Jo�o Pedro da Silva', 'KDB6632','986872340'),
+('Marcos Ant�nio de Oliveira', 'CJK2052', '980742301'),
 ('Gilberto dos Santos', 'FJM9067', '981845645')
 
 
@@ -358,7 +359,7 @@ insert into Item_Venda values
 (1, 1009, 4, 50.00)
 
 
---essa aq Ã© a unica q da erro
+--essa aq � a unica q da erro
 insert into Item_Peca values
 (100, 1, 100, 0.20, 1000),
 (101, 2, 100, 9.80, 1000)
@@ -387,7 +388,7 @@ where MONTH(data_Capital) =12
 
 
 Select Distinct( md.modelo), md.preco_Custo as custoConfeccao, cc.qtd_Peca_Cortada as cortado, cc.valor_Corte as valCorte,  cc.valor_Costura as costura,case when (tec.Capitalcodigo!= cap.codigo) then 0 else tec.valor_Unitario  end as tecido,case when (pl.Capitalcodigo!= cap.codigo) then 0 else pl.valor_Unitario end as piloto , case  when (ml.CapitalCodigo != cap.codigo) then 0 else ml.valor_Unitario end as modelagem from Capital cap , Modelo md , Corte_Costura cc, Tecido tec, Modelagem ml,Piloto pl
-where MONTH(data_Capital) = 02 and YEAR(data_Capital) = 2018 and md.Tecidocodigo = tec.codigo and cc.codigo = md.Corte_Costuracodigo and ml.codigo = md.Modelagemcodigo
+where MONTH(data_Capital) = 02 and YEAR(data_Capital) = 2018 and md.Tecidocodigo = tec.codigo and cc.codigo = md.Corte_Costuracodigo and ml.codigo = md.Modelagemcodigo 
 
 
 
@@ -397,17 +398,69 @@ select PWDCOMPARE('admin',senha) as valido from Usuarios WHERE nome = 'admin'
 
 Select valor_Capital  from Capital where MONTH(data_Capital) = 4 and YEAR(data_Capital) = 2018
 
-select md.modelo as modelo,Count(ien.valor_Item_Encomenda) + Count(iv.valor_Item_Venda)as qtd, md.margem_Custo as preco,  SUM(ien.valor_Item_Encomenda) + SUM(iv.valor_Item_Venda) as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv
-where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and MONTH(en.data_Encomenda) = 4 and YEAR(en.data_Encomenda) = 2018
-and MONTH(vd.data_Venda) = 4 and YEAR(vd.data_Venda) = 2018
+
+
+select vd.valor_Total + en.valor_Total as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv , lucro l where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and l.codigo = vd.Lucrocodigo and en.Lucrocodigo = l.codigo and Month(l.data_Lucro) = 6 and YEAR(l.data_Lucro) =2018
 group by md.modelo, md.margem_Custo
 
-select lucro_Mensal, data from Lucro
+Select  DISTINCT(md.modelo), md.preco_Custo as custoConfeccao, cc.qtd_Peca_Cortada as cortado, cc.valor_Corte as valCorte,  cc.valor_Costura as costura, tec.valor_Unitario  as tecido,case when (pl.Capitalcodigo!= cap.codigo) then 0 else pl.valor_Unitario end as piloto , case  when (ml.CapitalCodigo != cap.codigo) then 0 else ml.valor_Unitario end as modelagem from Capital cap , Modelo md , Corte_Costura cc, Tecido tec, Modelagem ml,Piloto pl where MONTH(data_Capital) = 6 and YEAR(data_Capital) = 2018 and md.Tecidocodigo = tec.codigo and cc.codigo = md.Corte_Costuracodigo and ml.codigo = md.Modelagemcodigo
+
+select lucro_Mensal, data_Lucro from Lucro
 select * from Lucro
 
 select * from Aviamento where nome like 'zi%'
 
+insert into Corte_Costura values
+(10.00,5.00,200,'10/05/2018', null),
+(20.00,1.00,150,'08/05/2018', null)
 
+insert into Tecido values
+('10/05/2018', 15, 20,'Tecido para moletom', 'Preto', 1, null),
+('08/05/2018', 15, 20,'Tecido de Laicra', 'Azul', 1, null)
+
+select * from Corte_Costura where DATEDIFF(MONTH,data,getdate()) = 1
+select * from Tecido where DATEDIFF(MONTH,data_Tecido,getdate()) = 1
+select * from Venda where DATEDIFF(MONTH,data_Venda,getdate()) = 1
+select * from Encomenda where DATEDIFF(MONTH,data_Encomenda,getdate()) = 1
+select * from Modelo
+update Encomenda
+set Lucrocodigo = null
+where data_Retirada = '23/05/2018'
+
+update tecido
+set data_Tecido = ('20/04/2018')
+where data_Tecido = '20/05/2018'
+
+alter table encomenda 
+alter column Lucrocodigo int null
+
+select * from Capital
+delete from Capital
+where codigo = 1004
+select * from Capital
+select * from Lucro
+select * from Capital 
+select * from Venda
+select * from encomenda
+where DATEDIFF(MONTH,data_Venda,getdate()) = 1
+select * from Encomenda where Lucrocodigo = 1013
+
+update Capital
+set data_Capital = '12/05/2018'
+where data_Capital = '12/06/2018'
+
+select max(codigo) +1 from Lucro
+
+select * from Lucro
+truncate table Venda
+
+
+select md.modelo as modelo,Sum(ien.quantidade) + Sum(iv.qtd_Modelo_Vendido)as qtd, md.margem_Custo as preco,  Sum(vd.valor_Total) + Sum(en.valor_Total)as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv , lucro l where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and l.codigo = vd.Lucrocodigo and en.Lucrocodigo = l.codigo and Month(l.data_Lucro) = 6 and YEAR(l.data_Lucro) =2018
+group by md.modelo, md.margem_Custo
+
+select sum(vd.valor_Total) , sum(en.valor_Total) from Venda vd, Lucro l, Encomenda en  where l.codigo = 1013 and
+vd.Lucrocodigo = l.codigo and en.Lucrocodigo = l.codigo 
+group by en.codigo
 
 
 --ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);

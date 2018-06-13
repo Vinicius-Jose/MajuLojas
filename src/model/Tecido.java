@@ -87,4 +87,9 @@ public class Tecido {
 	}
 	
 
+	
+	@Override
+	public String toString() {
+		return getTipo();
+	}
 }

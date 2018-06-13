@@ -1457,8 +1457,32 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	@Override
 	public List<Tecido> buscarTecido() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Tecido> tecido = new ArrayList<>();
+		try {
+			String sql = 
+				"select * from tecido";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Tecido t = new Tecido();
+				Fornecedor fornecedor = new Fornecedor();
+				
+				t.setCodigo( rs.getInt("codigo")  );
+				t.setData(rs.getDate("data_Tecido"));
+				t.setValor( rs.getFloat("valor_Unitario") );
+				t.setQuantidade( rs.getInt("qtd_Rolo"));
+				t.setTipo(rs.getString("tipo"));
+				t.setCor(rs.getString("cor"));
+				fornecedor.setId(rs.getInt("Fornecedorid"));
+				t.setFornecedor(fornecedor);
+				
+				tecido.add(t);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tecido;
 	}
 
 	@Override

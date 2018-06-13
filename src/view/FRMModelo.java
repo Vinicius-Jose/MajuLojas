@@ -2,13 +2,18 @@ package view;
 
 import java.awt.Font;
 import java.awt.Label;
+import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
@@ -17,27 +22,46 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.TabExpander;
 
 import controller.ControleModelo;
 
 import javax.swing.JScrollPane;
-import java.awt.Color;
 
-public class FRMModelo extends JPanel {
+import com.sun.webkit.Timer.Mode;
+
+import model.Aviamento;
+import model.ItemPeca;
+import model.Modelagem;
+import model.Modelo;
+import model.Piloto;
+import model.Tecido;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class FRMModelo extends JPanel implements ActionListener {
 	private JTextField txtModelo;
 	private JTextField txtQtd;
-	private JTable table;
+	private JTable tabelaAviamento;
 	private JTextField txtModelagem;
 	private JTextField qtdRolo;
 	private JTextField txtMargemCusto;
-	private JTextField txtCustoConfecção;
+	private JTextField txtCustoConfeccao;
 	private JTextField txtPiloto;
+	private JFormattedTextField fttData;
+	private JComboBox cbTecido ;
+	private JButton btnAlterar, btnCancelar, btnSalvar, btnAdicionar;
+	private JComboBox cbAviamento;
+	private JRadioButton rdbtnNo, rdbtnSim;
+	private ControleModelo ctrlModelo = new ControleModelo();
 
 	/**
 	 * Create the panel.
 	 * @throws ParseException 
 	 */
-	public FRMModelo() throws ParseException {
+	public FRMModelo() throws ParseException  {
 		setBackground(Color.WHITE);
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
@@ -77,14 +101,14 @@ public class FRMModelo extends JPanel {
 		lblNovoModelo.setBounds(484, 68, 124, 16);
 		add(lblNovoModelo);
 		
-		JRadioButton rdbtnSim = new JRadioButton("Sim");
+		rdbtnSim = new JRadioButton("Sim");
 		rdbtnSim.setForeground(Color.BLACK);
 		rdbtnSim.setBackground(Color.WHITE);
 		rdbtnSim.setSelected(true);
 		rdbtnSim.setBounds(616, 64, 69, 25);
 		add(rdbtnSim);
 		
-		JRadioButton rdbtnNo = new JRadioButton("N\u00E3o");
+		rdbtnNo = new JRadioButton("N\u00E3o");
 		rdbtnNo.setForeground(Color.BLACK);
 		rdbtnNo.setBackground(Color.WHITE);
 		rdbtnNo.setBounds(713, 64, 69, 25);
@@ -94,7 +118,7 @@ public class FRMModelo extends JPanel {
 		grupoBotao.add(rdbtnNo);
 		grupoBotao.add(rdbtnSim);
 		
-		JFormattedTextField fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 		fttData.setForeground(Color.BLACK);
 		fttData.setBackground(Color.WHITE);
 		fttData.setBounds(888, 68, 83, 22);
@@ -120,7 +144,7 @@ public class FRMModelo extends JPanel {
 		lblAviamento.setBounds(38, 176, 83, 16);
 		add(lblAviamento);
 		
-		JComboBox cbAviamento = new JComboBox();
+		cbAviamento = new JComboBox();
 		cbAviamento.setForeground(Color.BLACK);
 		cbAviamento.setBackground(Color.WHITE);
 		cbAviamento.setBounds(118, 176, 200, 22);
@@ -139,27 +163,34 @@ public class FRMModelo extends JPanel {
 		lblQuantidade.setBounds(330, 176, 86, 16);
 		add(lblQuantidade);
 		
-		JButton btnAdicionar = new JButton("Adicionar");
+	    btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setForeground(Color.BLACK);
 		btnAdicionar.setBackground(Color.WHITE);
 		btnAdicionar.setBounds(511, 172, 97, 25);
 		add(btnAdicionar);
 		
-		table = new JTable();
-		table.setFillsViewportHeight(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
+		tabelaAviamento = new JTable();
+		tabelaAviamento.setFillsViewportHeight(true);
+		tabelaAviamento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabelaAviamento.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Aviamento", "Quantidade", "Custo Aviamento", "A\u00E7\u00E3o"
+				 "Aviamento", "Quantidade", "Custo Aviamento", "A\u00E7\u00E3o"
 			}
-		)
+		) {
+			Class[] columnTypes = new Class[] {
+				 Aviamento.class, Object.class, Object.class, JButton.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		}
 		);
-		table.getColumnModel().getColumn(0).setPreferredWidth(252);
-		table.getColumnModel().getColumn(1).setPreferredWidth(107);
-		table.getColumnModel().getColumn(2).setPreferredWidth(188);
-		table.setBounds(38, 289, 570, -53);
+		tabelaAviamento.getColumnModel().getColumn(1).setPreferredWidth(252);
+		tabelaAviamento.getColumnModel().getColumn(2).setPreferredWidth(107);
+		tabelaAviamento.getColumnModel().getColumn(3).setPreferredWidth(188);
+		tabelaAviamento.setBounds(38, 289, 570, -53);
 		
 		Label lblModelagem = new Label("Modelagem\r\n");
 		lblModelagem.setForeground(Color.BLACK);
@@ -180,7 +211,7 @@ public class FRMModelo extends JPanel {
 		lblTecido.setBounds(38, 392, 56, 16);
 		add(lblTecido);
 		
-		JComboBox cbTecido = new JComboBox();
+		cbTecido = new JComboBox();
 		cbTecido.setForeground(Color.BLACK);
 		cbTecido.setBackground(Color.WHITE);
 		cbTecido.setBounds(91, 389, 200, 22);
@@ -218,20 +249,20 @@ public class FRMModelo extends JPanel {
 		lblCustoDeConfeco.setBounds(402, 531, 139, 16);
 		add(lblCustoDeConfeco);
 		
-		txtCustoConfecção = new JTextField();
-		txtCustoConfecção.setForeground(Color.BLACK);
-		txtCustoConfecção.setBackground(Color.WHITE);
-		txtCustoConfecção.setBounds(553, 528, 116, 22);
-		add(txtCustoConfecção);
-		txtCustoConfecção.setColumns(10);
+		txtCustoConfeccao = new JTextField();
+		txtCustoConfeccao.setForeground(Color.BLACK);
+		txtCustoConfeccao.setBackground(Color.WHITE);
+		txtCustoConfeccao.setBounds(553, 528, 116, 22);
+		add(txtCustoConfeccao);
+		txtCustoConfeccao.setColumns(10);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(733, 195, 97, 25);
 		add(btnSalvar);
 		
-		JButton btnCancelar = new JButton("Cancelar\r\n");
+		btnCancelar = new JButton("Cancelar\r\n");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(733, 350, 97, 25);
@@ -239,10 +270,10 @@ public class FRMModelo extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(38, 211, 494, 83);
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(tabelaAviamento);
 		add(scrollPane);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar = new JButton("Alterar");
 		btnAlterar.setForeground(Color.BLACK);
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.setBounds(733, 275, 89, 23);
@@ -261,8 +292,113 @@ public class FRMModelo extends JPanel {
 		add(txtPiloto);
 		txtPiloto.setColumns(10);
 		
-		ControleModelo ctrlModelo = new ControleModelo(txtModelo, txtQtd, qtdRolo, fttData, qtdRolo, qtdRolo, qtdRolo, qtdRolo, rdbtnNo, rdbtnNo, cbTecido, btnAlterar, btnAlterar, btnAlterar, btnAlterar, cbTecido);
+		preencherCombo();
 		
+		rdbtnSim.addActionListener(this);
+		rdbtnNo.addActionListener(this);
+		btnAdicionar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnSalvar.addActionListener(this);
+		btnAlterar.addActionListener(this);
 
+	}
+
+	private void preencherCombo() {
+		for(Aviamento a : ctrlModelo.buscarAviamentos() ){
+			cbAviamento.addItem(a);
+		}
+		
+		for(Tecido a : ctrlModelo.buscarTecidos()){
+			cbTecido.addItem(a);
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Sim")){
+			txtModelagem.setEnabled(true);
+			txtPiloto.setEnabled(true);
+		}else if(a.getActionCommand().equals("Não")){
+			txtModelagem.setEnabled(false);
+			txtPiloto.setEnabled(false);
+		}else if (a.getActionCommand().equals("Adicionar")){
+			Aviamento av = (Aviamento) cbAviamento.getSelectedItem();
+			cbAviamento.removeItem(av);
+			adicionarItemTabela(av, Integer.parseInt(txtQtd.getText()));
+		}else if(a.getActionCommand().equals("Salvar")){
+			try {
+				salvarAviamento(txtModelagem.isEnabled());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			limparTela();
+		}else if(a.getActionCommand().equals("Cancelar")){
+			limparTela();
+		}
+		
+	}
+
+	private void limparTela() {
+		txtModelagem.setText("");
+		txtModelo.setText("");
+		txtMargemCusto.setText("");
+		txtCustoConfeccao.setText("");
+		txtQtd.setText("");
+		preencherCombo();
+		fttData.setText("");
+	}
+
+	private void salvarAviamento(boolean novo) throws ParseException {
+		try{
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			Modelo mod = new Modelo();
+			mod.setModelo(txtModelagem.getText());
+			if(novo){
+				Modelagem modelagem = new Modelagem();
+				modelagem.setDataModelagem(new java.sql.Date (sdf.parse(fttData.getText()).getTime()));
+				modelagem.setValor(Float.parseFloat(txtModelagem.getText()));
+				Piloto piloto = new Piloto();
+				piloto.setDataPiloto(new java.sql.Date (sdf.parse(fttData.getText()).getTime()));
+				piloto.setValorPiloto(Float.parseFloat(txtPiloto.getText()));
+				mod.setPiloto(piloto);
+				mod.setModelagem(modelagem);
+			}
+			mod.setDtCastastroPeca(new java.sql.Date (sdf.parse(fttData.getText()).getTime()));
+			Set<ItemPeca> itens = new HashSet<>();
+			for(int i = 0; i<tabelaAviamento.getRowCount(); i++){
+				ItemPeca item = new ItemPeca();
+				item.setAviamento((Aviamento) tabelaAviamento.getValueAt(i,0));
+				item.setQuantidadeAviamento((int) tabelaAviamento.getValueAt(i,1));
+				itens.add(item);
+			}
+			mod.setItemPeca(itens);
+			txtMargemCusto.setText(Float.toString(mod.getMargemCusto()));
+			txtCustoConfeccao.setText(Float.toString(mod.getCustoConfeccao()));
+			mod.setTecido((Tecido) cbTecido.getSelectedItem());
+			ctrlModelo.adicionarModelo(mod);
+		}catch (NullPointerException e){
+			JOptionPane.showMessageDialog(null,"Campos Obrigatórios estão vazios");
+		}
+		
+	}
+
+	private void adicionarItemTabela(Aviamento av,int  qtd) {
+		DefaultTableModel mdtab = (DefaultTableModel) tabelaAviamento.getModel();
+		Object [] linha = new Object[4];
+		linha[0] = av.getNome();
+		linha[1] = qtd;
+		linha[2] = av.getValorCompra();
+		JButton btnApagar = new JButton("Apagar");
+		btnApagar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cbAviamento.addItem((Aviamento)tabelaAviamento.getValueAt(tabelaAviamento.getSelectedRow(), 0));
+				tabelaAviamento.remove(tabelaAviamento.getSelectedRow());
+			}
+		});
+		linha[3] = btnApagar;
+		mdtab.addRow(linha);
+		txtQtd.setText("");
 	}
 }

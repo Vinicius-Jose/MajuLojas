@@ -64,6 +64,10 @@ public class Aviamento {
 		this.codigo = codigo;
 	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return getNome();
+	}
 
 }
