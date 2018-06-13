@@ -1,24 +1,29 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleCliente;
+import model.Cliente;
 
 import java.awt.Color;
 
-public class FRMCliente extends JPanel {
+public class FRMCliente extends JPanel implements ActionListener {
 	private JTextField txtNome;
 	private JTextField txtFone;
+	private ControleCliente ctrlCliente = new ControleCliente();
 	/**
 	 * Create the panel.
 	 * @throws ParseException 
@@ -92,16 +97,47 @@ public class FRMCliente extends JPanel {
 		btnAlterar.setForeground(Color.BLACK);
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.setBounds(397, 548, 97, 25);
-		add(btnAlterar);
-		
-		ControleCliente ctrlCliente = new ControleCliente(txtNome, txtFone, btnSalvar, btnCancelar, btnPesquisar, btnAlterar);
-		btnSalvar.addActionListener(ctrlCliente);
-		btnCancelar.addActionListener(ctrlCliente);
-		btnPesquisar.addActionListener(ctrlCliente);
-		btnAlterar.addActionListener(ctrlCliente);
-		
-		
-		
+		add(btnAlterar);	
+	}
+	
+	private Cliente dadosCliente() {
+		Cliente cliente = new Cliente();
+		cliente.setNome(txtNome.getText());
+		cliente.setTelefoneContato(txtFone.getText());
+		return cliente;
+	}
+	
+	private void colocaTela(Cliente cli) {
+		if(cli != null) {
+			txtNome.setText(cli.getNome());
+			txtFone.setText(cli.getTelefoneContato());
+		}
+	}
+	
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Salvar")) {
+			try {
+				ctrlCliente.adicionarCliente(dadosCliente());
+			} catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+			}	
+		}else 
+			if(a.getActionCommand().equals("Cancelar")) {
+			   txtNome.setText("");
+			   txtFone.setText("");	
+			}
+			if(a.getActionCommand().equals("Pesquisar")) {
+				Cliente cli = new Cliente();
+				cli.setNome(txtNome.getText());
+				colocaTela(ctrlCliente.buscar(cli));
+			}
+			if(a.getActionCommand().equals("Alterar")) {
+				try {
+					ctrlCliente.alterar(dadosCliente());
+				} catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
 		
 	}
 

@@ -8,6 +8,7 @@ import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -16,13 +17,15 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleMotorista;
+import model.Motorista;
 
 import java.awt.Color;
 
-public class FRMMotorista extends JPanel {
+public class FRMMotorista extends JPanel implements ActionListener{
 	private JTextField txtNome;
 	private JTextField txtFone;
 	private JTextField txtPlaca;
+	private ControleMotorista ctrlMotorista = new ControleMotorista();
 	/**
 	 * Create the panel.
 	 * @throws ParseException 
@@ -102,10 +105,6 @@ public class FRMMotorista extends JPanel {
 		btnCancelar.setBounds(292, 547, 97, 25);
 		add(btnCancelar);
 		
-		ControleMotorista ctrlMotorista = new ControleMotorista(txtNome, txtFone, txtPlaca, btnSalvar, btnCancelar);
-		btnSalvar.addActionListener(ctrlMotorista);
-		btnCancelar.addActionListener(ctrlMotorista);
-		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setBounds(360, 99, 89, 23);
 		add(btnPesquisar);
@@ -114,5 +113,49 @@ public class FRMMotorista extends JPanel {
 		btnAlterar.setBounds(470, 548, 97, 25);
 		add(btnAlterar);
 
+	}
+	
+	private Motorista dadosMotorista() {
+		Motorista motorista = new Motorista();
+		motorista.setNome(txtNome.getText());
+		motorista.setTelefoneContato(txtFone.getText());
+		motorista.setNumPlaca(txtPlaca.getText());
+		return motorista;
+	}
+	
+	private void colocaTela(Motorista moto) {
+		if(moto != null) {
+			txtNome.setText(moto.getNome());
+			txtFone.setText(moto.getTelefoneContato());
+			txtPlaca.setText(moto.getNumPlaca());
+		}
+	}
+	
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Salvar")) {
+			try {
+				ctrlMotorista.adicionarMotorista(dadosMotorista());
+			} catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		}else 
+			if(a.getActionCommand().equals("Cancelar")) {
+				txtNome.setText("");
+				txtFone.setText("");
+				txtPlaca.setText("");
+			}
+		    if(a.getActionCommand().equals("Pesquisar")) {
+		    	Motorista moto = new Motorista();
+		    	moto.setNome(txtNome.getText());
+		    	colocaTela(ctrlMotorista.buscar(moto));
+		    }
+		    if(a.getActionCommand().equals("Alterar")) {
+		    	try {
+		    		ctrlMotorista.alterar(dadosMotorista());
+		    	} catch(Exception e) {
+		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+		    	}
+		    }
 	}
 }

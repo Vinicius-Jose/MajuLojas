@@ -2,23 +2,28 @@ package view;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleFornecedor;
+import model.Fornecedor;
 
 import java.awt.Color;
 
-public class FRMFornecedor extends JPanel {
+public class FRMFornecedor extends JPanel implements ActionListener{
 	private JTextField txtNome;
 	private JTextField txtFone;
+	private ControleFornecedor ctrlFornecedor = new ControleFornecedor();
 
 	/**
 	 * Create the panel.
@@ -95,12 +100,50 @@ public class FRMFornecedor extends JPanel {
 		btnAlterar.setBounds(420, 548, 97, 25);
 		add(btnAlterar);
 		
-		ControleFornecedor ctrlFornecedor = new ControleFornecedor(txtNome, txtFone, btnSalvar, btnCancelar, btnPesquisar, btnAlterar);
-		btnSalvar.addActionListener(ctrlFornecedor);
-		btnCancelar.addActionListener(ctrlFornecedor);
-		btnPesquisar.addActionListener(ctrlFornecedor);
-		btnAlterar.addActionListener(ctrlFornecedor);
+	
 
+	}
+	
+	private Fornecedor dadosFornecedor() {
+		Fornecedor fornecedor = new Fornecedor();
+		fornecedor.setNome(txtNome.getText());
+		fornecedor.setTelefoneFornecedor(txtFone.getText());
+		return fornecedor;
+	}
+	
+	private void colocaTela(Fornecedor forn) {
+		if(forn != null) {
+			txtNome.setText(forn.getNome());
+			txtFone.setText(forn.getTelefoneFornecedor());
+		}
+	}
+	
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Salvar")) {
+			try {
+				ctrlFornecedor.adicionarfornecedor(dadosFornecedor());
+			} catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}else
+			if(a.getActionCommand().equals("Cancelar")) {
+				txtNome.setText("");
+				txtFone.setText("");
+			}
+		    if(a.getActionCommand().equals("Pesquisar")) {
+		    	Fornecedor forn = new Fornecedor();
+		    	forn.setNome(txtNome.getText());
+		    	colocaTela(ctrlFornecedor.buscar(forn));
+		    }
+		    if(a.getActionCommand().equals("Alterar")) {
+		    	try {
+		    		ctrlFornecedor.alterar(dadosFornecedor());
+		    	} catch(Exception e) {
+		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+		    	}
+		    	
+		    }
+		
 	}
 
 }

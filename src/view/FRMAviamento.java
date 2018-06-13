@@ -2,9 +2,11 @@ package view;
 
 import java.awt.Font;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -12,13 +14,14 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleAviamento;
+import model.Aviamento;
 
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class FRMAviamento extends JPanel {
+public class FRMAviamento extends JPanel implements ActionListener {
 	private JTextField txtAviamento;
 	private JTextField txtPreco;
 	private JComboBox cbFornecedor ;
@@ -26,6 +29,7 @@ public class FRMAviamento extends JPanel {
 	private JButton btnSalvar;
 	private JFormattedTextField fttData;
 	private JFormattedTextField formattedTextField;
+	private ControleAviamento ctrlAviamento = new ControleAviamento();
 	/**
 	 * Create the panel.
 	 */
@@ -126,13 +130,61 @@ public class FRMAviamento extends JPanel {
 		btnAlterar.setBounds(250, 349, 97, 25);
 		add(btnAlterar);
 		
-		ControleAviamento ctrlAviamento = new ControleAviamento(txtAviamento, txtPreco, cbFornecedor, btnCancelar, btnSalvar,
-		btnPesquisar, btnAlterar);
-		cbFornecedor.addActionListener(ctrlAviamento);
-		btnCancelar.addActionListener(ctrlAviamento);
-		btnSalvar.addActionListener(ctrlAviamento);
-		btnPesquisar.addActionListener(ctrlAviamento);
-		btnAlterar.addActionListener(ctrlAviamento);
+	}
+	@Override
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Salvar")) {
+			try {
+				ctrlAviamento.adicionarAviamento(dadosAviamento());
+			}catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+			}	
+		}else
+			if(a.getActionCommand().equals("Cancelar")) {
+				cbFornecedor.getItemAt(-1);
+				txtAviamento.setText("");
+				txtPreco.setText("");
+				fttData.setText(null);
+		}else 
+			if(a.getActionCommand().equals("Pesquisar")) {
+				Aviamento av = new Aviamento();
+				av.setNome(txtAviamento.getText());
+					colocaTela(ctrlAviamento.buscar(av));
+		    } 
+			if(a.getActionCommand().equals("Alterar")) {
+				try {
+					ctrlAviamento.alterar(dadosAviamento());
+				} catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
 		
 	}
+	
+	private void colocaTela(Aviamento av) {
+		if(av!=null){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		txtAviamento.setText(av.getNome());
+		txtPreco.setText(Float.toString(av.getValorCompra()));
+		cbFornecedor.setSelectedItem(av.getFornecedor());
+		fttData.setText(sdf.format(av.getDataCompra()));
+		}
+	}
+	
+	private Aviamento dadosAviamento(){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Aviamento aviamento = new Aviamento();
+		aviamento.setNome(txtAviamento.getText());
+		aviamento.setValorCompra(Float.parseFloat(txtPreco.getText()));
+		try {
+			aviamento.setDataCompra((new java.sql.Date(sdf.parse(fttData.getText()).getTime())));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		if(cbFornecedor.getSelectedItem() != null) {
+			aviamento = (Aviamento) cbFornecedor.getSelectedItem();
+		}
+		return aviamento;
+	}
+	
 }
