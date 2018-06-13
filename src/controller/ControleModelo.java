@@ -51,6 +51,13 @@ public class ControleModelo{
 		return listaTecido;
 	}
 	
+	public Aviamento buscarAviamentoEs(String nome){
+		Aviamento av = new Aviamento();
+		av.setNome(nome);
+		System.out.println(nome);
+		return banco.buscaEspecifico(av);
+	}
+	
 	
 
 	

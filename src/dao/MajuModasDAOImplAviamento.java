@@ -162,9 +162,9 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 		
 		try {
 			String sql = 
-				  "select av.codigo, av.data, av.valor_Unitario,"
+				  "select av.codigo, av.data, av.valor_Unitario, "
 			    + "forn.id AS codigo_fornecedor, forn.nome AS nome_fornecedor "
-			    + "from aviamento av, fornecedor forn"
+			    + "from aviamento av, fornecedor forn "
 			    + "where forn.id = av.Fornecedorid AND av.nome like %?%";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			

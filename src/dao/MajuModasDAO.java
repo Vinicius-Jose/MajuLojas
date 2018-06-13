@@ -99,5 +99,7 @@ public interface MajuModasDAO {
 	public List<Venda> buscarVenda();
 
 	Set<Modelo> buscarModelo1();
+
+	Aviamento buscaEspecifico(Aviamento aviamento);
 	
 }
