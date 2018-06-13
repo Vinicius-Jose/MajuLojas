@@ -6,7 +6,7 @@ public class Piloto {
 	
 	private int codigo;
 	
-	private float valorPiloto;
+	private float valorPiloto = 0;
 	
 	private Date dataPiloto;
 

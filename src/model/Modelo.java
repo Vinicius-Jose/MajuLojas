@@ -7,27 +7,27 @@ import java.util.Set;
 public class Modelo {
 
 	private int codigo;
-	
+
 	private String modelo;
-	
+
 	private float custoConfeccao;
-	
+
 	private float margemCusto;
-	
+
 	private Piloto piloto;
-	
+
 	private Modelagem modelagem;
-	
+
 	private CorteCostura corteCostura;
-	
+
 	private float valorVenda;
-	
+
 	private Date dtCastastroPeca;
-	
+
 	private Set<Estoque> pecaEstoque;
-	
+
 	private Set<ItemPeca> itemPeca;
-	
+
 	private Tecido tecido;
 
 	public String getModelo() {
@@ -39,17 +39,20 @@ public class Modelo {
 	}
 
 	public float getCustoConfeccao() {
-		if(custoConfeccao == 0){
-		Iterator<ItemPeca> a = itemPeca.iterator();
-		while(a.hasNext()){
-			ItemPeca b = a.next();
-			custoConfeccao+=b.getValorAviamento();
+		if (custoConfeccao == 0 ) {
+			Iterator<ItemPeca> a = itemPeca.iterator();
+			while (a.hasNext()) {
+				ItemPeca b = a.next();
+				custoConfeccao += b.getValorAviamento();
+			}
+			custoConfeccao += modelagem.getValor();
+			custoConfeccao += piloto.getValorPiloto();
 		}
-		custoConfeccao+=modelagem.getValor();
-		custoConfeccao+=piloto.getValorPiloto();
-		custoConfeccao+=corteCostura.getValorCorte();
-		custoConfeccao+=corteCostura.getValorCostura();
-		}
+		if (corteCostura != null) {
+				custoConfeccao += corteCostura.getValorCorte();
+				custoConfeccao += corteCostura.getValorCostura();
+			}
+		
 		return custoConfeccao;
 	}
 
@@ -58,9 +61,10 @@ public class Modelo {
 	}
 
 	public float getMargemCusto() {
-		if(margemCusto ==0){
-		margemCusto = getCustoConfeccao()/corteCostura.getQuantidadePecasCortadas();
-		margemCusto = custoConfeccao * 2;
+		if (margemCusto == 0 && corteCostura!=null) {
+			margemCusto = getCustoConfeccao()
+					/ corteCostura.getQuantidadePecasCortadas();
+			margemCusto = custoConfeccao * 2;
 		}
 		return margemCusto;
 	}
@@ -68,8 +72,6 @@ public class Modelo {
 	public void setMargemCusto(float margemCusto) {
 		this.margemCusto = margemCusto;
 	}
-
-
 
 	public Piloto getPiloto() {
 		return piloto;
@@ -102,29 +104,29 @@ public class Modelo {
 	public void setDtCastastroPeca(Date dtCastastroPeca) {
 		this.dtCastastroPeca = dtCastastroPeca;
 	}
-	
+
 	public float getValorVenda() {
-		
+
 		return valorVenda;
 	}
-	
-	public Set<Estoque> getEstoque(){
-		
+
+	public Set<Estoque> getEstoque() {
+
 		return pecaEstoque;
 	}
-	
+
 	public void setEstoque(Set<Estoque> pecaEstoque) {
-		
+
 		this.pecaEstoque = pecaEstoque;
 	}
-	
-	public Set<ItemPeca> getItemPeca(){
-		
+
+	public Set<ItemPeca> getItemPeca() {
+
 		return itemPeca;
 	}
-	
+
 	public void setItemPeca(Set<ItemPeca> itemPeca) {
-		
+
 		this.itemPeca = itemPeca;
 	}
 
@@ -143,8 +145,7 @@ public class Modelo {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 

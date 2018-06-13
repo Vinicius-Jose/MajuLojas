@@ -6,7 +6,7 @@ public class Modelagem {
 	
 	private int codigo;
 	
-	private float valor;
+	private float valor = 0;
 	
 	private Date dataModelagem;
 	

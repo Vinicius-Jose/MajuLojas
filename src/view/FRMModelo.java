@@ -321,12 +321,12 @@ public class FRMModelo extends JPanel implements ActionListener {
 			adicionarItemTabela(av, Integer.parseInt(txtQtd.getText()));
 		} else if (a.getActionCommand().equals("Salvar")) {
 			try {
-				salvarAviamento(txtModelagem.isEnabled());
+				salvarModelo(txtModelagem.isEnabled());
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			limparTela();
-		} else if (a.getActionCommand().equals("Cancelar")) {
+		} else if (a.getActionCommand().contains("Cancelar")) {
 			limparTela();
 		}
 
@@ -342,17 +342,17 @@ public class FRMModelo extends JPanel implements ActionListener {
 		fttData.setText("");
 	}
 
-	private void salvarAviamento(boolean novo) throws ParseException {
+	private void salvarModelo(boolean novo) throws ParseException {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Modelo mod = new Modelo();
 			mod.setModelo(txtModelagem.getText());
+			Modelagem modelagem = new Modelagem();
+			Piloto piloto = new Piloto();
 			if (novo) {
-				Modelagem modelagem = new Modelagem();
 				modelagem.setDataModelagem(new java.sql.Date(sdf.parse(
 						fttData.getText()).getTime()));
 				modelagem.setValor(Float.parseFloat(txtModelagem.getText()));
-				Piloto piloto = new Piloto();
 				piloto.setDataPiloto(new java.sql.Date(sdf.parse(
 						fttData.getText()).getTime()));
 				piloto.setValorPiloto(Float.parseFloat(txtPiloto.getText()));
@@ -362,6 +362,8 @@ public class FRMModelo extends JPanel implements ActionListener {
 			mod.setDtCastastroPeca(new java.sql.Date(sdf.parse(
 					fttData.getText()).getTime()));
 			Set<ItemPeca> itens = new HashSet<>();
+			mod.setPiloto(piloto);
+			mod.setModelagem(modelagem);
 			for (int i = 0; i < tabelaAviamento.getRowCount(); i++) {
 				ItemPeca item = new ItemPeca();
 				item.setAviamento(ctrlModelo.buscarAviamentoEs( tabelaAviamento.getValueAt(i, 0).toString()));
@@ -374,9 +376,11 @@ public class FRMModelo extends JPanel implements ActionListener {
 			txtCustoConfeccao.setText(Float.toString(mod.getCustoConfeccao()));
 			mod.setTecido((Tecido) cbTecido.getSelectedItem());
 			ctrlModelo.adicionarModelo(mod);
+			limparTela();
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null,
 					"Campos Obrigatórios estão vazios");
+			e.printStackTrace();
 		}
 
 	}
@@ -398,6 +402,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 				mdtab.removeRow(tabelaAviamento.getSelectedRow());
 				btnApagar.setVisible(false);
 				btnApagar.setEnabled(false);
+				
 			}
 		});
 

@@ -268,13 +268,11 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	public void adicionar(Cliente cliente) {
 
 		try {
-			String sql = "INSERT INTO Cliente " + " VALUES ( ?, ?, ? ) ";
+			String sql = "INSERT INTO Cliente " + " VALUES (  ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
-
-			stmt.setInt(1, cliente.getId());
-			stmt.setString(2, cliente.getNome());
-			stmt.setString(3, cliente.getTelefoneContato());
-
+			stmt.setString(1, cliente.getNome());
+			stmt.setString(2, cliente.getTelefoneContato());
+			System.out.println("Adicionei " + cliente.getTelefoneContato()) ;
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -886,18 +884,19 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 		try {
 			String sql = "INSERT INTO Modelo "
-					+ " VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ) ";
+					+ " VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, modelo.getCodigo());
-			stmt.setString(2, modelo.getModelo());
-			stmt.setDouble(3, modelo.getMargemCusto());
-			stmt.setDouble(4, modelo.getCustoConfeccao());
-			stmt.setInt(5, modelo.getPiloto().getCodigo());
-			stmt.setInt(6, modelo.getModelagem().getCodigo());
-			stmt.setInt(7, modelo.getCorteCostura().getCodigo());
-			stmt.setInt(8, modelo.getTecido().getCodigo());
-
+			stmt.setString(1, modelo.getModelo());
+			stmt.setDouble(2, modelo.getMargemCusto());
+			stmt.setDouble(3, modelo.getCustoConfeccao());
+			stmt.setInt(4, modelo.getPiloto().getCodigo());
+			stmt.setInt(5, modelo.getModelagem().getCodigo());
+			if(modelo.getCorteCostura()!= null) stmt.setInt(6, modelo.getCorteCostura().getCodigo());
+			else stmt.setString(6,null);
+			System.out.println( modelo.getTecido().getCodigo());
+			stmt.setInt(7, modelo.getTecido().getCodigo());
+			
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -917,18 +916,17 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		}
 
 		try {
-			String sql = "INSERT INTO Item_Peca " + " VALUES ( ?, ?, ?, ? ) ";
+			String sql = "INSERT INTO Item_Peca " + " VALUES ( ?, ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			for (ItemPeca ip : modelo.getItemPeca()) {
-
 				stmt.setInt(1, ip.getAviamento().getCodigo());
 				// teria que pegar o codigo do modelo, ver onde pegar esse
 				// codigo depois
 				stmt.setInt(2, modelo.getCodigo());
 				stmt.setDouble(3, ip.getQuantidadeAviamento());
 				stmt.setDouble(4, ip.getValorAviamento());
-
+				stmt.setString(5, null);
 				stmt.executeUpdate();
 
 			}
@@ -1528,20 +1526,20 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		
 		try {
 			String sql = 
-				  "select av.codigo, av.data, av.valor_Unitario,"
+				  "select av.codigo, av.data_Aviamento, av.valor_Unitario,"
 			    + "forn.id AS codigo_fornecedor, forn.nome AS nome_fornecedor "
 			    + "from aviamento av, Fornecedor forn"
-			    + " where forn.id = av.Fornecedorid AND av.nome like %?%";
+			    + " where forn.id = av.Fornecedorid AND av.nome like ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
-			stmt.setString(1, aviamento.getNome());
+			stmt.setString(1, "%" + aviamento.getNome() + "%");
 			
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) { 
 				Fornecedor forn = new Fornecedor();
 				aviamento.setCodigo( rs.getInt("codigo")  );
-				aviamento.setDataCompra( rs.getDate("data")  );
+				aviamento.setDataCompra( rs.getDate("data_Aviamento")  );
 				aviamento.setValorCompra( rs.getFloat("valor_Unitario")  );
 				forn.setId(rs.getInt("codigo_fornecedor"));
 				forn.setNome(rs.getString("nome_fornecedor"));
@@ -1554,6 +1552,11 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		return aviamento;
 		
 	}
+
+	
+// email ancibe@ancibe.com.br
+//	objetivo Cobol tarde nome
+	
 
 
 }

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleCliente;
@@ -22,7 +23,7 @@ import java.awt.Color;
 
 public class FRMCliente extends JPanel implements ActionListener {
 	private JTextField txtNome;
-	private JTextField txtFone;
+	private JFormattedTextField txtFone;
 	private ControleCliente ctrlCliente = new ControleCliente();
 	/**
 	 * Create the panel.
@@ -98,12 +99,25 @@ public class FRMCliente extends JPanel implements ActionListener {
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.setBounds(397, 548, 97, 25);
 		add(btnAlterar);	
+		
+		btnSalvar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnAlterar.addActionListener(this);
+		btnPesquisar.addActionListener(this);
 	}
 	
 	private Cliente dadosCliente() {
 		Cliente cliente = new Cliente();
 		cliente.setNome(txtNome.getText());
-		cliente.setTelefoneContato(txtFone.getText());
+		try {
+			String fone  = txtFone.getText(1,3) + txtFone.getText(5,5) + txtFone.getText(11,4); ;
+			System.out.println(fone);
+			cliente.setTelefoneContato(fone);
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return cliente;
 	}
 	
