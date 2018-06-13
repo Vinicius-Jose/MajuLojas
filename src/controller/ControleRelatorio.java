@@ -46,4 +46,12 @@ public class ControleRelatorio {
 	private boolean ultimoCapital(){
 		return rela.ultimoCapital();
 	}
+
+	public double buscarLucro(int mes, int ano) {
+		return rela.buscarLucro(mes, ano);
+	}
+
+	public List<HashMap<String, Object>> buscaDadosLucro(int mes, int ano) {
+		return rela.buscaDadosLucro(mes, ano);
+	}
 }

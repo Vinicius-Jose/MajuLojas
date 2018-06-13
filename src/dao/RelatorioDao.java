@@ -126,6 +126,57 @@ public class RelatorioDao {
 		return true;
 	}
 
+	public double buscarLucro(int mes, int ano) {
+		String sql = "Select lucro_Mensal  from Lucro where MONTH(data_Lucro) = ? and YEAR(data_Lucro) = ?";
+		PreparedStatement stmt = null;
+		double valor = 0;
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			stmt.setInt(1, mes);
+			stmt.setInt(2, ano);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				valor = rt.getDouble("lucro_Mensal");
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return valor;
+	}
+
+	public List<HashMap<String, Object>> buscaDadosLucro(int mes, int ano) {
+		List<HashMap<String, Object>> info = new ArrayList<>();
+		String sql = "select md.modelo as modelo,Count(ien.valor_Item_Encomenda) + Count(iv.valor_Item_Venda)as qtd, md.margem_Custo as preco,  SUM(ien.valor_Item_Encomenda) + SUM(iv.valor_Item_Venda) as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv "
+				+ "where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and MONTH(en.data_Encomenda) = ? and YEAR(en.data_Encomenda) = ? "
+				+ "and MONTH(vd.data_Venda) = ? and YEAR(vd.data_Venda) = ? "
+				+ "group by md.modelo, md.margem_Custo";
+		PreparedStatement stmt = null;
+		try {
+			stmt = banco.getCon().prepareStatement(sql);
+			stmt.setInt(1, mes);
+			stmt.setInt(2, ano);
+			stmt.setInt(3, mes);
+			stmt.setInt(4, ano);
+			ResultSet rt = stmt.executeQuery();
+			while (rt.next()) {
+				HashMap<String, Object> dados = new HashMap<>();
+				dados.put("Modelo", rt.getString("modelo"));
+				dados.put("Qtd Vendida", rt.getInt("qtd"));
+				dados.put("Preço de Venda", rt.getDouble("preco"));
+				dados.put("Valor Ganho", rt.getDouble("valor_Ganho"));
+				info.add(dados);
+			}
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return info;
+	}
 
 	public Set<CorteCostura> buscarCorte() {
 		// TODO Auto-generated method stub
@@ -136,4 +187,5 @@ public class RelatorioDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

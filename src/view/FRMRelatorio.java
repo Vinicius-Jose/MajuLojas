@@ -180,9 +180,29 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 			int mes = (int) cbMes.getSelectedItem();
 			if(rdbCapital.isSelected()){
 				preencherTabelaCapital(mes,ano);
+			}else if(rdbtnLucro.isSelected()){
+				preencherTabelaLucro(mes, ano);
 			}
 		}
 		
+	}
+
+
+
+	private void preencherTabelaLucro(int mes, int ano) {
+		txtCapital.setText(Double.toString(ctrlRelatorio.buscarLucro(mes, ano)));
+		List<HashMap<String,Object>> dados = ctrlRelatorio.buscaDadosLucro(mes, ano);
+		DefaultTableModel modelo = (DefaultTableModel) tabelaLucro.getModel();
+		modelo.setRowCount(0);
+		for(HashMap<String,Object> b : dados){
+			Object[] linha = new Object[4];
+			linha[0] =b.get("Modelo");
+			linha[1] =b.get("Qtd Vendida");
+			linha[2] =b.get("Preço de Venda");
+			linha[3] =b.get("Valor Ganho");
+			modelo.addRow(linha);
+			
+		}
 	}
 
 
