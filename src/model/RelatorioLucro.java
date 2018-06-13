@@ -5,16 +5,16 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class RelatorioLucro {
-	
+
 	private int codigo;
 	private Date mesAno;
-	
+
 	private float lucroMes;
-	
+
 	private Set<Venda> venda;
-	
+
 	private Set<Encomenda> encomenda;
-	
+
 	private Capital capital;
 
 	public Capital getCapital() {
@@ -34,18 +34,18 @@ public class RelatorioLucro {
 	}
 
 	public float getLucroMes() {
-		if(lucroMes == 0){
-	    Iterator<Venda> a = venda.iterator();
-	    while(a.hasNext()){
-	    	Venda b = a.next();
-	    	lucroMes+=b.getValorTotal();
-	    }
-	    Iterator<Encomenda> c = encomenda.iterator();
-	    while(c.hasNext()){
-	    	Encomenda encomendas = c.next();
-	    	lucroMes+=encomendas.getValorTotalEncomenda();
-	    }
-	    lucroMes-= capital.getValorCapital();
+		if (lucroMes == 0) {
+			Iterator<Venda> a = venda.iterator();
+			while (a.hasNext()) {
+				Venda b = a.next();
+				lucroMes += b.getValorTotal();
+			}
+			Iterator<Encomenda> c = encomenda.iterator();
+			while (c.hasNext()) {
+				Encomenda encomendas = c.next();
+				lucroMes += encomendas.getValorTotalEncomenda();
+			}
+			lucroMes -= capital.getValorCapital();
 		}
 		return lucroMes;
 	}
@@ -53,19 +53,19 @@ public class RelatorioLucro {
 	public void setLucroMes(float lucroMes) {
 		this.lucroMes = lucroMes;
 	}
-	
-	public Set<Venda> getVenda(){
+
+	public Set<Venda> getVenda() {
 		return venda;
 	}
-	
+
 	public void setVenda(Set<Venda> venda) {
 		this.venda = venda;
 	}
 
-	public Set<Encomenda> getEncomenda(){
+	public Set<Encomenda> getEncomenda() {
 		return encomenda;
 	}
-	
+
 	public void setEncomenda(Set<Encomenda> encomenda) {
 		this.encomenda = encomenda;
 	}
