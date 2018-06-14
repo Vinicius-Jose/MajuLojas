@@ -237,7 +237,7 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 		btnFinalizarEncomenda.addActionListener(this);
 		btnPesquisar.addActionListener(this);
 		btnCancelar.addActionListener(this);
-		
+
 		lblMotorista.setEnabled(false);
 		cbMotorista.setEnabled(false);
 		lblMotorista.setVisible(false);
@@ -275,17 +275,20 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 			limpaTela();
 		} else if (a.getActionCommand().contains("Finalizar"))
 			try {
-				java.sql.Date data = new java.sql.Date(sdf.parse(fttDataEncomenda.getText()).getTime());
-				if(tabelaEncomenda.getRowCount() > 0){
+				java.sql.Date data = new java.sql.Date(sdf.parse(
+						fttDataEncomenda.getText()).getTime());
+				if (tabelaEncomenda.getRowCount() > 0) {
 					ctrlEncomenda.finalizarEncomenda(montarEncomenda(data));
-				}else throw new Exception();
+					limpaTela();
+				} else
+					throw new Exception();
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null,
-						"Os dados não foram preenchidos corretamente",
-						"Erro", JOptionPane.ERROR_MESSAGE);
+						"Os dados não foram preenchidos corretamente", "Erro",
+						JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
 			}
-				
-		
+
 	}
 
 	private void preencherCombo() {
@@ -324,7 +327,7 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 
 	}
 
-	private Encomenda montarEncomenda(java.sql.Date data)  {
+	private Encomenda montarEncomenda(java.sql.Date data) {
 		Encomenda encomenda = new Encomenda();
 		Set<ItemEncomenda> itens = new HashSet<>();
 		Cliente cliente = (Cliente) tabelaEncomenda.getValueAt(0, 0);
@@ -346,17 +349,12 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 		encomenda.setItemEncomenda(itens);
 		if (rdbtnNo.isSelected()) {
 			encomenda.setMotorista((Motorista) cbMotorista.getSelectedItem());
-		} else encomenda.setMotorista(null);
-		
+		} else
+			encomenda.setMotorista(null);
+
 		encomenda.setStatus((Status) cbStatus.getSelectedItem());
-		
+
 		return encomenda;
-	}
-
-	
-	private void limpaTela() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void adicionarDadoTabela() {
@@ -404,4 +402,17 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 		combo.setCellEditor(new DefaultCellEditor(cbStatus));
 		combo.setCellRenderer(new DefaultTableCellRenderer());
 	}
+
+	private void limpaTela() {
+		preencherCombo();
+		DefaultTableModel md = (DefaultTableModel) tabelaEncomenda.getModel();
+		for(int i = 0; i< md.getRowCount(); i ++){
+			md.removeRow(i);
+		}
+		cbCliente.setEnabled(true);
+		cbMotorista.setEnabled(true);
+		cbModelo.setEnabled(true);
+		fttDataRetirada.setText("");
+	}
+
 }
