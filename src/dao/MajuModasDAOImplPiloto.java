@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Capital;
+import model.Modelagem;
+import model.Modelo;
 import model.Piloto;
 
 
@@ -143,7 +145,7 @@ public class MajuModasDAOImplPiloto implements MajuModasDAOPiloto {
 				p.setValorPiloto( rs.getFloat("valor_Unitario")  );
 				p.setDataPiloto( rs.getDate("data")  );
 				c.setCodigo(rs.getInt("capitalCodigo"));
-				p.setCapital(c);
+				// p.setCapital(c);
 				piloto.add(p);
 			}
 		} catch (SQLException e) {
@@ -151,6 +153,36 @@ public class MajuModasDAOImplPiloto implements MajuModasDAOPiloto {
 		}
 		return piloto;
 		
+	}
+	
+	@Override
+	public Piloto buscarPilotoEspecifica(Piloto piloto) {
+		try {
+			String sql = 
+				  "select pi.codigo, pi.valor_Unitario, pi.data_Piloto, "
+					+"from piloto pi, modelo model"
+			    + "where model.codigo = mod.Modelagemcodigo ";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setFloat(1, piloto.getValorPiloto());
+			stmt.setDate(2, piloto.getDataPiloto());
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Modelo modelo = new Modelo();
+				piloto.setCodigo( rs.getInt("codigo")  );
+				piloto.setValorPiloto(rs.getFloat("valor_Unitario"));
+				piloto.setDataPiloto(rs.getDate("data_Piloto"));
+				modelo.setCodigo(rs.getInt("codigo"));
+				modelo.setModelo(rs.getString("modelo"));
+				piloto.setModelo(modelo);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return piloto;
 	}
 
 

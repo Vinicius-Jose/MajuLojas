@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -24,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import model.Estoque;
 import model.ItemVenda;
 import model.Modelo;
 import model.Venda;
@@ -34,14 +36,15 @@ public class FRMVenda extends JPanel implements ActionListener {
 	private JTable tabelaVenda;
 	private JTextField txtValortotal;
 	private JFormattedTextField fttDataVenda;
-	private JComboBox cbModelo;
-	private JButton btnAdicionar, btnFinalizar,btnCancelar ;
+	private JComboBox cbModelo, cbGrade;
+	private JButton btnAdicionar, btnFinalizar, btnCancelar;
 	private ControleVenda ctrlVenda = new ControleVenda();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 	/**
 	 * Create the panel.
-	 * @throws ParseException 
+	 * 
+	 * @throws ParseException
 	 */
 	public FRMVenda() throws ParseException {
 		setForeground(Color.BLACK);
@@ -66,9 +69,8 @@ public class FRMVenda extends JPanel implements ActionListener {
 		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblData.setBounds(736, 108, 61, 14);
 		add(lblData);
-		
-		fttDataVenda = new JFormattedTextField(
-				new MaskFormatter("##/##/####"));
+
+		fttDataVenda = new JFormattedTextField(new MaskFormatter("##/##/####"));
 		fttDataVenda.setForeground(Color.BLACK);
 		fttDataVenda.setBackground(Color.WHITE);
 		fttDataVenda.setBounds(791, 106, 83, 22);
@@ -86,36 +88,31 @@ public class FRMVenda extends JPanel implements ActionListener {
 		cbModelo.setBackground(Color.WHITE);
 		cbModelo.setBounds(85, 111, 168, 20);
 		add(cbModelo);
-		
+
 		JLabel lblQuantidade = new JLabel("Quantidade");
 		lblQuantidade.setForeground(Color.BLACK);
 		lblQuantidade.setBackground(Color.WHITE);
 		lblQuantidade.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblQuantidade.setBounds(309, 116, 103, 17);
 		add(lblQuantidade);
-		
+
 		txtQtd = new JTextField();
 		txtQtd.setForeground(Color.BLACK);
 		txtQtd.setBackground(Color.WHITE);
 		txtQtd.setBounds(439, 113, 46, 20);
 		add(txtQtd);
 		txtQtd.setColumns(10);
-		
+
 		tabelaVenda = new JTable();
-		tabelaVenda.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				 "Modelo", "Qtd", "Valor"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Object.class, Modelo.class, Object.class, Object.class
-			};
+		tabelaVenda.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "Modelo", "Qtd", "Valor" }) {
+			Class[] columnTypes = new Class[] { Object.class, Modelo.class,
+					Object.class, Object.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			
+
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
@@ -123,105 +120,125 @@ public class FRMVenda extends JPanel implements ActionListener {
 		tabelaVenda.getColumnModel().getColumn(0).setResizable(false);
 		tabelaVenda.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tabelaVenda.setBounds(38, 197, 588, 159);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(37, 197, 495, 159);
 		add(scrollPane);
 		scrollPane.setViewportView(tabelaVenda);
-		
+
 		btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setForeground(Color.BLACK);
 		btnAdicionar.setBackground(Color.WHITE);
 		btnAdicionar.setBounds(509, 112, 89, 23);
 		add(btnAdicionar);
-		
+
 		txtValortotal = new JTextField();
 		txtValortotal.setForeground(Color.BLACK);
 		txtValortotal.setBackground(Color.WHITE);
 		txtValortotal.setBounds(446, 412, 86, 20);
 		add(txtValortotal);
 		txtValortotal.setColumns(10);
-		
+
 		JLabel lblValorTotal = new JLabel("Valor Total");
 		lblValorTotal.setForeground(Color.BLACK);
 		lblValorTotal.setBackground(Color.WHITE);
 		lblValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblValorTotal.setBounds(351, 413, 89, 14);
 		add(lblValorTotal);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(153, 539, 112, 23);
 		add(btnCancelar);
-		
+
 		btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.setForeground(Color.BLACK);
 		btnFinalizar.setBackground(Color.WHITE);
 		btnFinalizar.setBounds(351, 539, 112, 23);
 		add(btnFinalizar);
-		
+
 		btnAdicionar.addActionListener(this);
 		fttDataVenda.setEditable(false);
 		fttDataVenda.setText(sdf.format(Calendar.getInstance().getTime()));
-		
+
 		btnFinalizar.addActionListener(this);
 		btnCancelar.addActionListener(this);
+
+		cbGrade = new JComboBox();
+		cbGrade.setBounds(198, 147, 55, 20);
+		add(cbGrade);
+
+		JLabel lblGrade = new JLabel("Grade");
+		lblGrade.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblGrade.setBounds(133, 147, 55, 17);
+		add(lblGrade);
 		preencherCombo();
 	}
+
+	
 	
 	
 	private void preencherCombo() {
-		Set<Modelo> mod  = ctrlVenda.buscarModelos();
+		Set<Modelo> mod = ctrlVenda.buscarModelos();
 		cbModelo.removeAllItems();
-		for(Modelo a : mod ){
+		for (Modelo a : mod) {
 			cbModelo.addItem(a);
 		}
 
 	}
 
+	private void preencherComboGrade() {
+		cbGrade.removeAllItems();
+		Modelo modelo = (Modelo) cbModelo.getSelectedItem();
+		for (Estoque a : ctrlVenda.buscarEstoque(modelo)) {
+			if (a.getQuantidade() > 0) {
+				cbGrade.addItem(a);
+			}
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		DefaultTableModel df = (DefaultTableModel) tabelaVenda.getModel();
-		if(a.getActionCommand().equals("Adicionar")){
+		if (a.getActionCommand().equals("Adicionar")) {
 			adicionarItemTabela(df);
 			txtQtd.setText("");
-		}else if(a.getActionCommand().equals("Finalizar")){
-		   try {
-			ctrlVenda.adicionarVenda(montarVenda());
-			limparTela();
-		   } catch (ParseException e) {
+		} else if (a.getActionCommand().equals("Finalizar")) {
+			try {
+				ctrlVenda.adicionarVenda(montarVenda());
+//				ctrlVenda.atualizarEstoque(estoque);
+				limparTela();
+			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if (a.getActionCommand().equals("Cancelar")){
+		} else if (a.getActionCommand().equals("Cancelar")) {
 			limparTela();
 		}
 	}
-
 
 	private void limparTela() {
 		txtQtd.setText("");
 		txtValortotal.setText("");
 		tabelaVenda.revalidate();
 		DefaultTableModel md = (DefaultTableModel) tabelaVenda.getModel();
-		for(int i = 0; i< md.getRowCount(); i ++){
+		for (int i = 0; i < md.getRowCount(); i++) {
 			md.removeRow(i);
 		}
-		
-	}
 
+	}
 
 	private Venda montarVenda() throws ParseException {
 		Venda venda = new Venda();
-		venda.setDtVenda(new java.sql.Date (sdf.parse(fttDataVenda.getText()).getTime()));
+		venda.setDtVenda(new java.sql.Date(sdf.parse(fttDataVenda.getText())
+				.getTime()));
 		venda.setValorTotal(Float.parseFloat(txtValortotal.getText()));
 		List<ItemVenda> itens = new LinkedList<>();
-		for(int i = 0; i<tabelaVenda.getRowCount(); i++){
+		for (int i = 0; i < tabelaVenda.getRowCount(); i++) {
 			ItemVenda item = new ItemVenda();
-			item.setQuantidade((int) tabelaVenda.getValueAt(i,1));
-			item.setModelo((Modelo) tabelaVenda.getValueAt(i,0));
+			item.setQuantidade((int) tabelaVenda.getValueAt(i, 1));
+			item.setModelo((Modelo) tabelaVenda.getValueAt(i, 0));
 			item.setValorTotalPeca((float) tabelaVenda.getValueAt(i, 2));
 			itens.add(item);
 		}
@@ -229,17 +246,24 @@ public class FRMVenda extends JPanel implements ActionListener {
 		return venda;
 	}
 
-
 	private void adicionarItemTabela(DefaultTableModel df) {
+		if(((Estoque)cbGrade.getSelectedItem()).getQuantidade() < Integer.parseInt(txtQtd.getText())){
+			JOptionPane.showMessageDialog(null,"Quantidade informada maior que a disponível no estoque");
+		}else{
+			List<Estoque> estoque;
+		((Estoque) cbGrade.getSelectedItem()).setQuantidade(((Estoque) cbGrade.getSelectedItem()).getQuantidade() - Integer.parseInt( txtQtd.getText()));
 		Object[] linha = new Object[3];
 		linha[0] = cbModelo.getSelectedItem();
 		linha[1] = Integer.parseInt(txtQtd.getText());
-		linha[2] = (((Modelo) cbModelo.getSelectedItem()).getMargemCusto()) * Integer.parseInt(txtQtd.getText());
+		linha[2] = (((Modelo) cbModelo.getSelectedItem()).getMargemCusto())
+				* Integer.parseInt(txtQtd.getText());
 		df.addRow(linha);
 		float valor = 0;
-		for(int i = 0; i<tabelaVenda.getRowCount(); i++){
-			valor += Float.parseFloat((tabelaVenda.getValueAt(i,2).toString()));
+		for (int i = 0; i < tabelaVenda.getRowCount(); i++) {
+			valor += Float
+					.parseFloat((tabelaVenda.getValueAt(i, 2).toString()));
 		}
 		txtValortotal.setText(Float.toString(valor));
+	}
 	}
 }

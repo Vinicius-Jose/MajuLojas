@@ -346,7 +346,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Modelo mod = new Modelo();
-			mod.setModelo(txtModelagem.getText());
+			mod.setModelo(txtModelo.getText());
 			Modelagem modelagem = new Modelagem();
 			Piloto piloto = new Piloto();
 			if (novo) {
@@ -366,7 +366,8 @@ public class FRMModelo extends JPanel implements ActionListener {
 			mod.setModelagem(modelagem);
 			for (int i = 0; i < tabelaAviamento.getRowCount(); i++) {
 				ItemPeca item = new ItemPeca();
-				item.setAviamento(ctrlModelo.buscarAviamentoEs( tabelaAviamento.getValueAt(i, 0).toString()));
+				item.setAviamento(ctrlModelo.buscarAviamentoEs(tabelaAviamento
+						.getValueAt(i, 0).toString()));
 				item.setQuantidadeAviamento((int) tabelaAviamento.getValueAt(i,
 						1));
 				itens.add(item);
@@ -395,14 +396,16 @@ public class FRMModelo extends JPanel implements ActionListener {
 		BotaoParaTabela btt = new BotaoParaTabela(tabelaAviamento, 3);
 		final JButton btnApagar = btt.getBotao();
 		btnApagar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent a) {
-				cbAviamento.addItem(ctrlModelo.buscarAviamentoEs(tabelaAviamento.getValueAt(tabelaAviamento.getSelectedRow(), 0).toString()));
+				cbAviamento.addItem(ctrlModelo
+						.buscarAviamentoEs(tabelaAviamento.getValueAt(
+								tabelaAviamento.getSelectedRow(), 0).toString()));
 				mdtab.removeRow(tabelaAviamento.getSelectedRow());
 				btnApagar.setVisible(false);
 				btnApagar.setEnabled(false);
-				
+
 			}
 		});
 
@@ -411,14 +414,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 	}
 }
 
-
-
-
-
-
-
-
-//Classe que adiciona o botao na tabela
+// Classe que adiciona o botao na tabela
 class BotaoParaTabela extends AbstractCellEditor implements TableCellRenderer,
 		TableCellEditor {
 	JTable table;
@@ -464,9 +460,8 @@ class BotaoParaTabela extends AbstractCellEditor implements TableCellRenderer,
 		return text;
 	}
 
-	public JButton getBotao(){
+	public JButton getBotao() {
 		return editButton;
 	}
-	
 
 }

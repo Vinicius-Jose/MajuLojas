@@ -11,6 +11,7 @@ public interface MajuModasDAOModelagem {
 	public void remover(Modelagem modelagem);
 	public void alterar(Modelagem modelagem);
 	public List<Modelagem> buscarModelagem();
+	Modelagem buscarModelagemEspecifica(Modelagem modelagem);
 	
 	
 }

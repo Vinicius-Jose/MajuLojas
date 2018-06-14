@@ -117,7 +117,6 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 			System.out.println(fone);
 			fornecedor.setTelefoneFornecedor(fone);
 		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return fornecedor;
@@ -137,10 +136,10 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 			} catch(Exception e) {
 				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 			}
+			limpaTela();
 		}else
 			if(a.getActionCommand().equals("Cancelar")) {
-				txtNome.setText("");
-				txtFone.setText("");
+				limpaTela();
 			}
 		    if(a.getActionCommand().equals("Pesquisar")) {
 		    	Fornecedor forn = new Fornecedor();
@@ -153,9 +152,14 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 		    	} catch(Exception e) {
 		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 		    	}
-		    	
+		    	limpaTela();	
 		    }
 		
+	}
+	
+	private void limpaTela() {
+		txtNome.setText("");
+		txtFone.setText("");
 	}
 
 }

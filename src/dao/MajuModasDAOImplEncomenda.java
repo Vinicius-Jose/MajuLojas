@@ -52,7 +52,7 @@ public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
 			stmt.setDate(3, encomenda.getDataEncomenda() );
 			stmt.setDate(4, encomenda.getDataRetirada() );
 			stmt.setDouble(5, encomenda.getValorTotalEncomenda() );
-			stmt.setString(6, encomenda.getStatus().getValorEnum());
+			stmt.setString(6, encomenda.getStatus().toString());
 			stmt.setString(7, encomenda.getMotorista().getNumPlaca());
 			
 			stmt.executeUpdate();
@@ -154,7 +154,7 @@ public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
 			stmt.setDate(1, encomenda.getDataEncomenda() );
 			stmt.setDate(2, encomenda.getDataRetirada() );
 			stmt.setFloat(3, encomenda.getValorTotalEncomenda());
-			stmt.setString(4, encomenda.getStatus().getValorEnum());
+			stmt.setString(4, encomenda.getStatus().toString());
 			stmt.setString(5, encomenda.getMotorista().getNumPlaca());
 			stmt.setInt(6, encomenda.getCodigo());
 			

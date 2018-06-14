@@ -13,10 +13,27 @@ public class CorteCostura {
 	private float valorCostura;
 	
 	private int quantidadePecasCortadas;
-		
+	
+	private Modelo modelo;
+	
+	private String letraGrade;
 
-	
-	
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
+	public String getletraGrade() {
+		return letraGrade;
+	}
+
+	public void setletraGrade(String letraGrade) {
+		this.letraGrade = letraGrade;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

@@ -126,11 +126,8 @@ public class FRMMotorista extends JPanel implements ActionListener{
 			fone = txtFone.getText(1,3) + txtFone.getText(5,5) + txtFone.getText(11,4);
 			motorista.setTelefoneContato(fone);
 		} catch (BadLocationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} ;
-
-		
 		motorista.setNumPlaca(txtPlaca.getText());
 		return motorista;
 	}
@@ -150,11 +147,9 @@ public class FRMMotorista extends JPanel implements ActionListener{
 			} catch(Exception e) {
 				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 			}
-			
+			limpaTela();
 		}else if(a.getActionCommand().contains("Cancelar")) {
-				txtNome.setText("");
-				txtFone.setText("");
-				txtPlaca.setText("");
+				limpaTela();
 			}
 		    if(a.getActionCommand().equals("Pesquisar")) {
 		    	Motorista moto = new Motorista();
@@ -167,6 +162,13 @@ public class FRMMotorista extends JPanel implements ActionListener{
 		    	} catch(Exception e) {
 		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 		    	}
+		    	limpaTela();
 		    }
+	}
+	
+	private void limpaTela() {
+		txtNome.setText("");
+		txtFone.setText("");
+		txtPlaca.setText("");
 	}
 }

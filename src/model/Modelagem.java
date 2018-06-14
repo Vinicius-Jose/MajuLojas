@@ -10,6 +10,15 @@ public class Modelagem {
 	
 	private Date dataModelagem;
 	
+	private Modelo modelo;
+	
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
 
 	public float getValor() {
 		return valor;

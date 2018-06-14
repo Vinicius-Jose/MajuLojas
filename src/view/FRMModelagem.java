@@ -1,10 +1,15 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Set;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
@@ -12,12 +17,17 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleModelagem;
+import model.Modelagem;
+import model.Modelo;
 
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class FRMModelagem extends JPanel {
+public class FRMModelagem extends JPanel implements ActionListener{
+	private JComboBox cbModelo;
 	private JTextField txtPrecoModelagem;
+	private JFormattedTextField fttData;
+	private ControleModelagem ctrlModelagem = new ControleModelagem();
 
 	/**
 	 * Create the panel.
@@ -80,29 +90,44 @@ public class FRMModelagem extends JPanel {
 		fttData.setBounds(654, 210, 83, 22);
 		add(fttData);
 		
-		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setForeground(Color.BLACK);
-		btnSalvar.setBackground(Color.WHITE);
-		btnSalvar.setBounds(531, 564, 97, 25);
-		add(btnSalvar);
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setForeground(Color.BLACK);
+		btnPesquisar.setBackground(Color.WHITE);
+		btnPesquisar.setBounds(442, 84, 89, 23);
+		add(btnPesquisar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setForeground(Color.BLACK);
-		btnCancelar.setBackground(Color.WHITE);
-		btnCancelar.setBounds(203, 564, 97, 25);
-		add(btnCancelar);
-		
-		JButton btnAlterar = new JButton("Alterar");
-		btnAlterar.setForeground(Color.BLACK);
-		btnAlterar.setBackground(Color.WHITE);
-		btnAlterar.setBounds(370, 565, 97, 25);
-		add(btnAlterar);
-		
-		ControleModelagem ctrlModelagem = new ControleModelagem(txtPrecoModelagem, cbModelo, fttData, btnSalvar, btnAlterar, btnCancelar);
-		cbModelo.addActionListener(ctrlModelagem);
-		btnSalvar.addActionListener(ctrlModelagem);
-		btnAlterar.addActionListener(ctrlModelagem);
-		btnCancelar.addActionListener(ctrlModelagem);
+		preencherCombo();
+
 	}
 
+	private void preencherCombo() {
+		Set<Modelo> a = ctrlModelagem.buscarModelo();
+		cbModelo.removeAllItems();
+		for(Modelo b : a) {
+			cbModelo.addItem(b);
+		}
+		
+	}
+	
+    private void colocaTela(Modelagem modelagem) {
+    	if(modelagem != null) {
+    		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    		cbModelo.setSelectedItem(modelagem.getModelo());
+    		txtPrecoModelagem.setText(Float.toString(modelagem.getValor()));
+    		fttData.setText(sdf.format(modelagem.getDataModelagem()));
+    	}
+    }
+
+	@Override
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Pesquisar")) {
+			try {
+				Modelagem mod = new Modelagem();
+				mod.setModelo((Modelo) cbModelo.getSelectedItem());
+				colocaTela(ctrlModelagem.buscarModelagem(mod));
+			}catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Campo não preenchido", "Preenchido", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}	
+	}
 }

@@ -4,21 +4,27 @@ import java.awt.Font;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import controller.ControleGrade;
+import model.Grade;
+import model.Modelo;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class FRMGrade extends JPanel {
+public class FRMGrade extends JPanel implements ActionListener{
+	private JComboBox cbModelo;
 	private JTextField textField;
 	private JTextField txtMin;
 	private JTextField txtMax;
+	private ControleGrade ctrlGrade = new ControleGrade();
 
 	/**
 	 * Create the panel.
@@ -112,10 +118,61 @@ public class FRMGrade extends JPanel {
 		btnAlterar.setBounds(391, 548, 97, 25);
 		add(btnAlterar);
 		
-		ControleGrade ctrlGrade = new ControleGrade(cbModelo, textField, txtMin, txtMax, btnSalvar, btnCancelar, btnAlterar);
-		cbModelo.addActionListener(ctrlGrade);
-		btnSalvar.addActionListener(ctrlGrade);
-		btnCancelar.addActionListener(ctrlGrade);
-		btnAlterar.addActionListener(ctrlGrade);
+		btnSalvar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnAlterar.addActionListener(this);
+		
+		preencherCombo();
+	
+	}
+	
+	private void preencherCombo() {
+		Set<Modelo> a = ctrlGrade.buscarModelo();
+		cbModelo.removeAllItems();
+		for(Modelo b : a) {
+			cbModelo.addItem(b);
+		}
+	}
+	
+	private Grade dadosGrade() {
+		Grade grade = new Grade();
+		if(cbModelo.getSelectedItem() != null) {
+			grade.setModelo((Modelo) cbModelo.getSelectedItem());
+		}
+		grade.setLetra(textField.getText());
+		grade.setNumTamanhoMinimo(Integer.parseInt(txtMin.getText()));
+		grade.setNumTamanhoMaximo(Integer.parseInt(txtMax.getText()));
+		return grade;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Salvar")) {
+			try {
+				ctrlGrade.adicionarGrade(dadosGrade());
+			} catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+			}
+			limpaTela();
+		}else
+			if(a.getActionCommand().equals("Cancelar")) {
+				limpaTela();
+			}
+		    if(a.getActionCommand().equals("Alterar")) {
+		    	try {
+		    		ctrlGrade.alterarGrade(dadosGrade());
+		    	} catch(Exception e) {
+		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+		    	}
+		    	limpaTela();
+		    }
+		
+	}
+
+	private void limpaTela() {
+		cbModelo.setSelectedIndex(-1);
+		textField.setText("");
+		txtMin.setText("");
+		txtMax.setText("");
 	}
 }

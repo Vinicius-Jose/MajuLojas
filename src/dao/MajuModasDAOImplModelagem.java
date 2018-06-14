@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Modelagem;
+import model.Modelo;
 
 
 public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
@@ -144,6 +145,36 @@ public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
 		}
 		return modelagem;
 		
+	}
+	
+	@Override
+	public Modelagem buscarModelagemEspecifica(Modelagem modelagem) {
+		try {
+			String sql = 
+				  "select mod.codigo, mod.valor_Unitario, mod.data_Modelagem, "
+					+"from modelagem mod, modelo model"
+			    + "where model.codigo = mod.Modelagemcodigo ";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			
+			stmt.setFloat(1, modelagem.getValor());
+			stmt.setDate(2, modelagem.getDataModelagem());
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				Modelo modelo = new Modelo();
+				modelagem.setCodigo( rs.getInt("codigo")  );
+				modelagem.setValor(rs.getFloat("valor_Unitario"));
+				modelagem.setDataModelagem(rs.getDate("data_Modelagem"));
+				modelo.setCodigo(rs.getInt("codigo"));
+				modelo.setModelo(rs.getString("modelo"));
+				modelagem.setModelo(modelo);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return modelagem;
 	}
 
 

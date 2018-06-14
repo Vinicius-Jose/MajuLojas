@@ -1,7 +1,7 @@
 create database MajuLoja 
 go 
 use MajuLoja
-GRANT execute,select,insert,update,delete TO root
+
 
 CREATE TABLE Fornecedor (
 id int IDENTITY (1,1) NOT NULL,
@@ -468,6 +468,17 @@ alter column lucrocodigo int null
 alter table encomenda
 alter column Motoristanum_Placa varchar(07) null
 
+alter table modelo
+alter column Corte_Costuracodigo int null
+
+select * from modelo
+select * from Estoque
+select md.modelo , gd.letra as grade, es.qtd_Grade as quantidade  from estoque es, Modelo md, Grade gd
+where md.codigo = es.Modelocodigo and gd.codigo = es.Gradecodigo and es.Modelocodigo = 1
+
+select es.ModeloCodigo as modelo, es.qtd_Grade as quantidade, es.gradeCodigo, gd.letra from grade gd, Estoque es 
+where es.Gradecodigo = gd.codigo and es.Modelocodigo = 1
+select * from modelo
 --ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
 
 --ALTER TABLE Modelo ADD CONSTRAINT FKModelo467655 FOREIGN KEY (Pilotocodigo) REFERENCES Piloto (codigo);

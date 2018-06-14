@@ -2,25 +2,18 @@ package model;
 
 public class Estoque {
 	
-	private int id;
+
 	private int quantidade;
 	private Grade grade;
 	private Modelo modelo;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getQuantidade() {
 		return quantidade;
 	}
 
 	public void setQuantidade(int quantidade) {
-		this.quantidade += quantidade;
+		this.quantidade = quantidade;
 	}
 
 	public Grade getGrade() {
@@ -37,5 +30,11 @@ public class Estoque {
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return grade.getLetra();
 	}
 }

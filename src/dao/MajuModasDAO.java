@@ -101,5 +101,7 @@ public interface MajuModasDAO {
 	Set<Modelo> buscarModelo1();
 
 	Aviamento buscaEspecifico(Aviamento aviamento);
+	public int ultimoCadastroModelagem();
+	public int ultimoCadastroPiloto();
 	
 }

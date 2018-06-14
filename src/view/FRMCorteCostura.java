@@ -4,9 +4,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -14,15 +17,20 @@ import javax.swing.JComboBox;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControleCorteCostura;
+import model.CorteCostura;
+import model.Modelo;
 
 import javax.swing.JButton;
 import java.awt.Color;
 
-public class FRMCorteCostura extends JPanel {
+public class FRMCorteCostura extends JPanel implements ActionListener{
 	private JTextField txtGrade;
 	private JTextField txtQtd;
 	private JTextField txtCorte;
 	private JTextField txtCostura;
+	private JComboBox cbModelo;
+	private JFormattedTextField fttData;
+	private ControleCorteCostura ctrlCorteCostura = new ControleCorteCostura();
 
 	/**
 	 * Create the panel.
@@ -151,13 +159,84 @@ public class FRMCorteCostura extends JPanel {
 		btnAlterar.setBounds(489, 539, 97, 25);
 		add(btnAlterar);
 		
-		ControleCorteCostura ctrlCorteCostura = new ControleCorteCostura(txtGrade, txtQtd, txtCorte, txtCostura, fttData, comboBox, btnSalvar, btnCancelar, btnAtualizarEstoque, btnAlterar);
-		comboBox.addActionListener(ctrlCorteCostura);
-		btnSalvar.addActionListener(ctrlCorteCostura);
-		btnCancelar.addActionListener(ctrlCorteCostura);
-		btnAtualizarEstoque.addActionListener(ctrlCorteCostura);
-		btnAlterar.addActionListener(ctrlCorteCostura);
+		btnSalvar.addActionListener(this);
+		btnCancelar.addActionListener(this);
+		btnAlterar.addActionListener(this);
+		btnAtualizarEstoque.addActionListener(this);
 		
+		preencherCombo();
+		
+	}
+	
+	private void preencherCombo() {
+		List<Modelo> a = ctrlCorteCostura.buscarModelos();
+		cbModelo.removeAllItems();
+		for(Modelo b : a) {
+			cbModelo.addItem(b);
+		}
+	}
+	
+	private CorteCostura dadosCorteCostura() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		CorteCostura corteCostura = new CorteCostura();
+		if(cbModelo.getSelectedItem() != null) {
+			corteCostura.setModelo((Modelo) cbModelo.getSelectedItem());
+		}
+		corteCostura.setletraGrade(txtGrade.getText());
+		corteCostura.setQuantidadePecasCortadas(Integer.parseInt(txtQtd.getText()));
+		corteCostura.setValorCorte(Float.parseFloat(txtCorte.getText()));
+		corteCostura.setValorCostura(Float.parseFloat(txtCostura.getText()));
+		try {
+			corteCostura.setDataCorte(new java.sql.Date(sdf.parse(fttData.getText()).getTime()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return corteCostura;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent a) {
+		if(a.getActionCommand().equals("Salvar")) {
+			try {
+				ctrlCorteCostura.adicionarCorteCostura(dadosCorteCostura());
+			} catch(Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+			}
+			limpaTela();
+		}else
+		    if(a.getActionCommand().equals("Cancelar")) {
+			    limpaTela();
+		    }
+			if (a.getActionCommand().equals("Alterar")) {
+			   try {
+				  ctrlCorteCostura.alterar(dadosCorteCostura()); 
+			   } catch(Exception e) {
+				   JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE); 
+			   }
+			   limpaTela();
+		    }
+		    if(a.getActionCommand().equals("Atualizar Estoque")) {
+		    	try {
+		    		  Modelo mod = new Modelo();
+			    	  if(cbModelo.getSelectedItem() != null) {
+			             mod.setModelo((String) cbModelo.getSelectedItem());
+			    	}
+			    	String grade = txtGrade.getText();
+			    	ctrlCorteCostura.atualizarEstoque(mod, grade);
+		    	} catch(Exception e) {
+		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+		    	}   
+		    	
+		    }	
+	}
+	
+	private void limpaTela() {
+		cbModelo.setSelectedIndex(-1);
+		txtGrade.setText("");
+		txtQtd.setText("");
+		txtCorte.setText("");
+		txtCostura.setText("");
+		fttData.setText(null);
 	}
 
 }

@@ -817,17 +817,18 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	 * MovimentaÃ§Ã£o dos dados da tabela Modelagem
 	 * 
 	 */
-
+//  m�todo alterado
 	@Override
 	public void adicionar(Modelagem modelagem) {
 
 		try {
-			String sql = "INSERT INTO Modelagem " + " VALUES ( ?, ?, ?, ? ) ";
+			String sql = "INSERT INTO Modelagem " + " VALUES (  ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, modelagem.getCodigo());
-			stmt.setDouble(2, modelagem.getValor());
-			stmt.setDate(3, modelagem.getDataModelagem());
+
+			stmt.setDouble(1, modelagem.getValor());
+			stmt.setDate(2,modelagem.getDataModelagem());
+			stmt.setString(3,null);
 
 			stmt.executeUpdate();
 
@@ -883,22 +884,28 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	 * MovimentaÃ§Ã£o dos dados da tabela Modelo
 	 * 
 	 */
-
+//  M�todo alterado e deve constar no novo dao
 	@Override
 	public void adicionar(Modelo modelo) {
-
+		
 		try {
-			String sql = "INSERT INTO Modelo "
+			String sql = "INSERT INTO Modelo(modelo, margem_Custo, preco_custo, PilotoCodigo, ModelagemCodigo, Corte_Costuracodigo, TecidoCodigo)  "
 					+ " VALUES ( ?, ?, ?, ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.setString(1, modelo.getModelo());
 			stmt.setDouble(2, modelo.getMargemCusto());
 			stmt.setDouble(3, modelo.getCustoConfeccao());
-			stmt.setInt(4, modelo.getPiloto().getCodigo());
-			stmt.setInt(5, modelo.getModelagem().getCodigo());
+			
+			if(modelo.getPiloto() == null) stmt.setString(4, null);
+			else stmt.setInt(4, modelo.getPiloto().getCodigo());
+			
+			if(modelo.getModelagem() == null )  stmt.setString(5, null);
+			else stmt.setInt(5, modelo.getModelagem().getCodigo());
+			
 			if(modelo.getCorteCostura()!= null) stmt.setInt(6, modelo.getCorteCostura().getCodigo());
 			else stmt.setString(6,null);
+			
 			System.out.println( modelo.getTecido().getCodigo());
 			stmt.setInt(7, modelo.getTecido().getCodigo());
 			
@@ -913,7 +920,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 			String sql = "INSERT INTO Capital_Modelo " + " VALUES ( ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setInt(1, modelo.getCodigo());
-			stmt.setInt(2, 0);
+			stmt.setString(2, null);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -921,13 +928,16 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		}
 
 		try {
-			String sql = "INSERT INTO Item_Peca " + " VALUES ( ?, ?, ?, ?, ? ) ";
+			String sql = "select max(codigo) as maximo from modelo";
 			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			rt.next();
+			modelo.setCodigo(rt.getInt("maximo"));
+			sql = "INSERT INTO Item_Peca " + " VALUES ( ?, ?, ?, ?, ? ) ";
+			stmt = con.prepareStatement(sql);
 
 			for (ItemPeca ip : modelo.getItemPeca()) {
 				stmt.setInt(1, ip.getAviamento().getCodigo());
-				// teria que pegar o codigo do modelo, ver onde pegar esse
-				// codigo depois
 				stmt.setInt(2, modelo.getCodigo());
 				stmt.setDouble(3, ip.getQuantidadeAviamento());
 				stmt.setDouble(4, ip.getValorAviamento());
@@ -1046,18 +1056,17 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	 * MovimentaÃ§Ã£o dos dados da tabela Piloto
 	 * 
 	 */
-
+// M�todo alterado
 	@Override
 	public void adicionar(Piloto piloto) {
 
 		try {
-			String sql = "INSERT INTO Piloto " + " VALUES ( ?, ?, ?, ? ) ";
+			String sql = "INSERT INTO Piloto " + " VALUES ( ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, piloto.getCodigo());
-			stmt.setDouble(2, piloto.getValorPiloto());
-			stmt.setDate(3, piloto.getDataPiloto());
-			stmt.setInt(4, 0);
+			stmt.setDouble(1, piloto.getValorPiloto());
+			stmt.setDate(2, piloto.getDataPiloto());
+			stmt.setString(3, null);
 
 			stmt.executeUpdate();
 
@@ -1112,22 +1121,22 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 	 * MovimentaÃ§Ã£o dos dados da tabela Tecido
 	 * 
 	 */
-
+// m�todo alterado
 	@Override
 	public void adicionar(Tecido tecido) {
 
 		try {
 			String sql = "INSERT INTO Tecido "
-					+ " VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ) ";
+					+ " VALUES (  ?, ?, ?, ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, tecido.getCodigo());
-			stmt.setDate(2, tecido.getData());
-			stmt.setDouble(3, tecido.getValor());
-			stmt.setInt(4, tecido.getQuantidade());
-			stmt.setString(5, tecido.getTipo());
-			stmt.setString(6, tecido.getCor());
-			stmt.setInt(7, tecido.getFornecedor().getId());
+
+			stmt.setDate(1, tecido.getData());
+			stmt.setDouble(2, tecido.getValor());
+			stmt.setInt(3, tecido.getQuantidade());
+			stmt.setString(4, tecido.getTipo());
+			stmt.setString(5, tecido.getCor());
+			stmt.setInt(6, tecido.getFornecedor().getId());
 
 			stmt.executeUpdate();
 
@@ -1576,10 +1585,40 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 		
 	}
 
+	public int ultimoCadastroPiloto(){
+		String sql = "select max(codigo) as maximo from piloto";
+		PreparedStatement stmt;
+		int num = 0 ;
+		try {
+			stmt = con.prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			rt.next();
+			num = rt.getInt("maximo");
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
+	}
 	
-// email ancibe@ancibe.com.br
-//	objetivo Cobol tarde nome
-	
+	public int ultimoCadastroModelagem(){
+		String sql = "select max(codigo) as maximo from modelagem";
+		PreparedStatement stmt;
+		int num = 0 ;
+		try {
+			stmt = con.prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			rt.next();
+			num = rt.getInt("maximo");
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
+	}
+
 
 
 }

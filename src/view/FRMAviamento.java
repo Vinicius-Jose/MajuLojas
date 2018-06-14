@@ -141,6 +141,7 @@ public class FRMAviamento extends JPanel implements ActionListener {
 		preencherCombo();
 		
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		if(a.getActionCommand().equals("Salvar")) {
@@ -150,12 +151,10 @@ public class FRMAviamento extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 				e.printStackTrace();
 			}	
+			limpaTela();
 		}else
 			if(a.getActionCommand().equals("Cancelar")) {
-				cbFornecedor.getItemAt(-1);
-				txtAviamento.setText("");
-				txtPreco.setText("");
-				fttData.setText(null);
+				limpaTela();
 		}else 
 			if(a.getActionCommand().equals("Pesquisar")) {
 				Aviamento av = new Aviamento();
@@ -168,6 +167,7 @@ public class FRMAviamento extends JPanel implements ActionListener {
 				} catch(Exception e) {
 					JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 				}
+				limpaTela();
 			}
 		
 	}
@@ -194,8 +194,6 @@ public class FRMAviamento extends JPanel implements ActionListener {
 		}
 		if(cbFornecedor.getSelectedItem() != null) {
 			aviamento.setFornecedor((Fornecedor) cbFornecedor.getSelectedItem());
-			Fornecedor f = (Fornecedor) cbFornecedor.getSelectedItem();
-			System.out.println(f.getNome() + " " + f.getId());
 		}
 		return aviamento;
 	}
@@ -206,6 +204,13 @@ public class FRMAviamento extends JPanel implements ActionListener {
 		for(Fornecedor b : a){
 			cbFornecedor.addItem(b);
 		}
+	}
+	
+	private void limpaTela() {
+		cbFornecedor.getItemAt(-1);
+		txtAviamento.setText("");
+		txtPreco.setText("");
+		fttData.setText(null);
 	}
 	
 }

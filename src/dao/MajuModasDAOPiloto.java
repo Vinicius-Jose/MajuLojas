@@ -11,6 +11,7 @@ public interface MajuModasDAOPiloto {
 	public void remover(Piloto piloto);
 	public void alterar(Piloto piloto);
 	public List<Piloto> buscarPiloto();
+	Piloto buscarPilotoEspecifica(Piloto piloto);
 
 	
 }

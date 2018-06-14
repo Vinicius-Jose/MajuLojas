@@ -27,6 +27,12 @@ public class ControleModelo{
 	
 
 	public void adicionarModelo(Modelo modelo){
+		if(modelo.getPiloto()!=null){
+			banco.adicionar(modelo.getPiloto());
+			banco.adicionar(modelo.getModelagem());
+			modelo.getPiloto().setCodigo(banco.ultimoCadastroPiloto());
+			modelo.getModelagem().setCodigo(banco.ultimoCadastroModelagem());
+		}
 		banco.adicionar(modelo);
 		JOptionPane.showMessageDialog(null, "Modelo adicionado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
