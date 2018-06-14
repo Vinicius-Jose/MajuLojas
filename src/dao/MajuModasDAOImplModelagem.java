@@ -136,14 +136,11 @@ public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
 	public Modelagem buscarModelagemEspecifica(Modelagem modelagem) {
 		try {
 			String sql = 
-				  "select mod.codigo, mod.valor_Unitario, mod.data_Modelagem, "
+				  "select mod.codigo , mod.valor_Unitario, mod.data_Modelagem, model.codigo as codModelo, model.modelo "
 					+"from modelagem mod, modelo model"
-			    + "where model.codigo = mod.Modelagemcodigo ";
+			    + " where model.Modelagemcodigo = ? ";
 			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setFloat(1, modelagem.getValor());
-			stmt.setDate(2, modelagem.getDataModelagem());
-			
+			stmt.setInt(1,modelagem.getModelo().getCodigo());
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) { 
@@ -151,7 +148,7 @@ public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
 				modelagem.setCodigo( rs.getInt("codigo")  );
 				modelagem.setValor(rs.getFloat("valor_Unitario"));
 				modelagem.setDataModelagem(rs.getDate("data_Modelagem"));
-				modelo.setCodigo(rs.getInt("codigo"));
+				modelo.setCodigo(rs.getInt("codModelo"));
 				modelo.setModelo(rs.getString("modelo"));
 				modelagem.setModelo(modelo);
 				

@@ -28,6 +28,7 @@ public class FRMModelagem extends JPanel implements ActionListener{
 	private JTextField txtPrecoModelagem;
 	private JFormattedTextField fttData;
 	private ControleModelagem ctrlModelagem = new ControleModelagem();
+	private JButton btnPesquisar;
 
 	/**
 	 * Create the panel.
@@ -57,7 +58,7 @@ public class FRMModelagem extends JPanel implements ActionListener{
 		lblModelo.setBounds(12, 85, 56, 16);
 		add(lblModelo);
 		
-		JComboBox cbModelo = new JComboBox();
+		cbModelo = new JComboBox();
 		cbModelo.setForeground(Color.BLACK);
 		cbModelo.setBackground(Color.WHITE);
 		cbModelo.setBounds(80, 85, 352, 22);
@@ -84,18 +85,19 @@ public class FRMModelagem extends JPanel implements ActionListener{
 		lblDataDaModelagem.setBounds(494, 212, 169, 16);
 		add(lblDataDaModelagem);
 		
-		JFormattedTextField fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 		fttData.setForeground(Color.BLACK);
 		fttData.setBackground(Color.WHITE);
 		fttData.setBounds(654, 210, 83, 22);
 		add(fttData);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setForeground(Color.BLACK);
 		btnPesquisar.setBackground(Color.WHITE);
 		btnPesquisar.setBounds(442, 84, 89, 23);
 		add(btnPesquisar);
 		
+		btnPesquisar.addActionListener(this);
 		preencherCombo();
 
 	}
@@ -112,7 +114,7 @@ public class FRMModelagem extends JPanel implements ActionListener{
     private void colocaTela(Modelagem modelagem) {
     	if(modelagem != null) {
     		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    		cbModelo.setSelectedItem(modelagem.getModelo());
+//    		cbModelo.setSelectedItem(modelagem.getModelo());
     		txtPrecoModelagem.setText(Float.toString(modelagem.getValor()));
     		fttData.setText(sdf.format(modelagem.getDataModelagem()));
     	}
@@ -127,6 +129,7 @@ public class FRMModelagem extends JPanel implements ActionListener{
 				colocaTela(ctrlModelagem.buscarModelagem(mod));
 			}catch(Exception e) {
 				JOptionPane.showMessageDialog(null, "Campo não preenchido", "Preenchido", JOptionPane.INFORMATION_MESSAGE);
+				e.printStackTrace();
 			}
 		}	
 	}
