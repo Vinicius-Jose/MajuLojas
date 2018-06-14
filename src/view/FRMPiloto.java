@@ -56,13 +56,13 @@ public class FRMPiloto extends JPanel implements ActionListener{
 		lblModelo.setBounds(12, 85, 56, 16);
 		add(lblModelo);
 		
-		JComboBox cbModelo = new JComboBox();
+		 cbModelo = new JComboBox();
 		cbModelo.setForeground(Color.BLACK);
 		cbModelo.setBackground(Color.WHITE);
 		cbModelo.setBounds(80, 85, 352, 22);
 		add(cbModelo);
 		
-		txtPrecoPiloto = new JFormattedTextField(new MaskFormatter("####.##"));
+		txtPrecoPiloto = new JTextField();
 		txtPrecoPiloto.setForeground(Color.BLACK);
 		txtPrecoPiloto.setBackground(Color.WHITE);
 		txtPrecoPiloto.setBounds(80, 210, 116, 22);
@@ -83,10 +83,12 @@ public class FRMPiloto extends JPanel implements ActionListener{
 		lblDataDoPiloto.setBounds(494, 212, 169, 16);
 		add(lblDataDoPiloto);
 		
-		JFormattedTextField fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 		fttData.setForeground(Color.BLACK);
 		fttData.setBackground(Color.WHITE);
 		fttData.setBounds(654, 210, 83, 22);
+		fttData.setEditable(false);
+		txtPrecoPiloto.setEditable(false);
 		add(fttData);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
@@ -95,6 +97,7 @@ public class FRMPiloto extends JPanel implements ActionListener{
 		btnPesquisar.setBounds(442, 84, 89, 23);
 		add(btnPesquisar);
 		
+		btnPesquisar.addActionListener(this);
 		preencherCombo();
 		
 	}
@@ -112,7 +115,6 @@ public class FRMPiloto extends JPanel implements ActionListener{
 	private void colocaTela(Piloto piloto) {
 		if(piloto != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			cbModelo.setSelectedItem(piloto.getModelo());
 			txtPrecoPiloto.setText(Float.toString(piloto.getValorPiloto()));
 			fttData.setText(sdf.format(piloto.getDataPiloto()));
 		}
@@ -123,10 +125,10 @@ public class FRMPiloto extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent a) {
 		if(a.getActionCommand().equals("Pesquisar")) {
 			try {
-				Piloto pi = new Piloto();
-				pi.setModelo((Modelo) cbModelo.getSelectedItem());
-				colocaTela(ctrlPiloto.buscarPiloto(pi));
+				
+				colocaTela(ctrlPiloto.buscarPiloto((Modelo)cbModelo.getSelectedItem()));
 			} catch(Exception e) {
+				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Campo não preenchido", "Preenchido", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}	

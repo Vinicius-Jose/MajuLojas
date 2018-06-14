@@ -19,8 +19,8 @@ public class ControlePiloto{
 		JOptionPane.showMessageDialog(null, "Piloto adicionado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public Piloto buscarPiloto(Piloto piloto) {
-		return bdPiloto.buscarPilotoEspecifica(piloto);
+	public Piloto buscarPiloto(Modelo modelo) {
+		return bdPiloto.buscarPilotoEspecifico(modelo);
 	}
 	
 	public void alterarPiloto(Piloto piloto) {

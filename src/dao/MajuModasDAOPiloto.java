@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import model.Modelo;
 import model.Piloto;
 
 public interface MajuModasDAOPiloto {
@@ -11,7 +12,7 @@ public interface MajuModasDAOPiloto {
 	public void remover(Piloto piloto);
 	public void alterar(Piloto piloto);
 	public List<Piloto> buscarPiloto();
-	Piloto buscarPilotoEspecifica(Piloto piloto);
+	public Piloto buscarPilotoEspecifico(Modelo modelo);
 
 	
 }

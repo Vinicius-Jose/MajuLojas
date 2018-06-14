@@ -10,15 +10,6 @@ public class Piloto {
 	
 	private Date dataPiloto;
 	
-	private Modelo modelo;
-	
-	public Modelo getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
-	}
 
 	public float getValorPiloto() {
 		return valorPiloto;
