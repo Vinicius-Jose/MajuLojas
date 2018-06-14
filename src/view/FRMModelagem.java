@@ -89,6 +89,7 @@ public class FRMModelagem extends JPanel implements ActionListener{
 		fttData.setForeground(Color.BLACK);
 		fttData.setBackground(Color.WHITE);
 		fttData.setBounds(654, 210, 83, 22);
+		fttData.setEditable(false);
 		add(fttData);
 		
 		btnPesquisar = new JButton("Pesquisar");
@@ -96,6 +97,7 @@ public class FRMModelagem extends JPanel implements ActionListener{
 		btnPesquisar.setBackground(Color.WHITE);
 		btnPesquisar.setBounds(442, 84, 89, 23);
 		add(btnPesquisar);
+		txtPrecoModelagem.setEditable(false);
 		
 		btnPesquisar.addActionListener(this);
 		preencherCombo();
@@ -124,9 +126,7 @@ public class FRMModelagem extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent a) {
 		if(a.getActionCommand().equals("Pesquisar")) {
 			try {
-				Modelagem mod = new Modelagem();
-				mod.setModelo((Modelo) cbModelo.getSelectedItem());
-				colocaTela(ctrlModelagem.buscarModelagem(mod));
+				colocaTela(ctrlModelagem.buscarModelagem((Modelo) cbModelo.getSelectedItem()));
 			}catch(Exception e) {
 				JOptionPane.showMessageDialog(null, "Campo não preenchido", "Preenchido", JOptionPane.INFORMATION_MESSAGE);
 				e.printStackTrace();

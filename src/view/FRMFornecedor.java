@@ -21,32 +21,33 @@ import model.Fornecedor;
 
 import java.awt.Color;
 
-public class FRMFornecedor extends JPanel implements ActionListener{
+public class FRMFornecedor extends JPanel implements ActionListener {
 	private JTextField txtNome;
 	private JTextField txtFone;
 	private ControleFornecedor ctrlFornecedor = new ControleFornecedor();
 
 	/**
 	 * Create the panel.
-	 * @throws ParseException 
+	 * 
+	 * @throws ParseException
 	 */
 	public FRMFornecedor() throws ParseException {
 		setForeground(Color.BLACK);
 		setBackground(Color.WHITE);
 		setBounds(0, 31, 1040, 660);
 		setLayout(null);
-		
+
 		JLabel lblFornecedor = new JLabel("Fornecedor");
 		lblFornecedor.setForeground(Color.BLACK);
 		lblFornecedor.setBackground(Color.WHITE);
 		lblFornecedor.setBounds(12, 0, 224, 34);
 		lblFornecedor.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		add(lblFornecedor);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 44, 1034, 11);
 		add(separator);
-		
+
 		txtNome = new JTextField();
 		txtNome.setForeground(Color.BLACK);
 		txtNome.setBackground(Color.WHITE);
@@ -54,14 +55,14 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 		txtNome.setBounds(127, 95, 202, 26);
 		add(txtNome);
 		txtNome.setColumns(10);
-		
+
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setForeground(Color.BLACK);
 		lblNome.setBackground(Color.WHITE);
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNome.setBounds(10, 95, 105, 26);
 		add(lblNome);
-		
+
 		txtFone = new JFormattedTextField(new MaskFormatter("(###)#####-####"));
 		txtFone.setForeground(Color.BLACK);
 		txtFone.setBackground(Color.WHITE);
@@ -69,51 +70,52 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 		txtFone.setBounds(127, 208, 202, 22);
 		add(txtFone);
 		txtFone.setColumns(10);
-		
+
 		JLabel lblTelefone = new JLabel("Telefone");
 		lblTelefone.setForeground(Color.BLACK);
 		lblTelefone.setBackground(Color.WHITE);
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblTelefone.setBounds(12, 206, 72, 26);
 		add(lblTelefone);
-		
+
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(580, 547, 97, 25);
 		add(btnSalvar);
-		
+
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(247, 547, 97, 25);
 		add(btnCancelar);
-		
+
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setForeground(Color.BLACK);
 		btnPesquisar.setBackground(Color.WHITE);
 		btnPesquisar.setBounds(355, 99, 89, 23);
 		add(btnPesquisar);
-		
+
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.setForeground(Color.BLACK);
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.setBounds(420, 548, 97, 25);
 		add(btnAlterar);
-		
+
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		btnAlterar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
-	
 
 	}
-	
+
 	private Fornecedor dadosFornecedor() {
 		Fornecedor fornecedor = new Fornecedor();
 		fornecedor.setNome(txtNome.getText());
 		try {
-			String fone  = txtFone.getText(1,3) + txtFone.getText(5,5) + txtFone.getText(11,4); ;
+			String fone = txtFone.getText(1, 3) + txtFone.getText(5, 5)
+					+ txtFone.getText(11, 4);
+			;
 			System.out.println(fone);
 			fornecedor.setTelefoneFornecedor(fone);
 		} catch (BadLocationException e) {
@@ -121,42 +123,48 @@ public class FRMFornecedor extends JPanel implements ActionListener{
 		}
 		return fornecedor;
 	}
-	
+
 	private void colocaTela(Fornecedor forn) {
-		if(forn != null) {
+		if (forn != null) {
 			txtNome.setText(forn.getNome());
 			txtFone.setText(forn.getTelefoneFornecedor());
+		}else {
+			JOptionPane.showMessageDialog(null, "Não foi possível encontrar o referido fornecedor",
+					"Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public void actionPerformed(ActionEvent a) {
-		if(a.getActionCommand().equals("Salvar")) {
+		if (a.getActionCommand().equals("Salvar")) {
 			try {
 				ctrlFornecedor.adicionarfornecedor(dadosFornecedor());
-			} catch(Exception e) {
-				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos",
+						"Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 			}
 			limpaTela();
-		}else
-			if(a.getActionCommand().equals("Cancelar")) {
-				limpaTela();
+		} else if (a.getActionCommand().equals("Cancelar")) {
+			limpaTela();
+		}
+		if (a.getActionCommand().equals("Pesquisar")) {
+			Fornecedor forn = new Fornecedor();
+			forn.setNome(txtNome.getText());
+			colocaTela(ctrlFornecedor.buscar(forn));
+
+		}
+
+		if (a.getActionCommand().equals("Alterar")) {
+			try {
+				ctrlFornecedor.alterar(dadosFornecedor());
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Campos não preenchidos",
+						"Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 			}
-		    if(a.getActionCommand().equals("Pesquisar")) {
-		    	Fornecedor forn = new Fornecedor();
-		    	forn.setNome(txtNome.getText());
-		    	colocaTela(ctrlFornecedor.buscar(forn));
-		    }
-		    if(a.getActionCommand().equals("Alterar")) {
-		    	try {
-		    		ctrlFornecedor.alterar(dadosFornecedor());
-		    	} catch(Exception e) {
-		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
-		    	}
-		    	limpaTela();	
-		    }
-		
+			limpaTela();
+		}
+
 	}
-	
+
 	private void limpaTela() {
 		txtNome.setText("");
 		txtFone.setText("");

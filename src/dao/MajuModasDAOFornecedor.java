@@ -11,6 +11,7 @@ public interface MajuModasDAOFornecedor {
 	public void remover(Fornecedor fornecedor);
 	public void alterar(Fornecedor fornecedor);
 	public List<Fornecedor> buscarFornecedor();
+	public Fornecedor buscarFornecedorEspecifico(Fornecedor fornecedor);
 
 	
 }

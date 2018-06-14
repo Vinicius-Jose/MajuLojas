@@ -18,8 +18,8 @@ public class ControleModelagem{
 		return banco.buscarModelo1();
 	}
 	
-	public Modelagem buscarModelagem(Modelagem modelagem){
-		return bdModelagem.buscarModelagemEspecifica(modelagem);
+	public Modelagem buscarModelagem(Modelo modelo){
+		return bdModelagem.buscarModelagemEspecifica(modelo);
 	}
 
 }

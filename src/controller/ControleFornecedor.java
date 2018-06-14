@@ -4,11 +4,13 @@ import model.Fornecedor;
 import java.util.List;
 import javax.swing.JOptionPane;
 import dao.MajuModasDAO;
+import dao.MajuModasDAOFornecedor;
 import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplFornecedor;
 
 public class ControleFornecedor{
 
-	private MajuModasDAO bdFornecedor = new MajuModasDAOImpl();
+	private MajuModasDAOFornecedor bdFornecedor = new MajuModasDAOImplFornecedor();
 	
 	public void adicionarfornecedor(Fornecedor fornecedor){
 		bdFornecedor.adicionar(fornecedor);
@@ -16,8 +18,8 @@ public class ControleFornecedor{
 	}
 	
 	public Fornecedor buscar(Fornecedor fornecedor){
-		List<Fornecedor> listaFornecedor = bdFornecedor.buscarFornecedor();
-		return listaFornecedor.get(0);
+		Fornecedor fornecedorRet = bdFornecedor.buscarFornecedorEspecifico(fornecedor);
+		return fornecedorRet;
 	}
 	
 	public void alterar(Fornecedor fornecedor){

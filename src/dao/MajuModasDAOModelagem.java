@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import model.Modelagem;
+import model.Modelo;
 
 public interface MajuModasDAOModelagem {
 
@@ -11,7 +12,7 @@ public interface MajuModasDAOModelagem {
 	public void remover(Modelagem modelagem);
 	public void alterar(Modelagem modelagem);
 	public List<Modelagem> buscarModelagem();
-	Modelagem buscarModelagemEspecifica(Modelagem modelagem);
+	public Modelagem buscarModelagemEspecifica(Modelo modelo);
 	
 	
 }
