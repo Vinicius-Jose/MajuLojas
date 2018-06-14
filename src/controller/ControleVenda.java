@@ -27,4 +27,9 @@ public class ControleVenda {
 		return bdEstoque.buscarEstoque(modelo);
 	}
 
+	public void atualizarEstoque(Estoque estoque) {
+		bdEstoque.alterar(estoque);
+		
+	}
+
 }

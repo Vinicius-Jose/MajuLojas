@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import model.Estoque;
+import model.Grade;
 import model.ItemVenda;
 import model.Modelo;
 import model.Venda;
@@ -105,9 +106,9 @@ public class FRMVenda extends JPanel implements ActionListener {
 
 		tabelaVenda = new JTable();
 		tabelaVenda.setModel(new DefaultTableModel(new Object[][] {},
-				new String[] { "Modelo", "Qtd", "Valor" }) {
+				new String[] { "Modelo", "Qtd", "Valor", "Grade" }) {
 			Class[] columnTypes = new Class[] { Object.class, Modelo.class,
-					Object.class, Object.class };
+					Object.class, Object.class, Estoque.class };
 
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -174,6 +175,9 @@ public class FRMVenda extends JPanel implements ActionListener {
 		lblGrade.setBounds(133, 147, 55, 17);
 		add(lblGrade);
 		preencherCombo();
+		preencherComboGrade();
+		cbGrade.addActionListener(this);
+		cbGrade.setActionCommand("Grade");
 	}
 
 	
@@ -217,7 +221,6 @@ public class FRMVenda extends JPanel implements ActionListener {
 			limparTela();
 		}
 	}
-
 	private void limparTela() {
 		txtQtd.setText("");
 		txtValortotal.setText("");
@@ -240,6 +243,9 @@ public class FRMVenda extends JPanel implements ActionListener {
 			item.setQuantidade((int) tabelaVenda.getValueAt(i, 1));
 			item.setModelo((Modelo) tabelaVenda.getValueAt(i, 0));
 			item.setValorTotalPeca((float) tabelaVenda.getValueAt(i, 2));
+			Estoque estoque = (Estoque) tabelaVenda.getValueAt(i, 3);
+			estoque.setQuantidade(estoque.getQuantidade() - ((int) tabelaVenda.getValueAt(i, 1)));
+			ctrlVenda.atualizarEstoque(estoque);
 			itens.add(item);
 		}
 		venda.setItemVenda(itens);
@@ -250,13 +256,13 @@ public class FRMVenda extends JPanel implements ActionListener {
 		if(((Estoque)cbGrade.getSelectedItem()).getQuantidade() < Integer.parseInt(txtQtd.getText())){
 			JOptionPane.showMessageDialog(null,"Quantidade informada maior que a disponível no estoque");
 		}else{
-			List<Estoque> estoque;
-		((Estoque) cbGrade.getSelectedItem()).setQuantidade(((Estoque) cbGrade.getSelectedItem()).getQuantidade() - Integer.parseInt( txtQtd.getText()));
-		Object[] linha = new Object[3];
+			
+		Object[] linha = new Object[4];
 		linha[0] = cbModelo.getSelectedItem();
 		linha[1] = Integer.parseInt(txtQtd.getText());
 		linha[2] = (((Modelo) cbModelo.getSelectedItem()).getMargemCusto())
 				* Integer.parseInt(txtQtd.getText());
+		linha[3] = (Estoque)cbGrade.getSelectedItem();
 		df.addRow(linha);
 		float valor = 0;
 		for (int i = 0; i < tabelaVenda.getRowCount(); i++) {
