@@ -275,11 +275,17 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 			limpaTela();
 		} else if (a.getActionCommand().contains("Finalizar"))
 			try {
-				ctrlEncomenda.finalizarEncomenda(montarEncomenda());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				java.sql.Date data = new java.sql.Date(sdf.parse(fttDataEncomenda.getText()).getTime());
+				if(tabelaEncomenda.getRowCount() > 0){
+					ctrlEncomenda.finalizarEncomenda(montarEncomenda(data));
+				}else throw new Exception();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,
+						"Os dados não foram preenchidos corretamente",
+						"Erro", JOptionPane.ERROR_MESSAGE);
 			}
+				
+		
 	}
 
 	private void preencherCombo() {
@@ -318,11 +324,12 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 
 	}
 
-	private Encomenda montarEncomenda() throws ParseException {
+	private Encomenda montarEncomenda(java.sql.Date data)  {
 		Encomenda encomenda = new Encomenda();
 		Set<ItemEncomenda> itens = new HashSet<>();
 		Cliente cliente = (Cliente) tabelaEncomenda.getValueAt(0, 0);
 		encomenda.setCliente(cliente);
+		encomenda.setDataEncomenda(data);
 		for (int i = 0; i < tabelaEncomenda.getRowCount(); i++) {
 			ItemEncomenda item = new ItemEncomenda();
 			item.setModelo((Modelo) tabelaEncomenda.getValueAt(i, 1));
@@ -342,11 +349,11 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 		} else encomenda.setMotorista(null);
 		
 		encomenda.setStatus((Status) cbStatus.getSelectedItem());
-		encomenda.setDataEncomenda(new java.sql.Date(sdf.parse(
-					fttDataRetirada.getText()).getTime()));
+		
 		return encomenda;
 	}
 
+	
 	private void limpaTela() {
 		// TODO Auto-generated method stub
 
@@ -381,6 +388,7 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 			cbMotorista.setEnabled(false);
 			cbModelo.removeItem(cbModelo.getSelectedItem());
 			comboBoxTabela(null);
+			txtQtd.setText("");
 
 		}
 

@@ -465,6 +465,9 @@ group by en.codigo
 alter table encomenda
 alter column lucrocodigo int null
 
+alter table encomenda
+alter column Motoristanum_Placa varchar(07) null
+
 --ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
 
 --ALTER TABLE Modelo ADD CONSTRAINT FKModelo467655 FOREIGN KEY (Pilotocodigo) REFERENCES Piloto (codigo);
