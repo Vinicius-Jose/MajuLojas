@@ -122,6 +122,7 @@ public class MajuModasDAOImplCliente implements MajuModasDAOCliente {
 			if (rs.next()) { 
 				cliente.setNome(rs.getString("nome"));
 				cliente.setTelefoneContato(rs.getString("telefone"));
+				cliente.setId(rs.getInt("id"));
 				return cliente;
 			}else return null;
 		} catch (SQLException e) {

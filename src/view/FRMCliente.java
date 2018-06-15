@@ -152,11 +152,18 @@ public class FRMCliente extends JPanel implements ActionListener {
 				btnSalvar.setEnabled(false);
 				Cliente cli = new Cliente();
 				cli.setNome(txtNome.getText());
-				colocaTela(ctrlCliente.buscar(cli));
+				cli = ctrlCliente.buscar(cli);
+				id = cli.getId();
+				colocaTela(cli);
 			}
 			if(a.getActionCommand().equals("Alterar")) {
 				try {
-					ctrlCliente.alterar(dadosCliente());
+					Cliente cliente = dadosCliente();
+					System.out.println(id);
+					cliente.setId(id);
+					ctrlCliente.alterar(cliente);
+					btnAlterar.setEnabled(false);
+					btnSalvar.setEnabled(true);
 				} catch(Exception e) {
 					JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 				}
