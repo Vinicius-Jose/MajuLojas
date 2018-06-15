@@ -72,8 +72,11 @@ public class FRMEstoque extends JPanel implements ActionListener {
 			},
 			new String[] {
 				"Modelo", "Grade", "Quantidade em Estoque"
-			}
-		));
+			}){
+			public boolean isCellEditable(int row, int column){
+				return false;
+			}}
+		);
 		tabelaEstoque.getColumnModel().getColumn(2).setPreferredWidth(145);
 		scrollPane.setViewportView(tabelaEstoque);
 		

@@ -148,7 +148,9 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 			new String[] {
 				"Modelo", "Qtd Vendida", "Preço de Venda", "Valor Ganho"
 			}
-		));
+		){public boolean isCellEditable(int row, int column){
+			return false;
+		}});
 		tabelaLucro.getColumnModel().getColumn(0).setPreferredWidth(157);
 		tabelaLucro.getColumnModel().getColumn(1).setPreferredWidth(91);
 		tabelaLucro.getColumnModel().getColumn(2).setPreferredWidth(122);

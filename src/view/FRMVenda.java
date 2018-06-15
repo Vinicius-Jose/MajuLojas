@@ -176,8 +176,8 @@ public class FRMVenda extends JPanel implements ActionListener {
 		add(lblGrade);
 		preencherCombo();
 		preencherComboGrade();
-		cbGrade.addActionListener(this);
-		cbGrade.setActionCommand("Grade");
+		cbModelo.addActionListener(this);
+		cbModelo.setActionCommand("cbModelo");
 	}
 
 	
@@ -213,11 +213,12 @@ public class FRMVenda extends JPanel implements ActionListener {
 				ctrlVenda.adicionarVenda(montarVenda());
 				limparTela();
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (a.getActionCommand().equals("Cancelar")) {
 			limparTela();
+		}else if(a.getActionCommand().equals("cbModelo")){
+			preencherComboGrade();
 		}
 	}
 	private void limparTela() {

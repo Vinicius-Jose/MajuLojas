@@ -180,6 +180,11 @@ public class FRMModelo extends JPanel implements ActionListener {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			
+			public boolean isCellEditable(int row, int column){
+				if(column == 4 ) return true;
+				return false;
+			}
 		});
 		tabelaAviamento.getColumnModel().getColumn(1).setPreferredWidth(252);
 		tabelaAviamento.getColumnModel().getColumn(2).setPreferredWidth(107);

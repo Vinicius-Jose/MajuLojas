@@ -164,6 +164,10 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			public boolean isCellEditable(int row, int column){
+				if(column == 6 ) return true;
+				return false;
+			}
 		});
 		tabelaEncomenda.getColumnModel().getColumn(0).setPreferredWidth(179);
 		tabelaEncomenda.getColumnModel().getColumn(1).setPreferredWidth(193);
