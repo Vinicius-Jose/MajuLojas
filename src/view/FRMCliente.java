@@ -128,6 +128,7 @@ public class FRMCliente extends JPanel implements ActionListener {
 			txtNome.setText(cli.getNome());
 			txtFone.setText(cli.getTelefoneContato());
 			id = cli.getId();
+			
 		}else{
 			JOptionPane.showMessageDialog(null, "Não foi possível encontrar o cliente", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
@@ -153,7 +154,7 @@ public class FRMCliente extends JPanel implements ActionListener {
 				Cliente cli = new Cliente();
 				cli.setNome(txtNome.getText());
 				cli = ctrlCliente.buscar(cli);
-				id = cli.getId();
+				
 				colocaTela(cli);
 			}
 			if(a.getActionCommand().equals("Alterar")) {

@@ -1317,7 +1317,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 		List<Aviamento> aviamento = new ArrayList<>();
 		try {
-			String sql = "select * from aviamento";
+			String sql = "select * from Aviamento";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 

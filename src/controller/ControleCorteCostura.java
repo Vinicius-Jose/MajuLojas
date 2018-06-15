@@ -4,12 +4,15 @@ package controller;
 import java.text.Collator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+
 import javax.swing.JOptionPane;
+
+import dao.MajuModasDAO;
+import dao.MajuModasDAOImpl;
 import model.CorteCostura;
 import model.Estoque;
 import model.Modelo;
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
 
 public class ControleCorteCostura{
 	
@@ -31,8 +34,8 @@ public class ControleCorteCostura{
 		JOptionPane.showMessageDialog(null, "Corte & Costura alterado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public List<Modelo> buscarModelos(){
-		return bdCorteCostura.buscarModelo();
+	public Set<Modelo> buscarModelos(){
+		return bdCorteCostura.buscarModelo1();
 	}
 	
 	public void atualizarEstoque(Modelo modelo, String grade){
@@ -42,7 +45,6 @@ public class ControleCorteCostura{
 			if(col.compare(a.getGrade(), grade)>1){
 				b = a;
 			}
-		 break;
 		}
 		bdCorteCostura.alterar(b);
 		JOptionPane.showMessageDialog(null, "Estoque atualizado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

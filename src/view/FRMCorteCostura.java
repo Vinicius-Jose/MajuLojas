@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -30,6 +31,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 	private JTextField txtCostura;
 	private JComboBox cbModelo;
 	private JFormattedTextField fttData;
+	private JButton btnPesquisar, btnCancelar, btnAtualizarEstoque,btnAlterar, btnSalvar;
 	private ControleCorteCostura ctrlCorteCostura = new ControleCorteCostura();
 
 	/**
@@ -74,11 +76,11 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 		add(txtGrade);
 		txtGrade.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setForeground(Color.BLACK);
-		comboBox.setBackground(Color.WHITE);
-		comboBox.setBounds(70, 80, 235, 22);
-		add(comboBox);
+		cbModelo = new JComboBox();
+		cbModelo.setForeground(Color.BLACK);
+		cbModelo.setBackground(Color.WHITE);
+		cbModelo.setBounds(70, 80, 235, 22);
+		add(cbModelo);
 		
 		JLabel lblQuantidadePeasCortadas = new JLabel("Quantidade Pe\u00E7as Cortadas");
 		lblQuantidadePeasCortadas.setForeground(Color.BLACK);
@@ -135,25 +137,25 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 		lblPreoDaCostura.setBounds(12, 242, 148, 16);
 		add(lblPreoDaCostura);
 		
-		JButton btnAtualizarEstoque = new JButton("Atualizar Estoque");
+		btnAtualizarEstoque = new JButton("Atualizar Estoque");
 		btnAtualizarEstoque.setForeground(Color.BLACK);
 		btnAtualizarEstoque.setBackground(Color.WHITE);
 		btnAtualizarEstoque.setBounds(875, 79, 159, 25);
 		add(btnAtualizarEstoque);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(633, 538, 97, 25);
 		add(btnSalvar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(338, 538, 97, 25);
 		add(btnCancelar);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar = new JButton("Alterar");
 		btnAlterar.setForeground(Color.BLACK);
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.setBounds(489, 539, 97, 25);
@@ -169,7 +171,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 	}
 	
 	private void preencherCombo() {
-		List<Modelo> a = ctrlCorteCostura.buscarModelos();
+		Set<Modelo> a = ctrlCorteCostura.buscarModelos();
 		cbModelo.removeAllItems();
 		for(Modelo b : a) {
 			cbModelo.addItem(b);
@@ -219,7 +221,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 		    	try {
 		    		  Modelo mod = new Modelo();
 			    	  if(cbModelo.getSelectedItem() != null) {
-			             mod.setModelo((String) cbModelo.getSelectedItem());
+			             mod = (Modelo) cbModelo.getSelectedItem();
 			    	}
 			    	String grade = txtGrade.getText();
 			    	ctrlCorteCostura.atualizarEstoque(mod, grade);
