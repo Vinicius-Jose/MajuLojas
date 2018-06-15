@@ -180,9 +180,10 @@ public class FRMModelo extends JPanel implements ActionListener {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			
-			public boolean isCellEditable(int row, int column){
-				if(column == 4 ) return true;
+
+			public boolean isCellEditable(int row, int column) {
+				if (column == 3)
+					return true;
 				return false;
 			}
 		});
@@ -323,7 +324,15 @@ public class FRMModelo extends JPanel implements ActionListener {
 		} else if (a.getActionCommand().equals("Adicionar")) {
 			Aviamento av = (Aviamento) cbAviamento.getSelectedItem();
 			cbAviamento.removeItem(av);
-			adicionarItemTabela(av, Integer.parseInt(txtQtd.getText()));
+			try {
+				int qtd = Integer.parseInt(txtQtd.getText());
+				adicionarItemTabela(av, qtd);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,
+						"Dados nao preenchidos corretamente", "Erro",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
 		} else if (a.getActionCommand().equals("Salvar")) {
 			try {
 				salvarModelo(txtModelagem.isEnabled());
@@ -456,7 +465,6 @@ class BotaoParaTabela extends AbstractCellEditor implements TableCellRenderer,
 
 	public Component getTableCellEditorComponent(JTable table, Object value,
 			boolean isSelected, int row, int column) {
-		text = (value == null) ? "" : value.toString();
 		editButton.setText(text);
 		return editButton;
 	}

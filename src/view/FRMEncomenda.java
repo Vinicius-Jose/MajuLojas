@@ -165,7 +165,7 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 				return columnTypes[columnIndex];
 			}
 			public boolean isCellEditable(int row, int column){
-				if(column == 6 ) return true;
+				if(column == 5 ) return true;
 				return false;
 			}
 		});
