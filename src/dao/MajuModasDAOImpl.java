@@ -560,34 +560,21 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 	}
 
+	
 	@Override
-	public void remover(Estoque estoque) {
-		try {
-			String sql = "DELETE FROM Estoque WHERE id = ?";
-			PreparedStatement stmt = con.prepareStatement(sql);
-
-			stmt.setInt(1, estoque.getId());
-
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public void alterar(Estoque estoque) {
+	public void alterar(Estoque estoque, int codigoModelo) {
 
 		try {
-			String sql = "UPDATE Estoque SET" + " qtd_Grade = ? "
-					+ "WHERE id = ? ";
+			String sql = "update Estoque set qtd_Grade = ? "
+					   + "where Estoque.Modelocodigo = ? and Gradecodigo in "
+					   + "(select codigo from Grade "
+					   + "where letra = ?) ";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.setInt(1, estoque.getQuantidade());
-			stmt.setInt(2, estoque.getId());
+			stmt.setInt(2, codigoModelo);
+			stmt.setString(3,estoque.getGrade().getLetra());
 
 			stmt.executeUpdate();
 
@@ -1617,6 +1604,12 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 			e.printStackTrace();
 		}
 		return num;
+	}
+
+	@Override
+	public void remover(Estoque estoque) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -1,13 +1,14 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import model.Estoque;
 import model.Grade;
@@ -159,8 +160,8 @@ public class MajuModasDAOImplEstoque implements MajuModasDAOEstoque {
 
 
 	@Override
-	public List<Estoque> buscarEstoque(Modelo modelo) {
-		List<Estoque> estoque = new ArrayList<>();
+	public Set<Estoque> buscarEstoque(Modelo modelo) {
+		Set<Estoque> estoque = new HashSet();
 		try {
 			String sql = 
 				"select es.ModeloCodigo as modelo, es.qtd_Grade as quantidade, es.gradeCodigo, gd.letra from grade gd, Estoque es where es.Gradecodigo = gd.codigo and es.Modelocodigo = ?";

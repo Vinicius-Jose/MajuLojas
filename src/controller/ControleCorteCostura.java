@@ -9,7 +9,10 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 import dao.MajuModasDAO;
+import dao.MajuModasDAOEncomenda;
+import dao.MajuModasDAOEstoque;
 import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplEstoque;
 import model.CorteCostura;
 import model.Estoque;
 import model.Modelo;
@@ -17,6 +20,7 @@ import model.Modelo;
 public class ControleCorteCostura{
 	
 	private MajuModasDAO bdCorteCostura = new MajuModasDAOImpl();
+	private MajuModasDAOEstoque bdEstoque = new MajuModasDAOImplEstoque();
 
 
 	public void adicionarCorteCostura(CorteCostura corteCostura){
@@ -38,15 +42,18 @@ public class ControleCorteCostura{
 		return bdCorteCostura.buscarModelo1();
 	}
 	
-	public void atualizarEstoque(Modelo modelo, String grade){
+	public void atualizarEstoque(Modelo modelo, String grade, int qtd){
 		Collator col = Collator.getInstance(new Locale ("pt", "BR"));
 		Estoque b = null;
+		modelo.setEstoque(bdEstoque.buscarEstoque(modelo));
 		for (Estoque a : modelo.getEstoque()) {
-			if(col.compare(a.getGrade(), grade)>1){
+			if(col.compare(a.getGrade().getLetra(), grade)>=1){
 				b = a;
+				b.setQuantidade(b.getQuantidade() + qtd);
 			}
 		}
-		bdCorteCostura.alterar(b);
+		if(b!= null)bdCorteCostura.alterar(b, modelo.getCodigo());
+		else JOptionPane.showMessageDialog(null, "Erro ao atualizar o estoque", "Erro", JOptionPane.ERROR_MESSAGE);
 		JOptionPane.showMessageDialog(null, "Estoque atualizado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 	}
 

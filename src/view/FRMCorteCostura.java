@@ -31,7 +31,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 	private JTextField txtCostura;
 	private JComboBox cbModelo;
 	private JFormattedTextField fttData;
-	private JButton btnPesquisar, btnCancelar, btnAtualizarEstoque,btnAlterar, btnSalvar;
+	private JButton btnPesquisar, btnCancelar, btnAtualizarEstoque, btnSalvar;
 	private ControleCorteCostura ctrlCorteCostura = new ControleCorteCostura();
 
 	/**
@@ -155,15 +155,8 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 		btnCancelar.setBounds(338, 538, 97, 25);
 		add(btnCancelar);
 		
-		btnAlterar = new JButton("Alterar");
-		btnAlterar.setForeground(Color.BLACK);
-		btnAlterar.setBackground(Color.WHITE);
-		btnAlterar.setBounds(489, 539, 97, 25);
-		add(btnAlterar);
-		
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
-		btnAlterar.addActionListener(this);
 		btnAtualizarEstoque.addActionListener(this);
 		
 		preencherCombo();
@@ -202,20 +195,13 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 			try {
 				ctrlCorteCostura.adicionarCorteCostura(dadosCorteCostura());
 			} catch(Exception e) {
+				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 			}
 			limpaTela();
 		}else
 		    if(a.getActionCommand().equals("Cancelar")) {
 			    limpaTela();
-		    }
-			if (a.getActionCommand().equals("Alterar")) {
-			   try {
-				  ctrlCorteCostura.alterar(dadosCorteCostura()); 
-			   } catch(Exception e) {
-				   JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE); 
-			   }
-			   limpaTela();
 		    }
 		    if(a.getActionCommand().equals("Atualizar Estoque")) {
 		    	try {
@@ -224,8 +210,9 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 			             mod = (Modelo) cbModelo.getSelectedItem();
 			    	}
 			    	String grade = txtGrade.getText();
-			    	ctrlCorteCostura.atualizarEstoque(mod, grade);
+			    	ctrlCorteCostura.atualizarEstoque(mod, grade, Integer.parseInt(txtQtd.getText()));
 		    	} catch(Exception e) {
+		    		e.printStackTrace();
 		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 		    	}   
 		    	

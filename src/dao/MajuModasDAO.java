@@ -50,7 +50,6 @@ public interface MajuModasDAO {
 
 	public void adicionar(Estoque estoque);
 	public void remover(Estoque estoque);
-	public void alterar(Estoque estoque);
 	public List<Estoque> buscarEstoque();
 	
 	public void adicionar(Fornecedor fornecedor);
@@ -103,5 +102,7 @@ public interface MajuModasDAO {
 	Aviamento buscaEspecifico(Aviamento aviamento);
 	public int ultimoCadastroModelagem();
 	public int ultimoCadastroPiloto();
+
+	void alterar(Estoque estoque, int codigoModelo);
 	
 }
