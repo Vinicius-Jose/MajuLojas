@@ -41,7 +41,7 @@ public class ControleEncomenda {
 		return banco.buscarModelo1();
 	}
 
-	public List<Encomenda> buscarEncomendas(Cliente selectedItem) {
+	public List<Encomenda> buscarEncomendas(Cliente cliente) {
 		return banco.buscarEncomenda();
 	}
 	

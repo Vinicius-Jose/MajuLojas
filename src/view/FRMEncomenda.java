@@ -242,6 +242,9 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 		cbMotorista.setEnabled(false);
 		lblMotorista.setVisible(false);
 		cbMotorista.setVisible(false);
+		
+		btnPesquisar.setEnabled(false);
+		btnPesquisar.setVisible(false);
 
 		rdbtnSim.addActionListener(new ActionListener() {
 			@Override
