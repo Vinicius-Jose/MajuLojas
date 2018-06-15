@@ -35,6 +35,7 @@ public class FRMTecido extends JPanel implements ActionListener{
 	private JButton btnAlterar;
 	private JButton btnPesquisar;
 	private ControleTecido ctrlTecido = new ControleTecido();
+	private JTextField txtColor;
 
 	/**
 	 * Create the panel.
@@ -157,16 +158,28 @@ public class FRMTecido extends JPanel implements ActionListener{
 		btnAlterar.setBounds(442, 557, 97, 25);
 		add(btnAlterar);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setForeground(Color.BLACK);
 		btnPesquisar.setBackground(Color.WHITE);
-		btnPesquisar.setBounds(423, 143, 89, 23);
+		btnPesquisar.setBounds(423, 143, 104, 23);
 		add(btnPesquisar);
 		
 		btnSalvar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		btnAlterar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
+		
+		txtColor = new JTextField();
+		txtColor.setBounds(735, 296, 119, 20);
+		add(txtColor);
+		txtColor.setColumns(10);
+		
+		txtValorTotal.setEditable(false);
+		
+		JLabel lblCor = new JLabel("Cor");
+		lblCor.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCor.setBounds(655, 299, 54, 17);
+		add(lblCor);
 		
         preencherCombo();
 	}
@@ -198,6 +211,7 @@ public class FRMTecido extends JPanel implements ActionListener{
 		float total = precoUnitario * qtdRolo;
 		txtValorTotal.setText(String.valueOf(total));
 		tecido.setValorTotal(Float.parseFloat(txtValorTotal.getText()));
+		txtColor.setText(tecido.getCor());
 		return tecido;
 		
 	}
@@ -210,6 +224,8 @@ public class FRMTecido extends JPanel implements ActionListener{
 			fttData.setText(sdf.format(tecido.getData()));
 			txtPrecoUni.setText(Float.toString(tecido.getValor()));
 			txtQtdRolo.setText(Integer.toString(tecido.getQuantidade()));
+			txtColor.setText(tecido.getCor());
+			txtValorTotal.setText(Float.toString(tecido.getValorTotal()));
 			
 		}
 	}
@@ -234,6 +250,10 @@ public class FRMTecido extends JPanel implements ActionListener{
 		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 		    	}
 		    	limpaTela();
+		    }if(a.getActionCommand().equals("Pesquisar")){
+		    	Tecido tec = new Tecido();
+		    	tec.setTipo(txtTecido.getText());
+		    	colocaTela(ctrlTecido.buscar(tec));
 		    }
 		
 	}

@@ -147,6 +147,37 @@ public class MajuModasDAOImplTecido implements MajuModasDAOTecido {
 		return tecido;
 		
 	}
+	
+	@Override
+	public Tecido buscarTecidoEspecifico(Tecido tecido){
+		try {
+			String sql = 
+				"select tec.tipo, tec.cor, tec.data_Tecido, tec.codigo, tec.qtd_Rolo, "
+			  + "tec.valor_Unitario, fn.id,fn.nome "
+			  + "from Tecido tec, Fornecedor fn "
+			  + "where tec.Fornecedorid = fn.id and tipo like ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			stmt.setString(1,"%" + tecido.getTipo() + "%");
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()) { 
+				Fornecedor fornecedor = new Fornecedor();
+				tecido.setCodigo( rs.getInt("codigo")  );
+				tecido.setData(rs.getDate("data_Tecido"));
+				tecido.setValor( rs.getFloat("valor_Unitario") );
+				tecido.setQuantidade( rs.getInt("qtd_Rolo"));
+				tecido.setTipo(rs.getString("tipo"));
+				tecido.setCor(rs.getString("cor"));
+				fornecedor.setId(rs.getInt("id"));
+				fornecedor.setNome(rs.getString("nome"));
+				tecido.setFornecedor(fornecedor);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tecido;
+	}
 
 
 

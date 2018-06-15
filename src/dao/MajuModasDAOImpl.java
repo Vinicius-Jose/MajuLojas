@@ -333,14 +333,14 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 
 		try {
 			String sql = "INSERT INTO Corte_Costura "
-					+ " VALUES ( ?, ?, ?, ? ) ";
+					+ " VALUES ( ?, ?, ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, corteCostura.getCodigo());
-			stmt.setDouble(2, corteCostura.getValorCorte());
-			stmt.setDouble(3, corteCostura.getValorCostura());
-			stmt.setInt(4, corteCostura.getQuantidadePecasCortadas());
-			stmt.setDate(5, corteCostura.getDataCorte());
+			stmt.setDouble(1, corteCostura.getValorCorte());
+			stmt.setDouble(2, corteCostura.getValorCostura());
+			stmt.setInt(3, corteCostura.getQuantidadePecasCortadas());
+			stmt.setDate(4, corteCostura.getDataCorte());
+			stmt.setString(5, null);
 
 			stmt.executeUpdate();
 
@@ -1124,6 +1124,7 @@ public class MajuModasDAOImpl implements MajuModasDAO {
 			stmt.setString(4, tecido.getTipo());
 			stmt.setString(5, tecido.getCor());
 			stmt.setInt(6, tecido.getFornecedor().getId());
+			stmt.setString(7,null);
 
 			stmt.executeUpdate();
 

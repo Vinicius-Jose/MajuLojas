@@ -22,6 +22,7 @@ public class Tecido {
 	
 
 	public float getValorTotal() {
+		valorTotal = valor*quantidade;
 		return valorTotal;
 	}
 
@@ -46,7 +47,7 @@ public class Tecido {
 	}
 
 	public float getValor() {
-		valor*=quantidade;
+
 		return valor;
 	}
 

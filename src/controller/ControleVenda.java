@@ -23,7 +23,7 @@ public class ControleVenda {
 		bd.adicionar(venda);
 	}
 
-	public List<Estoque> buscarEstoque(Modelo modelo) {
+	public Set<Estoque> buscarEstoque(Modelo modelo) {
 		return bdEstoque.buscarEstoque(modelo);
 	}
 

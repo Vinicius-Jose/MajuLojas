@@ -89,7 +89,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 		lblQuantidadePeasCortadas.setBounds(582, 82, 207, 16);
 		add(lblQuantidadePeasCortadas);
 		
-		JFormattedTextField fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		fttData = new JFormattedTextField(new MaskFormatter("##/##/####"));
 		fttData.setForeground(Color.BLACK);
 		fttData.setBackground(Color.WHITE);
 		fttData.setBounds(629, 183, 83, 22);
@@ -175,7 +175,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		CorteCostura corteCostura = new CorteCostura();
 		if(cbModelo.getSelectedItem() != null) {
-			corteCostura.setModelo((Modelo) cbModelo.getSelectedItem());
+			Modelo mod = (Modelo) cbModelo.getSelectedItem();
 		}
 		corteCostura.setletraGrade(txtGrade.getText());
 		corteCostura.setQuantidadePecasCortadas(Integer.parseInt(txtQtd.getText()));
@@ -211,6 +211,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 			    	}
 			    	String grade = txtGrade.getText();
 			    	ctrlCorteCostura.atualizarEstoque(mod, grade, Integer.parseInt(txtQtd.getText()));
+			    	limpaTela();
 		    	} catch(Exception e) {
 		    		e.printStackTrace();
 		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
@@ -227,5 +228,4 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 		txtCostura.setText("");
 		fttData.setText(null);
 	}
-
 }

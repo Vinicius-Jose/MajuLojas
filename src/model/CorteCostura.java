@@ -14,18 +14,9 @@ public class CorteCostura {
 	
 	private int quantidadePecasCortadas;
 	
-	private Modelo modelo;
-	
 	private String letraGrade;
 
-	public Modelo getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
-	}
-
+	
 	public String getletraGrade() {
 		return letraGrade;
 	}

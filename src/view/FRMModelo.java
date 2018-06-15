@@ -294,6 +294,9 @@ public class FRMModelo extends JPanel implements ActionListener {
 
 		preencherCombo();
 
+		
+		txtMargemCusto.setEditable(false);
+		txtCustoConfeccao.setEditable(false);
 		rdbtnSim.addActionListener(this);
 		rdbtnNo.addActionListener(this);
 		btnAdicionar.addActionListener(this);
