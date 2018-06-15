@@ -5,8 +5,7 @@ public class Estoque {
 
 	private int quantidade;
 	private Grade grade;
-	private Modelo modelo;
-
+	
 
 	public int getQuantidade() {
 		return quantidade;
@@ -23,14 +22,7 @@ public class Estoque {
 	public void setGrade(Grade grade) {
 		this.grade = grade;
 	}
-	
-	public Modelo getModelo() {
-		return modelo;
-	}
 
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
-	}
 	
 	
 	@Override

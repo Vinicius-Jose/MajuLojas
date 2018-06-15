@@ -27,8 +27,8 @@ public class ControleVenda {
 		return bdEstoque.buscarEstoque(modelo);
 	}
 
-	public void atualizarEstoque(Estoque estoque) {
-		bdEstoque.alterar(estoque);
+	public void atualizarEstoque(Estoque estoque, int idModelo) {
+		bdEstoque.alterar(estoque,idModelo);
 		
 	}
 

@@ -52,13 +52,13 @@ public class MajuModasDAOImplEstoque implements MajuModasDAOEstoque {
 
 
 	@Override
-	public void remover(Estoque estoque) {
+	public void remover(Estoque estoque, int idModelo) {
 		try {			
 			String sql = "DELETE FROM Estoque WHERE gradeCodigo = ? and ModeloCodigo = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
 			stmt.setInt(1, estoque.getGrade().getCodigo() );
-			stmt.setInt(2, estoque.getModelo().getCodigo());
+			stmt.setInt(2, idModelo);
 				
 			stmt.executeUpdate();
 			
@@ -77,7 +77,7 @@ public class MajuModasDAOImplEstoque implements MajuModasDAOEstoque {
 
 
 	@Override
-	public void alterar(Estoque estoque) {
+	public void alterar(Estoque estoque, int idModelo) {
 		
 		try {			
 			String sql = "UPDATE Estoque SET"
@@ -88,7 +88,7 @@ public class MajuModasDAOImplEstoque implements MajuModasDAOEstoque {
 			
 			stmt.setInt(1, estoque.getQuantidade() );
 			stmt.setInt(2, estoque.getGrade().getCodigo() );
-			stmt.setInt(2, estoque.getModelo().getCodigo());
+			stmt.setInt(3, idModelo);
 			
 			
 			stmt.executeUpdate();

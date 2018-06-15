@@ -9,10 +9,11 @@ import model.Modelo;
 public interface MajuModasDAOEstoque {
 
 	public void adicionar(Estoque estoque);
-	public void remover(Estoque estoque);
-	public void alterar(Estoque estoque);
+	public void alterar(Estoque estoque, int idModelo);
+	public void remover(Estoque estoque, int idModelo);
 	public List<Estoque> buscarEstoque();
 	public List<HashMap<String,Object>> buscarEspecifico(Modelo modelo);
 	public List<Estoque> buscarEstoque(Modelo modelo);
+
 	
 }

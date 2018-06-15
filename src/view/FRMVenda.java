@@ -211,7 +211,6 @@ public class FRMVenda extends JPanel implements ActionListener {
 		} else if (a.getActionCommand().equals("Finalizar")) {
 			try {
 				ctrlVenda.adicionarVenda(montarVenda());
-//				ctrlVenda.atualizarEstoque(estoque);
 				limparTela();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -245,7 +244,7 @@ public class FRMVenda extends JPanel implements ActionListener {
 			item.setValorTotalPeca((float) tabelaVenda.getValueAt(i, 2));
 			Estoque estoque = (Estoque) tabelaVenda.getValueAt(i, 3);
 			estoque.setQuantidade(estoque.getQuantidade() - ((int) tabelaVenda.getValueAt(i, 1)));
-			ctrlVenda.atualizarEstoque(estoque);
+			ctrlVenda.atualizarEstoque(estoque,item.getModelo().getCodigo() );
 			itens.add(item);
 		}
 		venda.setItemVenda(itens);
