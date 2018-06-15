@@ -3,14 +3,17 @@ package controller;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import dao.MajuModasDAO;
+import dao.MajuModasDAOGrade;
 import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplGrade;
 import model.Grade;
 import model.Modelo;
 
 public class ControleGrade{
 
 	
-	private MajuModasDAO bdGrade = new MajuModasDAOImpl();
+	private MajuModasDAOGrade bdGrade = new MajuModasDAOImplGrade();
+	private MajuModasDAO bd = new MajuModasDAOImpl();
 	
 	public void adicionarGrade(Grade grade) {
 		bdGrade.adicionar(grade);
@@ -23,6 +26,6 @@ public class ControleGrade{
 	}
 	
 	public Set<Modelo> buscarModelo() {
-		return bdGrade.buscarModelo1();
+		return bd.buscarModelo1();
 	}
 }

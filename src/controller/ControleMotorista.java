@@ -1,14 +1,14 @@
 package controller;
 
-import model.Motorista;
-import java.util.List;
 import javax.swing.JOptionPane;
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
+
+import model.Motorista;
+import dao.MajuModasDAOImplMotorista;
+import dao.MajuModasDAOMotorista;
 
 public class ControleMotorista{
 
-	private MajuModasDAO bdMotorista = new MajuModasDAOImpl();
+	private MajuModasDAOMotorista bdMotorista = new MajuModasDAOImplMotorista();
 	
 	public void adicionarMotorista(Motorista motorista){
 		bdMotorista.adicionar(motorista);
@@ -16,8 +16,7 @@ public class ControleMotorista{
 	}
 	
 	public Motorista buscar(Motorista motorista){
-		List<Motorista> listaMotorista = bdMotorista.buscarMotorista();
-		return listaMotorista.get(0);
+		return bdMotorista.buscarMotoristaEspecifico(motorista);
 	}
 	
 	public void alterar(Motorista motorista){

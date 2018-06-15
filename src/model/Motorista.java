@@ -36,7 +36,6 @@ public class Motorista {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return getNome();
 	}
 	

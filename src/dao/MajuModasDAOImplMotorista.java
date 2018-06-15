@@ -73,7 +73,7 @@ public class MajuModasDAOImplMotorista implements MajuModasDAOMotorista {
 		
 		try {			
 			String sql = "UPDATE Motorista SET"
-					+ "nome = ?' , "
+					+ "nome = ? , "
 					+ "num_Placa = ?, "
 					+ "telefone = ? "
 					+ "WHERE num_Placa = ? ";
@@ -120,6 +120,27 @@ public class MajuModasDAOImplMotorista implements MajuModasDAOMotorista {
 		}
 		return motorista;
 		
+	}
+	
+	@Override
+	public Motorista buscarMotoristaEspecifico(Motorista motorista){
+		try {
+			String sql = 
+				"select * from motorista where nome like ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			stmt.setString(1, "%"+motorista.getNome()+"%");
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()) { 
+				motorista.setNumPlaca( rs.getString("num_Placa")  );
+				motorista.setNome( rs.getString("nome")  );
+				motorista.setTelefoneContato( rs.getString("telefone")  );
+				return motorista;
+			}else return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

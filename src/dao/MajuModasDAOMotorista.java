@@ -11,6 +11,7 @@ public interface MajuModasDAOMotorista {
 	public void remover(Motorista motorista);
 	public void alterar(Motorista motorista);
 	public List<Motorista> buscarMotorista();
+	public Motorista buscarMotoristaEspecifico(Motorista motorista);
 	
 	
 }

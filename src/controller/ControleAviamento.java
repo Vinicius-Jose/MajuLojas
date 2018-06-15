@@ -9,11 +9,13 @@ import javax.swing.JOptionPane;
 import model.Fornecedor;
 import dao.MajuModasDAO;
 import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplAviamento;
+import dao.MajuModasDAOImplFornecedor;
 
 public class ControleAviamento{
 	
-	private MajuModasDAO bdAviamento = new MajuModasDAOImpl();
-
+	private MajuModasDAOImplAviamento bdAviamento = new MajuModasDAOImplAviamento();
+	private MajuModasDAOImplFornecedor forn = new MajuModasDAOImplFornecedor();
 	
 	public void adicionarAviamento(Aviamento aviamento){
 		bdAviamento.adicionar(aviamento);
@@ -21,8 +23,7 @@ public class ControleAviamento{
 	}
 
 	public Aviamento buscar(Aviamento aviamento){
-		List<Aviamento> listaAviamento= bdAviamento.buscarAviamento();
-		return listaAviamento.get(0);
+		return bdAviamento.buscaEspecifico(aviamento);
 	}
 	
 	public void alterar(Aviamento aviamento){
@@ -31,7 +32,7 @@ public class ControleAviamento{
 	}
 
 	public List<Fornecedor> buscarFornecedor() {
-		return bdAviamento.buscarFornecedor();
+		return forn.buscarFornecedor();
 	}
 
 	

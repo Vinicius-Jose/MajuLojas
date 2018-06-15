@@ -53,7 +53,7 @@ public class FRMGrade extends JPanel implements ActionListener{
 		lblModelo.setBounds(12, 105, 56, 16);
 		add(lblModelo);
 		
-		JComboBox cbModelo = new JComboBox();
+		cbModelo = new JComboBox();
 		cbModelo.setForeground(Color.BLACK);
 		cbModelo.setBackground(Color.WHITE);
 		cbModelo.setBounds(80, 105, 352, 22);

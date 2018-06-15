@@ -25,6 +25,8 @@ public class FRMMotorista extends JPanel implements ActionListener{
 	private JTextField txtFone;
 	private JTextField txtPlaca;
 	private ControleMotorista ctrlMotorista = new ControleMotorista();
+	private String numPlaca;
+	private JButton btnPesquisar, btnCancelar, btnAlterar, btnSalvar;
 	/**
 	 * Create the panel.
 	 * @throws ParseException 
@@ -78,7 +80,7 @@ public class FRMMotorista extends JPanel implements ActionListener{
 		lblTelefone.setBounds(12, 206, 72, 26);
 		add(lblTelefone);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(635, 547, 97, 25);
@@ -98,17 +100,17 @@ public class FRMMotorista extends JPanel implements ActionListener{
 		add(txtPlaca);
 		txtPlaca.setColumns(10);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(292, 547, 97, 25);
 		add(btnCancelar);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setBounds(360, 99, 89, 23);
 		add(btnPesquisar);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar = new JButton("Alterar");
 		btnAlterar.setBounds(470, 548, 97, 25);
 		add(btnAlterar);
 
@@ -116,6 +118,7 @@ public class FRMMotorista extends JPanel implements ActionListener{
 		btnCancelar.addActionListener(this);
 		btnAlterar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
+		btnAlterar.setEnabled(false);
 	}
 	
 	private Motorista dadosMotorista() {
@@ -150,11 +153,15 @@ public class FRMMotorista extends JPanel implements ActionListener{
 			limpaTela();
 		}else if(a.getActionCommand().contains("Cancelar")) {
 				limpaTela();
+				btnSalvar.setEnabled(true);
+				btnAlterar.setEnabled(false);
 			}
 		    if(a.getActionCommand().equals("Pesquisar")) {
 		    	Motorista moto = new Motorista();
 		    	moto.setNome(txtNome.getText());
 		    	colocaTela(ctrlMotorista.buscar(moto));
+		    	btnAlterar.setEnabled(true);
+				btnSalvar.setEnabled(false);
 		    }
 		    if(a.getActionCommand().equals("Alterar")) {
 		    	try {

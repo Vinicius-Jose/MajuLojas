@@ -26,13 +26,12 @@ public class MajuModasDAOImplGrade implements MajuModasDAOGrade {
 		
 		try {			
 			String sql = "INSERT INTO Grade " +
-					" VALUES ( ?, ?, ?, ? ) ";
+					" VALUES ( ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, grade.getCodigo() );
-			stmt.setInt(2, grade.getNumTamanhoMaximo() );
-			stmt.setInt(3, grade.getNumTamanhoMinimo() );
-			stmt.setString(4, grade.getLetra() );
+
+			stmt.setInt(1, grade.getNumTamanhoMaximo() );
+			stmt.setInt(2, grade.getNumTamanhoMinimo() );
+			stmt.setString(3, grade.getLetra() );
 			
 			stmt.executeUpdate();
 			

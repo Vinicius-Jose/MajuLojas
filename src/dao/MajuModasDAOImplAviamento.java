@@ -26,85 +26,66 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 
 	@Override
 	public void adicionar(Aviamento aviamento) {
-		try {			
-			String sql = "INSERT INTO Aviamento " +
-					" VALUES ( ?, ?, ?, ?, ? ) ";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, aviamento.getCodigo() );
-			stmt.setDate(2, aviamento.getDataCompra() );
-			stmt.setDouble(3, aviamento.getValorCompra() );
-			stmt.setString(4, aviamento.getNome() );
-			stmt.setInt(5, aviamento.getFornecedor().getId() );
-			
+		try {
+			String sql = "INSERT INTO Aviamento "
+					+ " VALUES ( ?, ?, ?, ? ) ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+
+			stmt.setDate(1, aviamento.getDataCompra());
+			stmt.setDouble(2, aviamento.getValorCompra());
+			stmt.setString(3, aviamento.getNome());
+			stmt.setInt(4, aviamento.getFornecedor().getId());
+
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-
-
-
-
-
 
 	@Override
 	public void remover(Aviamento aviamento) {
-		try {			
+		try {
 			String sql = "DELETE FROM Aviamento WHERE id = ?";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, aviamento.getCodigo() );
-				
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setInt(1, aviamento.getCodigo());
+
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-
-
-
-
-
 
 	@Override
 	public void alterar(Aviamento aviamento) {
-		
-		try {			
-			String sql = "UPDATE Aviamento SET"
-					+ " data = ?' ,"
-					+ " valor_Unitario = ?,"
-					+ " nome = ?,"
-					+ " FornecedorId = ? "
-					+ "WHERE codigo = ? ";
-			
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setDate(1, aviamento.getDataCompra() );
-			stmt.setDouble(2, aviamento.getValorCompra() );
-			stmt.setString(3, aviamento.getNome() );
+
+		try {
+			String sql = "UPDATE Aviamento SET" + " data = ?' ,"
+					+ " valor_Unitario = ?," + " nome = ?,"
+					+ " FornecedorId = ? " + "WHERE codigo = ? ";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setDate(1, aviamento.getDataCompra());
+			stmt.setDouble(2, aviamento.getValorCompra());
+			stmt.setString(3, aviamento.getNome());
 			stmt.setInt(4, aviamento.getFornecedor().getId());
 			stmt.setInt(5, aviamento.getCodigo());
-			
+
 			stmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	@Override
@@ -147,20 +128,20 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 		
 		try {
 			String sql = 
-				  "select av.codigo, av.data, av.valor_Unitario, "
+				  "select av.codigo, av.data_Aviamento, av.valor_Unitario, "
 			    + "forn.id AS codigo_fornecedor, forn.nome AS nome_fornecedor "
 			    + "from aviamento av, fornecedor forn "
-			    + "where forn.id = av.Fornecedorid AND av.nome like %?%";
+			    + "where forn.id = av.Fornecedorid AND av.nome like ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
-			stmt.setString(1, aviamento.getNome());
+			stmt.setString(1, "%" + aviamento.getNome()+"%");
 			
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) { 
 				Fornecedor forn = new Fornecedor();
 				aviamento.setCodigo( rs.getInt("codigo")  );
-				aviamento.setDataCompra( rs.getDate("data")  );
+				aviamento.setDataCompra( rs.getDate("data_Aviamento")  );
 				aviamento.setValorCompra( rs.getFloat("valor_Unitario")  );
 				forn.setId(rs.getInt("codigo_fornecedor"));
 				forn.setNome(rs.getString("nome_fornecedor"));

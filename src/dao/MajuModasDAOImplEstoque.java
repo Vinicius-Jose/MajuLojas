@@ -17,7 +17,7 @@ import model.Modelo;
 public class MajuModasDAOImplEstoque implements MajuModasDAOEstoque {
 	
 	private Connection con;
-	private String tipoBanco;
+
 	
 	public MajuModasDAOImplEstoque() { 
 		con = new Conexao().getConnection();

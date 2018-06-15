@@ -471,6 +471,9 @@ alter column Motoristanum_Placa varchar(07) null
 alter table modelo
 alter column Corte_Costuracodigo int null
 
+alter table grade
+add constraint tamanho unique(letra)
+
 select * from modelo
 select * from Estoque
 select md.modelo , gd.letra as grade, es.qtd_Grade as quantidade  from estoque es, Modelo md, Grade gd
@@ -479,56 +482,3 @@ where md.codigo = es.Modelocodigo and gd.codigo = es.Gradecodigo and es.Modeloco
 select es.ModeloCodigo as modelo, es.qtd_Grade as quantidade, es.gradeCodigo, gd.letra from grade gd, Estoque es 
 where es.Gradecodigo = gd.codigo and es.Modelocodigo = 1
 select * from modelo
---ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda230972 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
-
---ALTER TABLE Modelo ADD CONSTRAINT FKModelo467655 FOREIGN KEY (Pilotocodigo) REFERENCES Piloto (codigo);
-
---ALTER TABLE Modelo ADD CONSTRAINT FKModelo137897 FOREIGN KEY (Modelagemcodigo) REFERENCES Modelagem (codigo);
-
---ALTER TABLE Estoque ADD CONSTRAINT FKEstoque839832 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
-
---ALTER TABLE Estoque ADD CONSTRAINT FKEstoque279001 FOREIGN KEY (Gradecodigo) REFERENCES Grade (codigo);
-
---ALTER TABLE Item_Peca ADD CONSTRAINT FKItem_Peca2313 FOREIGN KEY (Aviamentocodigo) REFERENCES Aviamento (codigo);
-
---ALTER TABLE Item_Peca ADD CONSTRAINT FKItem_Peca719986 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
-
---ALTER TABLE Modelo ADD CONSTRAINT FKModelo500796 FOREIGN KEY (Tecidocodigo) REFERENCES Tecido (codigo);
-
---ALTER TABLE Modelo ADD CONSTRAINT FKModelo668632 FOREIGN KEY (Corte_Costuracodigo) REFERENCES Corte_Costura (codigo);
-
---ALTER TABLE Item_Encomenda ADD CONSTRAINT FKItem_Encom651029 FOREIGN KEY (Encomendacodigo) REFERENCES Encomenda (codigo);
-
---ALTER TABLE Item_Encomenda ADD CONSTRAINT FKItem_Encom260119 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
-
---ALTER TABLE Aviamento ADD CONSTRAINT FKAviamento115700 FOREIGN KEY (Fornecedorid) REFERENCES Fornecedor (id);
-
---ALTER TABLE Tecido ADD CONSTRAINT FKTecido88568 FOREIGN KEY (Fornecedorid) REFERENCES Fornecedor (id);
-
---ALTER TABLE Encomenda ADD CONSTRAINT FKEncomenda914015 FOREIGN KEY (Motoristanum_Placa) REFERENCES Motorista (num_Placa);
-
---ALTER TABLE Piloto ADD CONSTRAINT FKPiloto109574 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo);
-
---ALTER TABLE Modelagem ADD CONSTRAINT FKModelagem940067 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo);
-
---ALTER TABLE Tecido ADD CONSTRAINT FKTecido438675 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo);
-
---ALTER TABLE Corte_Costura ADD CONSTRAINT FKCorte_Cost579743 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo);
-
---ALTER TABLE Item_Peca ADD CONSTRAINT FKItem_Peca962951 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo);
-
---ALTER TABLE Capital_Modelo ADD CONSTRAINT FKCapital_Mo622814 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo);
-
---ALTER TABLE Capital_Modelo ADD CONSTRAINT FKCapital_Mo379849 FOREIGN KEY (Modelocodigo) REFERENCES Modelo (codigo);
-
---ALTER TABLE Encomenda ADD CONSTRAINT FKEncomenda600866 FOREIGN KEY (Clienteid) REFERENCES Cliente (id);
-
---ALTER TABLE Lucro ADD CONSTRAINT FKLucro2036 FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo);
-
---ALTER TABLE Encomenda ADD CONSTRAINT FKEncomenda349000 FOREIGN KEY (Lucrocodigo) REFERENCES Lucro (codigo);
-
---ALTER TABLE Item_Venda ADD CONSTRAINT FKItem_Venda946331 FOREIGN KEY (Vendacodigo) REFERENCES Venda (codigo);
-
---ALTER TABLE Venda ADD CONSTRAINT FKVenda278257 FOREIGN KEY (Lucrocodigo) REFERENCES Lucro (codigo);
-
-
