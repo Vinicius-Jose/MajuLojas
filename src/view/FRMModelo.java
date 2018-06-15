@@ -440,7 +440,6 @@ class BotaoParaTabela extends AbstractCellEditor implements TableCellRenderer,
 	String text;
 
 	public BotaoParaTabela(JTable table, int column) {
-		super();
 		this.table = table;
 		renderButton = new JButton();
 		editButton = new JButton();

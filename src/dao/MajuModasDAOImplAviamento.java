@@ -67,7 +67,7 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 	public void alterar(Aviamento aviamento) {
 
 		try {
-			String sql = "UPDATE Aviamento SET" + " data_aviamento = ?' ,"
+			String sql = "UPDATE Aviamento SET" + " data_aviamento = ? ,"
 					+ " valor_Unitario = ?," + " nome = ?,"
 					+ " Fornecedorid = ? " + "WHERE codigo = ? ";
 

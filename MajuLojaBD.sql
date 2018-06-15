@@ -482,3 +482,7 @@ where md.codigo = es.Modelocodigo and gd.codigo = es.Gradecodigo and es.Modeloco
 select es.ModeloCodigo as modelo, es.qtd_Grade as quantidade, es.gradeCodigo, gd.letra from grade gd, Estoque es 
 where es.Gradecodigo = gd.codigo and es.Modelocodigo = 1
 select * from modelo
+
+
+alter table modelo
+alter column corte_costuracodigo int null
