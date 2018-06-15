@@ -162,6 +162,7 @@ public class FRMCliente extends JPanel implements ActionListener {
 					System.out.println(id);
 					cliente.setId(id);
 					ctrlCliente.alterar(cliente);
+					id = 0;
 					btnAlterar.setEnabled(false);
 					btnSalvar.setEnabled(true);
 				} catch(Exception e) {
