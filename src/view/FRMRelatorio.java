@@ -173,10 +173,12 @@ public class FRMRelatorio extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent a) {
 		if (a.getActionCommand().equals("Capital")){
 			montaTelaCapital();
+			txtCapital.setText("");
 		    
 		}else if(a.getActionCommand().equals("Lucro")){
 			scrollPane.setViewportView(tabelaLucro);
 		    lblCapitalMensal.setText("Lucro Mensal");
+		    txtCapital.setText("");
 		}else if(a.getActionCommand().contains("Emitir")){
 			int ano = (int) cbAno.getSelectedItem();
 			int mes = (int) cbMes.getSelectedItem();
