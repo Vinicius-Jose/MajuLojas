@@ -170,7 +170,6 @@ public class FRMCliente extends JPanel implements ActionListener {
 				}
 				limpaTela();
 			}
-		
 	}
 	
 	private void limpaTela() {
