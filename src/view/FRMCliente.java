@@ -25,6 +25,8 @@ public class FRMCliente extends JPanel implements ActionListener {
 	private JTextField txtNome;
 	private JFormattedTextField txtFone;
 	private ControleCliente ctrlCliente = new ControleCliente();
+	private int id;
+	private JButton btnAlterar,btnSalvar, btnCancelar, btnPesquisar;
 	/**
 	 * Create the panel.
 	 * @throws ParseException 
@@ -76,25 +78,25 @@ public class FRMCliente extends JPanel implements ActionListener {
 		lblTelefone.setBounds(12, 206, 72, 26);
 		add(lblTelefone);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(546, 547, 97, 25);
 		add(btnSalvar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(232, 547, 97, 25);
 		add(btnCancelar);
 		
-		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setForeground(Color.BLACK);
 		btnPesquisar.setBackground(Color.WHITE);
 		btnPesquisar.setBounds(349, 95, 89, 23);
 		add(btnPesquisar);
 		
-		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar = new JButton("Alterar");
 		btnAlterar.setForeground(Color.BLACK);
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.setBounds(397, 548, 97, 25);
@@ -104,6 +106,7 @@ public class FRMCliente extends JPanel implements ActionListener {
 		btnCancelar.addActionListener(this);
 		btnAlterar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
+		btnAlterar.setEnabled(false);
 	}
 	
 	private Cliente dadosCliente() {
@@ -124,6 +127,9 @@ public class FRMCliente extends JPanel implements ActionListener {
 		if(cli != null) {
 			txtNome.setText(cli.getNome());
 			txtFone.setText(cli.getTelefoneContato());
+			id = cli.getId();
+		}else{
+			JOptionPane.showMessageDialog(null, "Não foi possível encontrar o cliente", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -138,8 +144,12 @@ public class FRMCliente extends JPanel implements ActionListener {
 		}else 
 			if(a.getActionCommand().equals("Cancelar")) {
 			   limpaTela();
+			   btnSalvar.setEnabled(true);
+			   btnAlterar.setEnabled(false);
 			}
 			if(a.getActionCommand().equals("Pesquisar")) {
+				btnAlterar.setEnabled(true);
+				btnSalvar.setEnabled(false);
 				Cliente cli = new Cliente();
 				cli.setNome(txtNome.getText());
 				colocaTela(ctrlCliente.buscar(cli));

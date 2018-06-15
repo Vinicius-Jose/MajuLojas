@@ -25,6 +25,8 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 	private JTextField txtNome;
 	private JTextField txtFone;
 	private ControleFornecedor ctrlFornecedor = new ControleFornecedor();
+	private int id;
+	private  JButton btnAlterar, btnSalvar, btnCancelar, btnPesquisar;
 
 	/**
 	 * Create the panel.
@@ -78,25 +80,25 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 		lblTelefone.setBounds(12, 206, 72, 26);
 		add(lblTelefone);
 
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.setForeground(Color.BLACK);
 		btnSalvar.setBackground(Color.WHITE);
 		btnSalvar.setBounds(580, 547, 97, 25);
 		add(btnSalvar);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(Color.WHITE);
 		btnCancelar.setBounds(247, 547, 97, 25);
 		add(btnCancelar);
 
-		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setForeground(Color.BLACK);
 		btnPesquisar.setBackground(Color.WHITE);
 		btnPesquisar.setBounds(355, 99, 89, 23);
 		add(btnPesquisar);
 
-		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar = new JButton("Alterar");
 		btnAlterar.setForeground(Color.BLACK);
 		btnAlterar.setBackground(Color.WHITE);
 		btnAlterar.setBounds(420, 548, 97, 25);
@@ -106,6 +108,7 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 		btnCancelar.addActionListener(this);
 		btnAlterar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
+		btnAlterar.setEnabled(false);
 
 	}
 
@@ -118,6 +121,9 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 			;
 			System.out.println(fone);
 			fornecedor.setTelefoneFornecedor(fone);
+			fornecedor.setNome(txtNome.getText());
+			fornecedor.setId(id);
+			id = -1;
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
@@ -128,6 +134,7 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 		if (forn != null) {
 			txtNome.setText(forn.getNome());
 			txtFone.setText(forn.getTelefoneFornecedor());
+			id = forn.getId();
 		}else {
 			JOptionPane.showMessageDialog(null, "Não foi possível encontrar o referido fornecedor",
 					"Erro", JOptionPane.ERROR_MESSAGE);
@@ -145,8 +152,12 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 			limpaTela();
 		} else if (a.getActionCommand().equals("Cancelar")) {
 			limpaTela();
+			btnSalvar.setEnabled(true);
+			btnAlterar.setEnabled(false);
 		}
 		if (a.getActionCommand().equals("Pesquisar")) {
+			btnAlterar.setEnabled(true);
+			btnSalvar.setEnabled(false);
 			Fornecedor forn = new Fornecedor();
 			forn.setNome(txtNome.getText());
 			colocaTela(ctrlFornecedor.buscar(forn));
@@ -155,10 +166,12 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 
 		if (a.getActionCommand().equals("Alterar")) {
 			try {
+				btnAlterar.setEnabled(false);
+				btnSalvar.setEnabled(true);
 				ctrlFornecedor.alterar(dadosFornecedor());
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Campos não preenchidos",
-						"Preenchidos", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Impossível alterar fornecedor",
+						"Erro", JOptionPane.ERROR_MESSAGE);
 			}
 			limpaTela();
 		}

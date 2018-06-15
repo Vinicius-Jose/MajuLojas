@@ -4,11 +4,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import dao.MajuModasDAO;
 import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplCliente;
 import model.Cliente;
 
 public class ControleCliente{
 
-	private MajuModasDAO bdCliente = new MajuModasDAOImpl();
+	private MajuModasDAOImplCliente bdCliente = new MajuModasDAOImplCliente();
 	
 
 	
@@ -18,8 +19,7 @@ public class ControleCliente{
 	}
 	
 	public Cliente buscar(Cliente cliente){
-		List<Cliente> listaCliente = bdCliente.buscarCliente();
-		return  listaCliente.get(0);
+		return bdCliente.buscarClienteEspecifico(cliente);
 	}
 	
 	public void alterar(Cliente cliente){

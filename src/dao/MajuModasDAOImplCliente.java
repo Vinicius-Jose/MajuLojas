@@ -26,84 +26,60 @@ public class MajuModasDAOImplCliente implements MajuModasDAOCliente {
 
 	@Override
 	public void adicionar(Cliente cliente) {
-		
-		try {			
-			String sql = "INSERT INTO Cliente " +
-					" VALUES ( ?, ?, ? ) ";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, cliente.getId() );
-			stmt.setString(2, cliente.getNome() );
-			stmt.setString(3, cliente.getTelefoneContato() );
-			
-			
+
+		try {
+			String sql = "INSERT INTO Cliente " + " VALUES (  ?, ? ) ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, cliente.getNome());
+			stmt.setString(2, cliente.getTelefoneContato());
+			System.out.println("Adicionei " + cliente.getTelefoneContato()) ;
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-
-
-
-
-
 
 	@Override
 	public void remover(Cliente cliente) {
-		
-		try {			
+
+		try {
 			String sql = "DELETE FROM Cliente WHERE id = ?";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, cliente.getId() );
-				
-			
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setInt(1, cliente.getId());
+
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-
-
-
-
-
 
 	@Override
 	public void alterar(Cliente cliente) {
-		
-		try {			
-			String sql = "UPDATE Cliente SET"
-					+ " nome = ? ,"
-					+ " telefone = ?"
+
+		try {
+			String sql = "UPDATE Cliente SET" + " nome = ? ," + " telefone = ?"
 					+ "WHERE id = ? ";
-			
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setString(1, cliente.getNome() );
-			stmt.setString(2, cliente.getTelefoneContato() );
-			stmt.setInt(3, cliente.getId() );
-			
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setString(1, cliente.getNome());
+			stmt.setString(2, cliente.getTelefoneContato());
+			stmt.setInt(3, cliente.getId());
+
 			stmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 
@@ -131,6 +107,27 @@ public class MajuModasDAOImplCliente implements MajuModasDAOCliente {
 		}
 		return cliente;
 		
+	}
+	
+	
+	@Override
+	public Cliente buscarClienteEspecifico(Cliente cliente){
+		
+		try {
+			String sql = 
+				"select * from cliente where nome like ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			stmt.setString(1,"%" + cliente.getNome() + "%");
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) { 
+				cliente.setNome(rs.getString("nome"));
+				cliente.setTelefoneContato(rs.getString("telefone"));
+				return cliente;
+			}else return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

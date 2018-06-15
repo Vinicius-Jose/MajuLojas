@@ -11,5 +11,6 @@ public interface MajuModasDAOCliente {
 	public void remover(Cliente cliente);
 	public void alterar(Cliente cliente);
 	public List<Cliente> buscarCliente();
+	public Cliente buscarClienteEspecifico(Cliente cliente);
 	
 }
