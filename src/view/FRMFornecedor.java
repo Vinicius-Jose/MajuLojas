@@ -137,6 +137,8 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 			txtNome.setText(forn.getNome());
 			txtFone.setText(forn.getTelefoneFornecedor());
 			id = forn.getId();
+			btnAlterar.setEnabled(true);
+			btnSalvar.setEnabled(false);
 		}else {
 			JOptionPane.showMessageDialog(null, "Não foi possível encontrar o referido fornecedor",
 					"Erro", JOptionPane.ERROR_MESSAGE);
@@ -158,8 +160,7 @@ public class FRMFornecedor extends JPanel implements ActionListener {
 			btnAlterar.setEnabled(false);
 		}
 		if (a.getActionCommand().equals("Pesquisar")) {
-			btnAlterar.setEnabled(true);
-			btnSalvar.setEnabled(false);
+			
 			Fornecedor forn = new Fornecedor();
 			forn.setNome(txtNome.getText());
 			colocaTela(ctrlFornecedor.buscar(forn));

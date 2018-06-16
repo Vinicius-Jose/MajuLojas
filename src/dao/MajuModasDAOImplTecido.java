@@ -83,9 +83,10 @@ public class MajuModasDAOImplTecido implements MajuModasDAOTecido {
 			stmt.setDate(1, tecido.getData());
 			stmt.setFloat(2, tecido.getValor());
 			stmt.setInt(3, tecido.getQuantidade());
-			stmt.setString(4, tecido.getCor());
-			stmt.setInt(5, tecido.getFornecedor().getId());
-			stmt.setInt(6, tecido.getCodigo());
+			stmt.setString(4, tecido.getTipo());
+			stmt.setString(5, tecido.getCor());
+			stmt.setInt(6, tecido.getFornecedor().getId());
+			stmt.setInt(7, tecido.getCodigo());
 
 			stmt.executeUpdate();
 

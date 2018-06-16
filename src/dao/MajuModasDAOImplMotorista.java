@@ -75,18 +75,16 @@ public class MajuModasDAOImplMotorista implements MajuModasDAOMotorista {
 	public void alterar(Motorista motorista) {
 		
 		try {			
-			String sql = "UPDATE Motorista SET"
+			String sql = "UPDATE Motorista SET "
 					+ "nome = ? , "
-					+ "num_Placa = ?, "
 					+ "telefone = ? "
 					+ "WHERE num_Placa = ? ";
 			
 			PreparedStatement stmt = con.prepareStatement( sql );
 			
 			stmt.setString(1, motorista.getNome() );
-			stmt.setString(2, motorista.getNumPlaca() );
-			stmt.setString(3, motorista.getTelefoneContato() );
-			stmt.setString(4, motorista.getNumPlaca());
+			stmt.setString(2, motorista.getTelefoneContato() );
+			stmt.setString(3, motorista.getNumPlaca());
 			
 			stmt.executeUpdate();
 			

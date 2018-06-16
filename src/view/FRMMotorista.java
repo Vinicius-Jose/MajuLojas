@@ -143,6 +143,12 @@ public class FRMMotorista extends JPanel implements ActionListener{
 			txtNome.setText(moto.getNome());
 			txtFone.setText(moto.getTelefoneContato());
 			txtPlaca.setText(moto.getNumPlaca());
+			btnAlterar.setEnabled(true);
+			btnSalvar.setEnabled(false);
+			txtPlaca.setEditable(false);
+			numPlaca = moto.getNumPlaca();
+		}else{
+			JOptionPane.showMessageDialog(null, "Não foi possível encontrar o motorista", "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -163,16 +169,18 @@ public class FRMMotorista extends JPanel implements ActionListener{
 		    	Motorista moto = new Motorista();
 		    	moto.setNome(txtNome.getText());
 		    	colocaTela(ctrlMotorista.buscar(moto));
-		    	btnAlterar.setEnabled(true);
-				btnSalvar.setEnabled(false);
 		    }
 		    if(a.getActionCommand().equals("Alterar")) {
 		    	try {
 		    		ctrlMotorista.alterar(dadosMotorista());
+		    		
 		    	} catch(Exception e) {
 		    		JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
 		    	}
 		    	limpaTela();
+		    	txtPlaca.setEditable(true);
+		    	btnAlterar.setEnabled(false);
+				btnSalvar.setEnabled(true);
 		    }
 	}
 	
