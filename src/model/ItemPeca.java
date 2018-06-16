@@ -18,7 +18,7 @@ public class ItemPeca {
 
 	public float getValorAviamento() {
 		if(valorAviamento == 0){
-		valorAviamento *= quantidadeAviamento;
+			valorAviamento = aviamento.getValorCompra()* quantidadeAviamento;
 		}
 		return valorAviamento;
 	}

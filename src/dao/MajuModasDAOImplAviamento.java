@@ -102,9 +102,6 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 				a.setDataCompra(rs.getDate("data_Aviamento"));
 				a.setValorCompra(rs.getFloat("valor_Unitario"));
 				a.setNome(rs.getString("nome"));
-				/**
-				 * ver depois como fazer *
-				 */
 				a.setFornecedor(null);
 				aviamento.add(a);
 			}

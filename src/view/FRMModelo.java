@@ -316,6 +316,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 		for (Tecido a : ctrlModelo.buscarTecidos()) {
 			cbTecido.addItem(a);
 		}
+		cbTecido.setSelectedIndex(-1);
 	}
 
 	@Override
@@ -361,6 +362,8 @@ public class FRMModelo extends JPanel implements ActionListener {
 		preencherCombo();
 		fttData.setText("");
 	    ((DefaultTableModel)tabelaAviamento.getModel()).setRowCount(0);
+	    qtdRolo.setText("");
+	    txtPiloto.setText("");
 	}
 
 	private void salvarModelo(boolean novo) throws ParseException {
@@ -380,11 +383,12 @@ public class FRMModelo extends JPanel implements ActionListener {
 				mod.setPiloto(piloto);
 				mod.setModelagem(modelagem);
 			}
+			mod.setPiloto(piloto);
+			mod.setModelagem(modelagem);
 			mod.setDtCastastroPeca(new java.sql.Date(sdf.parse(
 					fttData.getText()).getTime()));
 			Set<ItemPeca> itens = new HashSet<>();
-			mod.setPiloto(piloto);
-			mod.setModelagem(modelagem);
+			
 			for (int i = 0; i < tabelaAviamento.getRowCount(); i++) {
 				ItemPeca item = new ItemPeca();
 				item.setAviamento(ctrlModelo.buscarAviamentoEspecifico(tabelaAviamento
@@ -394,9 +398,12 @@ public class FRMModelo extends JPanel implements ActionListener {
 				itens.add(item);
 			}
 			mod.setItemPeca(itens);
-			txtMargemCusto.setText(Float.toString(mod.getMargemCusto()));
+			Tecido tecido = (Tecido) cbTecido.getSelectedItem();
+			tecido.setQuantidade(Integer.parseInt(qtdRolo.getText()));
+			mod.setTecido(tecido);
 			txtCustoConfeccao.setText(Float.toString(mod.getCustoConfeccao()));
-			mod.setTecido((Tecido) cbTecido.getSelectedItem());
+			txtMargemCusto.setText(Float.toString(mod.getMargemCusto()));
+			
 			ctrlModelo.adicionarModelo(mod);
 			limparTela();
 		} catch (Exception e) {

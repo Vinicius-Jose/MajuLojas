@@ -47,6 +47,7 @@ public class Modelo {
 			}
 			custoConfeccao += modelagem.getValor();
 			custoConfeccao += piloto.getValorPiloto();
+			custoConfeccao += tecido.getValorTotal();
 		}
 		if (corteCostura != null) {
 				custoConfeccao += corteCostura.getValorCorte();
@@ -61,12 +62,8 @@ public class Modelo {
 	}
 
 	public float getMargemCusto() {
-		if (margemCusto == 0 && corteCostura!=null) {
-			margemCusto = getCustoConfeccao()
-					/ corteCostura.getQuantidadePecasCortadas();
-			margemCusto = custoConfeccao * 2;
-		}
-		return margemCusto;
+
+		return custoConfeccao * 2;
 	}
 
 	public void setMargemCusto(float margemCusto) {

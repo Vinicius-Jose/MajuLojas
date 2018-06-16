@@ -41,13 +41,6 @@ public class FRMGrade extends JPanel implements ActionListener{
 		separator.setBounds(0, 44, 1034, 11);
 		add(separator);
 		
-		JLabel lblModelo = new JLabel("Modelo");
-		lblModelo.setForeground(Color.BLACK);
-		lblModelo.setBackground(Color.WHITE);
-		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblModelo.setBounds(12, 105, 56, 16);
-		add(lblModelo);
-		
 		
 		JLabel lblGrade = new JLabel("Grade");
 		lblGrade.setForeground(Color.BLACK);
