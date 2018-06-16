@@ -171,12 +171,12 @@ public class MajuModasDAOImplTecido implements MajuModasDAOTecido {
 				fornecedor.setId(rs.getInt("id"));
 				fornecedor.setNome(rs.getString("nome"));
 				tecido.setFornecedor(fornecedor);
-				
-			}
+				return tecido;
+			}else return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return tecido;
+		return null;
 	}
 
 

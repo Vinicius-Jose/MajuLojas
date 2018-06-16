@@ -227,6 +227,9 @@ public class FRMTecido extends JPanel implements ActionListener{
 			txtColor.setText(tecido.getCor());
 			txtValorTotal.setText(Float.toString(tecido.getValorTotal()));
 			
+		}else {
+			JOptionPane.showMessageDialog(null, "Não foi possível encontrar o referido tecido",
+					"Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

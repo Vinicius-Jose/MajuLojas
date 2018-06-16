@@ -10,15 +10,7 @@ public class Grade {
 	
 	private String letra;
 	
-	private Modelo modelo;
 
-	public Modelo getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
-	}
 
 	public int getNumTamanhoMaximo() {
 		return numTamanhoMaximo;
