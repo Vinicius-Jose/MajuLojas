@@ -1,3 +1,9 @@
+/**
+ * @author Suzana Portilho
+ * Classe Responsável por calcular o Lucro ao final de cada mes
+ */
+
+
 package model;
 
 import java.sql.Date;

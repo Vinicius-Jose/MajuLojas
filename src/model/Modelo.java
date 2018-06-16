@@ -1,3 +1,9 @@
+/**
+ * @author Suzana Portilho
+ * 
+ */
+
+
 package model;
 
 import java.util.Date;

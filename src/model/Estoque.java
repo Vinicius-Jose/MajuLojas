@@ -1,3 +1,10 @@
+/**
+ * @author Suzana Portilho
+ * 
+ */
+
+
+
 package model;
 
 public class Estoque {
