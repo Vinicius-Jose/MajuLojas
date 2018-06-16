@@ -15,20 +15,29 @@ import model.RelatorioLucro;
 import model.Tecido;
 import model.Venda;
 import dao.MajuModasDAO;
+import dao.MajuModasDAOCapital;
 import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplCapital;
+import dao.MajuModasDAOImplModelo;
+import dao.MajuModasDAOImplRelatorioLucro;
+import dao.MajuModasDAOModelo;
+import dao.MajuModasDAORelatorioLucro;
 import dao.RelatorioDao;
 
 public class ControleRelatorio {
 	private RelatorioDao rela = new RelatorioDao();
 	private MajuModasDAO banco = new MajuModasDAOImpl();
+	private MajuModasDAOModelo bdModelo = new MajuModasDAOImplModelo(); 
+	private MajuModasDAORelatorioLucro bdLucro = new MajuModasDAOImplRelatorioLucro();
+	private MajuModasDAOCapital bdCapital = new MajuModasDAOImplCapital();
 //	private MajuModasDAOModelo bancoModelo = new MajuModasDAOImplModelo();
 	
 	
 	public ControleRelatorio() {
 		if(ultimoCapital()){
-			Set<Modelo> modelo =(Set<Modelo>) banco.buscarModelo1();
-			Set<CorteCostura> corte  = rela.buscarCorte();
-			Set<Tecido> tecidos  = rela.buscarTecidos();
+			Set<Modelo> modelo = bdModelo.buscarModeloInfoBasica();
+			Set<CorteCostura> corte  = bdCapital.buscarCorte();
+			Set<Tecido> tecidos  = bdCapital.buscarTecidos();
 			Capital capital = new Capital();
 			capital.setCorteCostura(corte);
 			capital.setModelo(modelo);
@@ -36,45 +45,45 @@ public class ControleRelatorio {
 			Date dataAtual = Calendar.getInstance().getTime();
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			capital.setMesAno(new java.sql.Date(dataAtual.getTime()));
-			banco.adicionar(capital);
+			bdCapital.adicionar(capital);
 			capital.setCodigo(rela.getMaxIdCapital());
-			Set<Venda> vendas = rela.buscarVenda();
-			Set<Encomenda> encomendas = rela.buscarEncomendas();
+			Set<Venda> vendas = bdCapital.buscarVenda();
+			Set<Encomenda> encomendas = bdCapital.buscarEncomendas();
 			RelatorioLucro lucro = new RelatorioLucro();
 			lucro.setVenda(vendas);
 			lucro.setEncomenda(encomendas);
 			lucro.setCapital(capital);
-			lucro.setCodigo(rela.getMaxIdLucro());
+			lucro.setCodigo(bdLucro.getMaxIdLucro());
 			lucro.setMesAno(new java.sql.Date(dataAtual.getTime()));
-			banco.adicionar(lucro);
+			bdLucro.adicionar(lucro);
 		}
 	}
 
 	public List<Integer> mesesCapital(){
-		return rela.buscaMesesCapital();
+		return bdCapital.buscaMesesCapital();
 	}
 	
 	public List<Integer> anosCapital(){
-		return rela.buscaAnoCapital();
+		return bdCapital.buscaAnoCapital();
 	}
 	
 	public double buscarCapital(int mes, int ano){
-		return rela.buscarCapital(mes, ano);
+		return bdCapital.buscarCapital(mes, ano);
 	}
 	
 	public List<HashMap<String,Object>> buscaDadosCapital(int mes, int ano){
-		return rela.buscaDadosCapital(mes, ano);
+		return bdCapital.buscaDadosCapital(mes, ano);
 	}
 	
 	private boolean ultimoCapital(){
-		return rela.ultimoCapital();
+		return bdCapital.ultimoCapital();
 	}
 
 	public double buscarLucro(int mes, int ano) {
-		return rela.buscarLucro(mes, ano);
+		return bdLucro.buscarLucro(mes, ano);
 	}
 
 	public List<HashMap<String, Object>> buscaDadosLucro(int mes, int ano) {
-		return rela.buscaDadosLucro(mes, ano);
+		return bdLucro.buscaDadosLucro(mes, ano);
 	}
 }

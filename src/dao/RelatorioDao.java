@@ -153,8 +153,9 @@ public class RelatorioDao {
 
 	public List<HashMap<String, Object>> buscaDadosLucro(int mes, int ano) {
 		List<HashMap<String, Object>> info = new ArrayList<>();
-		String sql = "select md.modelo as modelo,Count(ien.valor_Item_Encomenda) + Count(iv.valor_Item_Venda)as qtd, md.margem_Custo as preco,  SUM(ien.valor_Item_Encomenda) + SUM(iv.valor_Item_Venda) as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv , lucro l where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and l.codigo = vd.Lucrocodigo and en.Lucrocodigo = l.codigo and Month(l.data_Lucro) = ? and YEAR(l.data_Lucro) = ?"
-				+" group by md.modelo, md.margem_Custo";
+		String sql = "select md.modelo, iv.qtd_Modelo_Vendido as qtd, md.margem_Custo as preco, sum(vd.valor_Total) as valor_Ganho from  Modelo md, Venda vd, Item_Venda iv, Lucro lc"
++ " where md.codigo = iv.Modelocodigo and vd.codigo = iv.Vendacodigo and vd.Lucrocodigo = lc.codigo and lc.codigo in (select codigo from Lucro  where MONTH(data_Lucro) = ? and YEAR(data_Lucro) = ?)"
++ " group by md.modelo, iv.qtd_Modelo_Vendido, md.margem_Custo";
 		PreparedStatement stmt = null;
 		try {
 			stmt = banco.getCon().prepareStatement(sql);
