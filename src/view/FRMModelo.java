@@ -51,7 +51,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 	private JTextField txtPiloto;
 	private JFormattedTextField fttData;
 	private JComboBox cbTecido;
-	private JButton btnAlterar, btnCancelar, btnSalvar, btnAdicionar;
+	private JButton btnCancelar, btnSalvar, btnAdicionar;
 	private JComboBox cbAviamento;
 	private JRadioButton rdbtnNo, rdbtnSim;
 	private ControleModelo ctrlModelo = new ControleModelo();
@@ -273,12 +273,6 @@ public class FRMModelo extends JPanel implements ActionListener {
 		scrollPane.setViewportView(tabelaAviamento);
 		add(scrollPane);
 
-		btnAlterar = new JButton("Alterar");
-		btnAlterar.setForeground(Color.BLACK);
-		btnAlterar.setBackground(Color.WHITE);
-		btnAlterar.setBounds(733, 275, 89, 23);
-		add(btnAlterar);
-
 		JLabel lblPiloto = new JLabel("Piloto");
 		lblPiloto.setForeground(Color.BLACK);
 		lblPiloto.setBackground(Color.WHITE);
@@ -302,7 +296,6 @@ public class FRMModelo extends JPanel implements ActionListener {
 		btnAdicionar.addActionListener(this);
 		btnCancelar.addActionListener(this);
 		btnSalvar.addActionListener(this);
-		btnAlterar.addActionListener(this);
 
 	}
 
