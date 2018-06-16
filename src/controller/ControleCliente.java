@@ -1,11 +1,9 @@
 package controller;
 
-import java.util.List;
 import javax.swing.JOptionPane;
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
-import dao.MajuModasDAOImplCliente;
+
 import model.Cliente;
+import dao.MajuModasDAOImplCliente;
 
 public class ControleCliente{
 

@@ -1,26 +1,23 @@
 package view;
 
-import java.awt.Font;
-
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import controller.ControleEstoque;
-
-import javax.swing.JButton;
-
-import model.Modelo;
-
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import model.Modelo;
+import controller.ControleEstoque;
 
 public class FRMEstoque extends JPanel implements ActionListener {
 	private JTable tabelaEstoque;

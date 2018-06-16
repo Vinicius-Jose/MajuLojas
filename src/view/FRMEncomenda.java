@@ -1,12 +1,11 @@
 package view;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -20,27 +19,23 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.text.MaskFormatter;
-import javax.swing.JRadioButton;
-
-import controller.ControleEncomenda;
 
 import model.Cliente;
 import model.Encomenda;
 import model.ItemEncomenda;
-import model.ItemVenda;
 import model.Modelo;
 import model.Motorista;
 import model.Status;
-import java.awt.Color;
+import controller.ControleEncomenda;
 
 public class FRMEncomenda extends JPanel implements ActionListener {
 	private JTextField txtQtd;

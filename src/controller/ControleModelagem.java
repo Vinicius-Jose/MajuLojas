@@ -1,13 +1,12 @@
 package controller;
-import java.util.List;
 import java.util.Set;
-import javax.swing.JOptionPane;
+
+import model.Modelagem;
+import model.Modelo;
 import dao.MajuModasDAO;
 import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplModelagem;
 import dao.MajuModasDAOModelagem;
-import model.Modelagem;
-import model.Modelo;
 
 public class ControleModelagem{
 	

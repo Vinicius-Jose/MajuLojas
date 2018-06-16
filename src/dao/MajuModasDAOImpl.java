@@ -28,7 +28,6 @@ import model.Piloto;
 import model.RelatorioLucro;
 import model.Tecido;
 import model.Venda;
-import model.Status;
 
 public class MajuModasDAOImpl implements MajuModasDAO {
 

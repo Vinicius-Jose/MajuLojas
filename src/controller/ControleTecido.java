@@ -1,9 +1,11 @@
 package controller;
 
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import model.Fornecedor;
 import model.Tecido;
-import java.util.List;
-import javax.swing.JOptionPane;
 import dao.MajuModasDAO;
 import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplTecido;

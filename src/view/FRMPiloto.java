@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,9 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import controller.ControlePiloto;
 import model.Modelo;
 import model.Piloto;
-
-import java.awt.Color;
+import controller.ControlePiloto;
 
 public class FRMPiloto extends JPanel implements ActionListener{
 	private JComboBox cbModelo;

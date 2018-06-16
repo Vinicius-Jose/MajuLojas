@@ -2,11 +2,8 @@ package dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
-import model.Encomenda;
 import model.RelatorioLucro;
-import model.Venda;
 
 public interface MajuModasDAORelatorioLucro {
 

@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,10 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 
-import controller.ControleFornecedor;
 import model.Fornecedor;
-
-import java.awt.Color;
+import controller.ControleFornecedor;
 
 public class FRMFornecedor extends JPanel implements ActionListener {
 	private JTextField txtNome;

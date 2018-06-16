@@ -1,13 +1,15 @@
 package controller;
 
 import java.util.Set;
+
 import javax.swing.JOptionPane;
+
+import model.Grade;
+import model.Modelo;
 import dao.MajuModasDAO;
 import dao.MajuModasDAOGrade;
 import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplGrade;
-import model.Grade;
-import model.Modelo;
 
 public class ControleGrade{
 

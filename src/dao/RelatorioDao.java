@@ -9,9 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import model.Encomenda;
-
 import model.CorteCostura;
+import model.Encomenda;
 import model.Tecido;
 import model.Venda;
 

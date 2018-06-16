@@ -8,14 +8,13 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-import dao.MajuModasDAO;
-import dao.MajuModasDAOEncomenda;
-import dao.MajuModasDAOEstoque;
-import dao.MajuModasDAOImpl;
-import dao.MajuModasDAOImplEstoque;
 import model.CorteCostura;
 import model.Estoque;
 import model.Modelo;
+import dao.MajuModasDAO;
+import dao.MajuModasDAOEstoque;
+import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplEstoque;
 
 public class ControleCorteCostura{
 	

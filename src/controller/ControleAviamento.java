@@ -1,14 +1,11 @@
 package controller;
 
-import model.Aviamento;
-
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import model.Aviamento;
 import model.Fornecedor;
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplAviamento;
 import dao.MajuModasDAOImplFornecedor;
 

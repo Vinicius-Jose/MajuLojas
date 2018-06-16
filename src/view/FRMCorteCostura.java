@@ -1,28 +1,26 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Set;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.text.MaskFormatter;
 
-import controller.ControleCorteCostura;
 import model.CorteCostura;
 import model.Modelo;
-
-import javax.swing.JButton;
-import java.awt.Color;
+import controller.ControleCorteCostura;
 
 public class FRMCorteCostura extends JPanel implements ActionListener{
 	private JTextField txtGrade;

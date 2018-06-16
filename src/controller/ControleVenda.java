@@ -1,15 +1,14 @@
 package controller;
 
-import java.util.List;
 import java.util.Set;
 
+import model.Estoque;
+import model.Modelo;
+import model.Venda;
 import dao.MajuModasDAO;
 import dao.MajuModasDAOEstoque;
 import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplEstoque;
-import model.Estoque;
-import model.Modelo;
-import model.Venda;
 
 public class ControleVenda {
 	private MajuModasDAO bd = new MajuModasDAOImpl();

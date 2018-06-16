@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,10 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 
-import controller.ControleMotorista;
 import model.Motorista;
-
-import java.awt.Color;
+import controller.ControleMotorista;
 
 public class FRMMotorista extends JPanel implements ActionListener{
 	private JTextField txtNome;
