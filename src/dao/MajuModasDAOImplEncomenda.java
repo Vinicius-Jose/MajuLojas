@@ -177,8 +177,8 @@ public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
 				en.setCodigo( rs.getInt("codigo")  );
 				en.setDataEncomenda( rs.getDate("data_Encomenda")  );
 				en.setDataRetirada( rs.getDate("data_Retirada")  );
-				en.setValorTotalEncomenda(rs.getFloat("valor_Total"));
 				en.setStatus(Status.valueOf(rs.getString("Status_Encomenda")));
+				en.setItemEncomenda(buscarItens(en));
 				encomenda.add(en);
 			
 			}

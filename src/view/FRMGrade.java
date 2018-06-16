@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class FRMGrade extends JPanel implements ActionListener{
-	private JComboBox cbModelo;
 	private JTextField textField;
 	private JTextField txtMin;
 	private JTextField txtMax;
@@ -53,11 +52,6 @@ public class FRMGrade extends JPanel implements ActionListener{
 		lblModelo.setBounds(12, 105, 56, 16);
 		add(lblModelo);
 		
-		cbModelo = new JComboBox();
-		cbModelo.setForeground(Color.BLACK);
-		cbModelo.setBackground(Color.WHITE);
-		cbModelo.setBounds(80, 105, 352, 22);
-		add(cbModelo);
 		
 		JLabel lblGrade = new JLabel("Grade");
 		lblGrade.setForeground(Color.BLACK);
@@ -122,23 +116,14 @@ public class FRMGrade extends JPanel implements ActionListener{
 		btnCancelar.addActionListener(this);
 		btnAlterar.addActionListener(this);
 		
-		preencherCombo();
 	
 	}
 	
-	private void preencherCombo() {
-		Set<Modelo> a = ctrlGrade.buscarModelo();
-		cbModelo.removeAllItems();
-		for(Modelo b : a) {
-			cbModelo.addItem(b);
-		}
-	}
+
 	
 	private Grade dadosGrade() {
 		Grade grade = new Grade();
-		if(cbModelo.getSelectedItem() != null) {
-			grade.setModelo((Modelo) cbModelo.getSelectedItem());
-		}
+	
 		grade.setLetra(textField.getText());
 		grade.setNumTamanhoMinimo(Integer.parseInt(txtMin.getText()));
 		grade.setNumTamanhoMaximo(Integer.parseInt(txtMax.getText()));
@@ -170,7 +155,6 @@ public class FRMGrade extends JPanel implements ActionListener{
 	}
 
 	private void limpaTela() {
-		cbModelo.setSelectedIndex(-1);
 		textField.setText("");
 		txtMin.setText("");
 		txtMax.setText("");

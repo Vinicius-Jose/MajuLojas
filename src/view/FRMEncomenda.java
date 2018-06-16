@@ -247,8 +247,8 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 		lblMotorista.setVisible(false);
 		cbMotorista.setVisible(false);
 		
-		btnPesquisar.setEnabled(false);
-		btnPesquisar.setVisible(false);
+//		btnPesquisar.setEnabled(false);
+//		btnPesquisar.setVisible(false);
 
 		rdbtnSim.addActionListener(new ActionListener() {
 			@Override
@@ -314,9 +314,10 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 	}
 
 	private void adicionarDadoTabela(List<Encomenda> encomendas) {
+		DefaultTableModel tbmodel = (DefaultTableModel) tabelaEncomenda.getModel();
 		for (Encomenda a : encomendas) {
 			Object linha[] = new Object[7];
-			linha[0] = a.getCliente();
+			linha[0] = cbCliente.getSelectedItem();
 			linha[3] = a.getDataEncomenda();
 			comboBoxTabela(a.getStatus());
 			try {
@@ -329,8 +330,10 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 				linha[1] = b.getModelo();
 				linha[2] = b.getQuantidade();
 				linha[6] = b.getValorItemEncomenda();
+				tbmodel.addRow(linha);
 			}
 		}
+		btnFinalizarEncomenda.setEnabled(false);
 
 	}
 
@@ -413,13 +416,15 @@ public class FRMEncomenda extends JPanel implements ActionListener {
 	private void limpaTela() {
 		preencherCombo();
 		DefaultTableModel md = (DefaultTableModel) tabelaEncomenda.getModel();
-		for(int i = 0; i< md.getRowCount(); i ++){
-			md.removeRow(i);
-		}
+		md.setNumRows(0);
+//		for(int i = 0; i< md.getRowCount(); i ++){
+//			md.removeRow(i);
+//		}
 		cbCliente.setEnabled(true);
 		cbMotorista.setEnabled(true);
 		cbModelo.setEnabled(true);
 		fttDataRetirada.setText("");
+		btnFinalizarEncomenda.setEnabled(true);
 	}
 
 }
