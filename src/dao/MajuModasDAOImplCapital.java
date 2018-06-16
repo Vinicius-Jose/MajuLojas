@@ -34,7 +34,7 @@ public class MajuModasDAOImplCapital implements MajuModasDAOCapital {
 	public void adicionar(Capital capital) {
 
 		try {
-			String sql = "INSERT INTO Capital " + " VALUES ( ?, ? ) ";
+			String sql = "INSERT INTO Capital(data_capital, valor_Capital) " + " VALUES ( ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.setDate(1, capital.getMesAno());
