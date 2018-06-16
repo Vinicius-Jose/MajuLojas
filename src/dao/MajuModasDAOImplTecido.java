@@ -24,100 +24,78 @@ public class MajuModasDAOImplTecido implements MajuModasDAOTecido {
 
 	@Override
 	public void adicionar(Tecido tecido) {
-		
-		try {			
-			String sql = "INSERT INTO Tecido " +
-					" VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ) ";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, tecido.getCodigo() );
-			stmt.setDate(2, tecido.getData() );
-			stmt.setDouble(3, tecido.getValor() );
-			stmt.setInt(4, tecido.getQuantidade() );
-			stmt.setString(5, tecido.getTipo() );
-			stmt.setString(6, tecido.getCor());
-			stmt.setInt(7, tecido.getFornecedor().getId());
-			
+
+		try {
+			String sql = "INSERT INTO Tecido "
+					+ " VALUES (  ?, ?, ?, ?, ?, ?, ? ) ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+
+			stmt.setDate(1, tecido.getData());
+			stmt.setDouble(2, tecido.getValor());
+			stmt.setInt(3, tecido.getQuantidade());
+			stmt.setString(4, tecido.getTipo());
+			stmt.setString(5, tecido.getCor());
+			stmt.setInt(6, tecido.getFornecedor().getId());
+			stmt.setString(7,null);
+
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-
-
-
 
 	@Override
 	public void remover(Tecido tecido) {
-		
-		try {			
+
+		try {
 			String sql = "DELETE FROM Tecido WHERE Codigo = ?";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			
+			PreparedStatement stmt = con.prepareStatement(sql);
+
 			stmt.setInt(1, tecido.getCodigo());
-			
-				
+
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-
-
 
 	@Override
 	public void alterar(Tecido tecido) {
-		
-		try {			
-			String sql = "UPDATE Tecido SET"
-					+ " data = ?,"
-					+ " valor_Unitario = ?, "
-					+ "qtd_Rolo = ?, "
-					+ "tipo = ?, "
-					+ "cor = ?, "
-					+ "FornecedorId = ? "
-					+ "WHERE codigo = ?";
-					
-			
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setDate(1, tecido.getData() );
-			stmt.setFloat(2, tecido.getValor() );
+
+		try {
+			String sql = "UPDATE Tecido SET" + " data = ?,"
+					+ " valor_Unitario = ?, " + "qtd_Rolo = ?, " + "tipo = ?, "
+					+ "cor = ?, " + "FornecedorId = ? " + "WHERE codigo = ?";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setDate(1, tecido.getData());
+			stmt.setFloat(2, tecido.getValor());
 			stmt.setInt(3, tecido.getQuantidade());
 			stmt.setString(4, tecido.getCor());
 			stmt.setInt(5, tecido.getFornecedor().getId());
 			stmt.setInt(6, tecido.getCodigo());
-			
-			
+
 			stmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 
 
 	@Override
 	public List<Tecido> buscarTecido() {
-
 		List<Tecido> tecido = new ArrayList<>();
 		try {
 			String sql = 
@@ -132,7 +110,7 @@ public class MajuModasDAOImplTecido implements MajuModasDAOTecido {
 				t.setCodigo( rs.getInt("codigo")  );
 				t.setData(rs.getDate("data_Tecido"));
 				t.setValor( rs.getFloat("valor_Unitario") );
-				t.setQuantidade( rs.getInt("quantidade_Rolo"));
+				t.setQuantidade( rs.getInt("qtd_Rolo"));
 				t.setTipo(rs.getString("tipo"));
 				t.setCor(rs.getString("cor"));
 				fornecedor.setId(rs.getInt("Fornecedorid"));
@@ -144,7 +122,6 @@ public class MajuModasDAOImplTecido implements MajuModasDAOTecido {
 			e.printStackTrace();
 		}
 		return tecido;
-		
 	}
 	
 	@Override

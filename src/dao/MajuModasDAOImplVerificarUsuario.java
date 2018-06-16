@@ -19,35 +19,29 @@ public class MajuModasDAOImplVerificarUsuario implements MajuModasDAOVerificarUs
 	public boolean verificarUsuario(String usuario, String senha) {
 		boolean existe = false;
 		String sql;
-		
 		try {
-			
-			if( tipoBanco == "mariadb"){
-				sql =  "select * from usuario "
-							+ "WHERE nome = ? AND "
-							+ "senha = MD5(?)";
-			}else{
-				sql =  "select * from usuario "
-						+ "WHERE nome = ? AND "
-						+ "senha = PWDCOMPARE(?)";	
+
+			if (tipoBanco == "mariadb") {
+				sql = "select * from usuarios " + "WHERE nome = ? AND "
+						+ "senha = MD5(?)";
+			} else {
+				sql = "select PWDCOMPARE(?, senha) as valido from usuarios "
+						+ "WHERE nome = ?";
 			}
-			PreparedStatement stmt = con.prepareStatement( sql );
-			stmt.setString(1, usuario);
-			stmt.setString(2, senha);
-			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, senha);
+			stmt.setString(2, usuario);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.isFirst()){
+			if (rs.next()) {
 				existe = true;
-			}else{
+			} else {
 				existe = false;
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return existe;
 	}
 	
-
 }

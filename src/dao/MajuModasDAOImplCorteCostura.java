@@ -21,92 +21,79 @@ public class MajuModasDAOImplCorteCostura implements MajuModasDAOCorteCostura {
 	
 	
 
+
 	@Override
 	public void adicionar(CorteCostura corteCostura) {
-		
-		try {			
-			String sql = "INSERT INTO Corte_Costura " +
-					" VALUES ( ?, ?, ?, ? ) ";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, corteCostura.getCodigo());
-			stmt.setDouble(2, corteCostura.getValorCorte() );
-			stmt.setDouble(3, corteCostura.getValorCostura() );
-			stmt.setInt(4, corteCostura.getQuantidadePecasCortadas() );
-			stmt.setDate(5, corteCostura.getDataCorte() );
-			
+
+		try {
+			String sql = "INSERT INTO Corte_Costura "
+					+ " VALUES ( ?, ?, ?, ?, ? ) ";
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setDouble(1, corteCostura.getValorCorte());
+			stmt.setDouble(2, corteCostura.getValorCostura());
+			stmt.setInt(3, corteCostura.getQuantidadePecasCortadas());
+			stmt.setDate(4, corteCostura.getDataCorte());
+			stmt.setString(5, null);
+
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
+	public Connection getCon() {
+		return con;
+	}
 
-
-
-
+	public void setCon(Connection con) {
+		this.con = con;
+	}
 
 	@Override
 	public void remover(CorteCostura corteCostura) {
-		try {			
+		try {
 			String sql = "DELETE FROM Corte_Costura WHERE id = ?";
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, corteCostura.getCodigo() );
-				
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setInt(1, corteCostura.getCodigo());
+
 			stmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-
-
-
-
-
 
 	@Override
 	public void alterar(CorteCostura corteCostura) {
-		
-		try {			
-			String sql = "UPDATE Corte_Costura SET"
-					+ " valor_Corte = ?, "
-					+ " valor_Costura = ?, "
-					+ "qtd_Peca_Cortada = ?, "
-					+ "data = ?"
-					+ "WHERE id = ? ";
-			
-			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setFloat(1, corteCostura.getValorCorte() );
-			stmt.setFloat(2, corteCostura.getValorCostura() );
+
+		try {
+			String sql = "UPDATE Corte_Costura SET" + " valor_Corte = ?, "
+					+ " valor_Costura = ?, " + "qtd_Peca_Cortada = ?, "
+					+ "data = ?" + "WHERE id = ? ";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setFloat(1, corteCostura.getValorCorte());
+			stmt.setFloat(2, corteCostura.getValorCostura());
 			stmt.setInt(3, corteCostura.getQuantidadePecasCortadas());
 			stmt.setDate(4, corteCostura.getDataCorte());
 			stmt.setInt(5, corteCostura.getCodigo());
-			
-			
+
 			stmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-	}
 
+	}
 
 	@Override
 	public List<CorteCostura> buscarCorteCostura() {

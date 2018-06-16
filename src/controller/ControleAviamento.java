@@ -12,7 +12,7 @@ import dao.MajuModasDAOImplFornecedor;
 public class ControleAviamento{
 	
 	private MajuModasDAOImplAviamento bdAviamento = new MajuModasDAOImplAviamento();
-	private MajuModasDAOImplFornecedor forn = new MajuModasDAOImplFornecedor();
+	private MajuModasDAOImplFornecedor bdFornecedor = new MajuModasDAOImplFornecedor();
 	
 	public void adicionarAviamento(Aviamento aviamento){
 		bdAviamento.adicionar(aviamento);
@@ -29,7 +29,7 @@ public class ControleAviamento{
 	}
 
 	public List<Fornecedor> buscarFornecedor() {
-		return forn.buscarFornecedor();
+		return bdFornecedor.buscarFornecedor();
 	}
 
 	

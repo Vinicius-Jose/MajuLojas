@@ -307,6 +307,8 @@ public class FRMModelo extends JPanel implements ActionListener {
 	}
 
 	private void preencherCombo() {
+		cbAviamento.removeAllItems();
+		cbTecido.removeAllItems();
 		for (Aviamento a : ctrlModelo.buscarAviamentos()) {
 			cbAviamento.addItem(a);
 		}
@@ -339,6 +341,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 		} else if (a.getActionCommand().equals("Salvar")) {
 			try {
 				salvarModelo(txtModelagem.isEnabled());
+				
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -357,6 +360,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 		txtQtd.setText("");
 		preencherCombo();
 		fttData.setText("");
+	    ((DefaultTableModel)tabelaAviamento.getModel()).setRowCount(0);
 	}
 
 	private void salvarModelo(boolean novo) throws ParseException {
@@ -383,7 +387,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 			mod.setModelagem(modelagem);
 			for (int i = 0; i < tabelaAviamento.getRowCount(); i++) {
 				ItemPeca item = new ItemPeca();
-				item.setAviamento(ctrlModelo.buscarAviamentoEs(tabelaAviamento
+				item.setAviamento(ctrlModelo.buscarAviamentoEspecifico(tabelaAviamento
 						.getValueAt(i, 0).toString()));
 				item.setQuantidadeAviamento((int) tabelaAviamento.getValueAt(i,
 						1));
@@ -395,7 +399,7 @@ public class FRMModelo extends JPanel implements ActionListener {
 			mod.setTecido((Tecido) cbTecido.getSelectedItem());
 			ctrlModelo.adicionarModelo(mod);
 			limparTela();
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
 					"Campos Obrigatórios estão vazios");
 			e.printStackTrace();
@@ -417,12 +421,12 @@ public class FRMModelo extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent a) {
 				cbAviamento.addItem(ctrlModelo
-						.buscarAviamentoEs(tabelaAviamento.getValueAt(
+						.buscarAviamentoEspecifico(tabelaAviamento.getValueAt(
 								tabelaAviamento.getSelectedRow(), 0).toString()));
 				mdtab.removeRow(tabelaAviamento.getSelectedRow());
 				btnApagar.setVisible(false);
 				btnApagar.setEnabled(false);
-
+				tabelaAviamento.remove(btnApagar);
 			}
 		});
 
@@ -430,6 +434,9 @@ public class FRMModelo extends JPanel implements ActionListener {
 		txtQtd.setText("");
 	}
 }
+
+
+
 
 // Classe que adiciona o botao na tabela
 class BotaoParaTabela extends AbstractCellEditor implements TableCellRenderer,

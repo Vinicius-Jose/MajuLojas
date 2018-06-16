@@ -26,15 +26,15 @@ public class MajuModasDAOImplEstoque implements MajuModasDAOEstoque {
 
 
 	@Override
-	public void adicionar(Estoque estoque) {
+	public void adicionar(Estoque estoque, int idModelo) {
 		
 		try {			
 			String sql = "INSERT INTO Estoque " +
-					" VALUES ( ? ) ";
+					" VALUES ( ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement( sql );
-			
-			stmt.setInt(1, estoque.getQuantidade() );
-			
+			stmt.setInt(1,idModelo);
+			stmt.setInt(2,estoque.getGrade().getCodigo());
+			stmt.setInt(3, estoque.getQuantidade() );
 			stmt.executeUpdate();
 			
 			

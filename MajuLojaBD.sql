@@ -376,6 +376,23 @@ insert into Usuarios values
 ('Maju' , PWDENCRYPT('Lojas'))
 
 
+alter table encomenda
+alter column lucrocodigo int null
+
+alter table encomenda
+alter column Motoristanum_Placa varchar(07) null
+
+alter table modelo
+alter column Corte_Costuracodigo int null
+
+alter table grade
+add constraint tamanho unique(letra)
+
+
+alter table modelo
+alter column corte_costuracodigo int null
+
+
 Select Month(data_Capital) as meses from Capital
 Order by meses
 
@@ -432,21 +449,6 @@ set data_Tecido = ('20/04/2018')
 where data_Tecido = '20/05/2018'
 
 
-alter table encomenda
-alter column lucrocodigo int null
-
-alter table encomenda
-alter column Motoristanum_Placa varchar(07) null
-
-alter table modelo
-alter column Corte_Costuracodigo int null
-
-alter table grade
-add constraint tamanho unique(letra)
-
-
-alter table modelo
-alter column corte_costuracodigo int null
 
 select * from Capital
 delete from Capital

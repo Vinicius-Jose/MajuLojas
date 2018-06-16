@@ -191,7 +191,13 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent a) {
 		if(a.getActionCommand().equals("Salvar")) {
 			try {
+				Modelo mod = new Modelo();
+		    	  if(cbModelo.getSelectedItem() != null) {
+		             mod = (Modelo) cbModelo.getSelectedItem();
+		    	}
+		    	String grade = txtGrade.getText();
 				ctrlCorteCostura.adicionarCorteCostura(dadosCorteCostura());
+				ctrlCorteCostura.atualizarEstoque(mod, grade, Integer.parseInt(txtQtd.getText()));
 			} catch(Exception e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Campos não preenchidos", "Preenchidos", JOptionPane.INFORMATION_MESSAGE);
@@ -209,6 +215,7 @@ public class FRMCorteCostura extends JPanel implements ActionListener{
 			    	}
 			    	String grade = txtGrade.getText();
 			    	ctrlCorteCostura.atualizarEstoque(mod, grade, Integer.parseInt(txtQtd.getText()));
+			    	ctrlCorteCostura.adicionarCorteCostura(dadosCorteCostura());
 			    	limpaTela();
 		    	} catch(Exception e) {
 		    		e.printStackTrace();

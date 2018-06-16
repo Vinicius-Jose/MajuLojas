@@ -14,23 +14,17 @@ import model.Modelo;
 import model.RelatorioLucro;
 import model.Tecido;
 import model.Venda;
-import dao.MajuModasDAO;
 import dao.MajuModasDAOCapital;
-import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplCapital;
 import dao.MajuModasDAOImplModelo;
 import dao.MajuModasDAOImplRelatorioLucro;
 import dao.MajuModasDAOModelo;
 import dao.MajuModasDAORelatorioLucro;
-import dao.RelatorioDao;
 
 public class ControleRelatorio {
-	private RelatorioDao rela = new RelatorioDao();
-	private MajuModasDAO banco = new MajuModasDAOImpl();
 	private MajuModasDAOModelo bdModelo = new MajuModasDAOImplModelo(); 
 	private MajuModasDAORelatorioLucro bdLucro = new MajuModasDAOImplRelatorioLucro();
 	private MajuModasDAOCapital bdCapital = new MajuModasDAOImplCapital();
-//	private MajuModasDAOModelo bancoModelo = new MajuModasDAOImplModelo();
 	
 	
 	public ControleRelatorio() {
@@ -46,7 +40,7 @@ public class ControleRelatorio {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			capital.setMesAno(new java.sql.Date(dataAtual.getTime()));
 			bdCapital.adicionar(capital);
-			capital.setCodigo(rela.getMaxIdCapital());
+			capital.setCodigo(bdCapital.getMaxIdCapital());
 			Set<Venda> vendas = bdCapital.buscarVenda();
 			Set<Encomenda> encomendas = bdCapital.buscarEncomendas();
 			RelatorioLucro lucro = new RelatorioLucro();

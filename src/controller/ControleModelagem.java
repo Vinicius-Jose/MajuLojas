@@ -3,18 +3,18 @@ import java.util.Set;
 
 import model.Modelagem;
 import model.Modelo;
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplModelagem;
+import dao.MajuModasDAOImplModelo;
 import dao.MajuModasDAOModelagem;
+import dao.MajuModasDAOModelo;
 
 public class ControleModelagem{
 	
 	private MajuModasDAOModelagem bdModelagem = new MajuModasDAOImplModelagem();
-	private MajuModasDAO banco = new MajuModasDAOImpl();
+	private MajuModasDAOModelo banco = new MajuModasDAOImplModelo();
 	
 	public Set<Modelo> buscarModelo(){
-		return banco.buscarModelo1();
+		return banco.buscarModeloInfoBasica();
 	}
 	
 	public Modelagem buscarModelagem(Modelo modelo){

@@ -1,57 +1,69 @@
 package controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
 import model.Aviamento;
 import model.Modelo;
 import model.Tecido;
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOAviamento;
+import dao.MajuModasDAOImplAviamento;
+import dao.MajuModasDAOImplModelagem;
+import dao.MajuModasDAOImplModelo;
+import dao.MajuModasDAOImplPiloto;
+import dao.MajuModasDAOImplTecido;
+import dao.MajuModasDAOModelagem;
+import dao.MajuModasDAOModelo;
+import dao.MajuModasDAOPiloto;
+import dao.MajuModasDAOTecido;
 
 public class ControleModelo{
 
 	
-	private MajuModasDAO banco = new MajuModasDAOImpl();
+	private MajuModasDAOModelo bdModelo = new MajuModasDAOImplModelo();
+	private MajuModasDAOPiloto bdPiloto = new MajuModasDAOImplPiloto();
+	private MajuModasDAOModelagem bdModelagem = new MajuModasDAOImplModelagem();
+	private MajuModasDAOAviamento bdAviamento = new MajuModasDAOImplAviamento();
+	private MajuModasDAOTecido bdTecido = new MajuModasDAOImplTecido();
 	
-
 	public void adicionarModelo(Modelo modelo){
 		if(modelo.getPiloto()!=null){
-			banco.adicionar(modelo.getPiloto());
-			banco.adicionar(modelo.getModelagem());
-			modelo.getPiloto().setCodigo(banco.ultimoCadastroPiloto());
-			modelo.getModelagem().setCodigo(banco.ultimoCadastroModelagem());
+			bdPiloto.adicionar(modelo.getPiloto());
+			bdModelagem.adicionar(modelo.getModelagem());
+			modelo.getPiloto().setCodigo(bdPiloto.ultimoCadastroPiloto());
+			modelo.getModelagem().setCodigo(bdModelagem.ultimoCadastroModelagem());
 		}
-		banco.adicionar(modelo);
+		bdModelo.adicionar(modelo);
 		JOptionPane.showMessageDialog(null, "Modelo adicionado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public List<Modelo> buscar(){
-		List<Modelo> listaModelo = banco.buscarModelo();
+	public Set<Modelo> buscar(){
+		Set<Modelo> listaModelo = bdModelo.buscarModeloInfoBasica();
 		return listaModelo;
 	}
 	
 	public void alterar(Modelo modelo){
-		banco.alterar(modelo);
+		bdModelo.alterar(modelo);
 		JOptionPane.showMessageDialog(null, "Modelo alterado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public List<Aviamento> buscarAviamentos(){
-		List<Aviamento> listaAviamento = banco.buscarAviamento();
+		List<Aviamento> listaAviamento = bdAviamento.buscarAviamento();
 		return listaAviamento;
 	}
 	
 	public List<Tecido> buscarTecidos(){
-		List<Tecido> listaTecido = banco.buscarTecido();
+		List<Tecido> listaTecido = bdTecido.buscarTecido();
 		return listaTecido;
 	}
 	
-	public Aviamento buscarAviamentoEs(String nome){
+	public Aviamento buscarAviamentoEspecifico(String nome){
 		Aviamento av = new Aviamento();
 		av.setNome(nome);
 		System.out.println(nome);
-		return banco.buscaEspecifico(av);
+		return bdAviamento.buscaEspecifico(av);
 	}
 	
 	

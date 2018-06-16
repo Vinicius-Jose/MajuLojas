@@ -13,6 +13,7 @@ public interface MajuModasDAOModelagem {
 	public void alterar(Modelagem modelagem);
 	public List<Modelagem> buscarModelagem();
 	public Modelagem buscarModelagemEspecifica(Modelo modelo);
+	public int ultimoCadastroModelagem();
 	
 	
 }

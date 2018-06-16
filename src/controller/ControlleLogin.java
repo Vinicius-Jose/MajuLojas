@@ -1,14 +1,14 @@
 package controller;
 
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOImplVerificarUsuario;
+import dao.MajuModasDAOVerificarUsuario;
 
 public class ControlleLogin {
 
 
 	
 
-	private MajuModasDAO banco = new MajuModasDAOImpl();
+	private MajuModasDAOVerificarUsuario banco = new MajuModasDAOImplVerificarUsuario();
 	
 	public boolean verificarUsuario(String nome, String senha){
 		boolean encontrado = banco.verificarUsuario(nome, senha);

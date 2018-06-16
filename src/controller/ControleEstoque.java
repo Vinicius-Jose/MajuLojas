@@ -5,19 +5,19 @@ import java.util.List;
 import java.util.Set;
 
 import model.Modelo;
-import dao.MajuModasDAO;
 import dao.MajuModasDAOEstoque;
-import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplEstoque;
+import dao.MajuModasDAOImplModelo;
+import dao.MajuModasDAOModelo;
 
 public class ControleEstoque {
 	
 
-	private MajuModasDAO banco = new MajuModasDAOImpl();
+	private MajuModasDAOModelo bdModelo = new MajuModasDAOImplModelo();
 	private MajuModasDAOEstoque bdEstoque  = new MajuModasDAOImplEstoque();
 	
 	public Set<Modelo> buscarModelos(){
-		Set<Modelo> listaModelo = banco.buscarModelo1();
+		Set<Modelo> listaModelo = bdModelo.buscarModeloInfoBasica();
 		return listaModelo;
 	}
 	

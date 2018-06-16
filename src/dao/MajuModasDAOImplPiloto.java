@@ -24,13 +24,12 @@ public class MajuModasDAOImplPiloto implements MajuModasDAOPiloto {
 	public void adicionar(Piloto piloto) {
 
 		try {
-			String sql = "INSERT INTO Piloto " + " VALUES ( ?, ?, ?, ? ) ";
+			String sql = "INSERT INTO Piloto " + " VALUES ( ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, piloto.getCodigo());
-			stmt.setDouble(2, piloto.getValorPiloto());
-			stmt.setDate(3, piloto.getDataPiloto());
-			stmt.setInt(4, 0);
+			stmt.setDouble(1, piloto.getValorPiloto());
+			stmt.setDate(2, piloto.getDataPiloto());
+			stmt.setString(3, null);
 
 			stmt.executeUpdate();
 
@@ -81,6 +80,7 @@ public class MajuModasDAOImplPiloto implements MajuModasDAOPiloto {
 
 	}
 
+
 	@Override
 	public List<Piloto> buscarPiloto() {
 
@@ -127,6 +127,24 @@ public class MajuModasDAOImplPiloto implements MajuModasDAOPiloto {
 			e.printStackTrace();
 		}
 		return piloto;
+	}
+	
+	@Override
+	public int ultimoCadastroPiloto(){
+		String sql = "select max(codigo) as maximo from piloto";
+		PreparedStatement stmt;
+		int num = 0 ;
+		try {
+			stmt = con.prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			rt.next();
+			num = rt.getInt("maximo");
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
 	}
 
 }

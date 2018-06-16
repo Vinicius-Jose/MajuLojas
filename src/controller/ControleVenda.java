@@ -5,21 +5,24 @@ import java.util.Set;
 import model.Estoque;
 import model.Modelo;
 import model.Venda;
-import dao.MajuModasDAO;
 import dao.MajuModasDAOEstoque;
-import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplEstoque;
+import dao.MajuModasDAOImplModelo;
+import dao.MajuModasDAOImplVenda;
+import dao.MajuModasDAOModelo;
+import dao.MajuModasDAOVenda;
 
 public class ControleVenda {
-	private MajuModasDAO bd = new MajuModasDAOImpl();
 	private MajuModasDAOEstoque bdEstoque = new MajuModasDAOImplEstoque();
+	private MajuModasDAOModelo bdModelo = new MajuModasDAOImplModelo();
+	private MajuModasDAOVenda bdVenda  = new MajuModasDAOImplVenda();
 
 	public Set<Modelo> buscarModelos() {
-		return  bd.buscarModelo1();
+		return  bdModelo.buscarModeloInfoBasica();
 	}
 	
 	public void adicionarVenda(Venda venda){
-		bd.adicionar(venda);
+		bdVenda.adicionar(venda);
 	}
 
 	public Set<Estoque> buscarEstoque(Modelo modelo) {

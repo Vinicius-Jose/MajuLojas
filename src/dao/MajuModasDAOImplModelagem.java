@@ -26,9 +26,10 @@ public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
 			String sql = "INSERT INTO Modelagem " + " VALUES (  ?, ?, ? ) ";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
+
 			stmt.setDouble(1, modelagem.getValor());
-			stmt.setDate(2, modelagem.getDataModelagem());
-			stmt.setString(3, null);
+			stmt.setDate(2,modelagem.getDataModelagem());
+			stmt.setString(3,null);
 
 			stmt.executeUpdate();
 
@@ -43,7 +44,7 @@ public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
 	public void remover(Modelagem modelagem) {
 
 		try {
-			String sql = "DELETE FROM Modelagem WHERE codigo = ?";
+			String sql = "DELETE FROM Modelagem WHERE VendaCodigo = ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			// precisa pegar apenas um codigo de uma venda ja realizada
@@ -79,6 +80,7 @@ public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
 		}
 
 	}
+
 
 	@Override
 	public List<Modelagem> buscarModelagem() {
@@ -124,6 +126,24 @@ public class MajuModasDAOImplModelagem implements MajuModasDAOModelagem {
 			e.printStackTrace();
 		}
 		return modelagem;
+	}
+	
+	@Override
+	public int ultimoCadastroModelagem(){
+		String sql = "select max(codigo) as maximo from modelagem";
+		PreparedStatement stmt;
+		int num = 0 ;
+		try {
+			stmt = con.prepareStatement(sql);
+			ResultSet rt = stmt.executeQuery();
+			rt.next();
+			num = rt.getInt("maximo");
+			rt.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return num;
 	}
 
 }

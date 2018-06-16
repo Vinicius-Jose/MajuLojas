@@ -6,15 +6,16 @@ import javax.swing.JOptionPane;
 
 import model.Fornecedor;
 import model.Tecido;
-import dao.MajuModasDAO;
-import dao.MajuModasDAOImpl;
+import dao.MajuModasDAOFornecedor;
+import dao.MajuModasDAOImplFornecedor;
 import dao.MajuModasDAOImplTecido;
 import dao.MajuModasDAOTecido;
 
 public class ControleTecido{
 
-	private MajuModasDAO bdTecido = new MajuModasDAOImpl();
-	private MajuModasDAOTecido bd = new MajuModasDAOImplTecido();
+
+	private MajuModasDAOTecido bdTecido = new MajuModasDAOImplTecido();
+	private MajuModasDAOFornecedor bdFornecedor = new MajuModasDAOImplFornecedor();
 	
 	public void adicionarTecido(Tecido tecido){
 		bdTecido.adicionar(tecido);
@@ -23,7 +24,7 @@ public class ControleTecido{
 	
 	public Tecido buscar(Tecido tecido){
 		
-		return bd.buscarTecidoEspecifico(tecido);
+		return bdTecido.buscarTecidoEspecifico(tecido);
 	}
 	
 	public void alterar(Tecido tecido){
@@ -32,7 +33,7 @@ public class ControleTecido{
 	}
 	
 	public List<Fornecedor> buscarFornecedor(){
-		return bdTecido.buscarFornecedor();
+		return bdFornecedor.buscarFornecedor();
 	}
 	
 }

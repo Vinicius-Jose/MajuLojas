@@ -6,16 +6,16 @@ import javax.swing.JOptionPane;
 
 import model.Grade;
 import model.Modelo;
-import dao.MajuModasDAO;
 import dao.MajuModasDAOGrade;
-import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplGrade;
+import dao.MajuModasDAOImplModelo;
+import dao.MajuModasDAOModelo;
 
 public class ControleGrade{
 
 	
 	private MajuModasDAOGrade bdGrade = new MajuModasDAOImplGrade();
-	private MajuModasDAO bd = new MajuModasDAOImpl();
+	private MajuModasDAOModelo bdModelo = new MajuModasDAOImplModelo();
 	
 	public void adicionarGrade(Grade grade) {
 		bdGrade.adicionar(grade);
@@ -28,6 +28,6 @@ public class ControleGrade{
 	}
 	
 	public Set<Modelo> buscarModelo() {
-		return bd.buscarModelo1();
+		return bdModelo.buscarModeloInfoBasica();
 	}
 }

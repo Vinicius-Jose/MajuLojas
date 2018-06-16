@@ -17,7 +17,7 @@ public class ControlePiloto{
 	private MajuModasDAOPiloto bdPiloto = new MajuModasDAOImplPiloto();
 	
 	public void adicionarPiloto(Piloto piloto) {
-		banco.adicionar(piloto);
+		bdPiloto.adicionar(piloto);
 		JOptionPane.showMessageDialog(null, "Piloto adicionado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -26,7 +26,7 @@ public class ControlePiloto{
 	}
 	
 	public void alterarPiloto(Piloto piloto) {
-		banco.alterar(piloto);
+		bdPiloto.alterar(piloto);
 		JOptionPane.showMessageDialog(null, "Piloto alterado com sucesso", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	

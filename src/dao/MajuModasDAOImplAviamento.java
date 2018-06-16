@@ -92,33 +92,28 @@ public class MajuModasDAOImplAviamento implements MajuModasDAOAviamento {
 
 		List<Aviamento> aviamento = new ArrayList<>();
 		try {
-			String sql = 
-				  "select av.codigo, av.data, av.valor_Unitario,"
-			    + "forn.id AS codigo_fornecedor, forn.nome AS nome_fornecedor "
-			    + "from aviamento av, fornecedor forn"
-			    + "where forn.id = av.Fornecedorid";
-			PreparedStatement stmt = con.prepareStatement( sql );
+			String sql = "select * from Aviamento";
+			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
-			
-			while (rs.next()) { 
+
+			while (rs.next()) {
 				Aviamento a = new Aviamento();
-				Fornecedor forn = new Fornecedor();
-				a.setCodigo( rs.getInt("codigo")  );
-				a.setDataCompra( rs.getDate("data_Aviamento")  );
-				a.setValorCompra( rs.getFloat("valor_Unitario")  );
-				a.setNome( rs.getString("nome")  );
-				forn.setId(rs.getInt("codigo_fornecedor"));
-				forn.setNome(rs.getString("nome_fornecedor"));
-				a.setFornecedor( forn );
-				aviamento.add( a );
+				a.setCodigo(rs.getInt("codigo"));
+				a.setDataCompra(rs.getDate("data_Aviamento"));
+				a.setValorCompra(rs.getFloat("valor_Unitario"));
+				a.setNome(rs.getString("nome"));
+				/**
+				 * ver depois como fazer *
+				 */
+				a.setFornecedor(null);
+				aviamento.add(a);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return aviamento;
-		
-	}
 
+	}
 
 
 

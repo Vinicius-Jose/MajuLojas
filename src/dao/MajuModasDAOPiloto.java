@@ -13,6 +13,7 @@ public interface MajuModasDAOPiloto {
 	public void alterar(Piloto piloto);
 	public List<Piloto> buscarPiloto();
 	public Piloto buscarPilotoEspecifico(Modelo modelo);
+	public int ultimoCadastroPiloto();
 
 	
 }
