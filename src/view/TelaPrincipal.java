@@ -1,3 +1,9 @@
+/**
+ * @autor Vinícius José
+ * Classe que possui uma tela fixa, chamade de painel principal e um 
+ * painel que altera o seu conteúdo durante o funcionamento do 
+ * sistema
+ */
 package view;
 
 import java.awt.Color;

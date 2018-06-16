@@ -1,3 +1,7 @@
+/**
+ * @autor Rodrigo Santos Santiago
+ * Interface DAO VerificarUsuario
+ */
 package dao;
 
 public interface MajuModasDAOVerificarUsuario {

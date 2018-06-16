@@ -1,3 +1,7 @@
+/**
+ * @autor Tela: Vinícius José; Métodos: Alicia Yoshida 
+ * 
+ */
 package view;
 
 import java.awt.Color;

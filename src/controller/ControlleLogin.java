@@ -1,3 +1,6 @@
+/**
+ * @autor Alicia Yoshida
+ */
 package controller;
 
 import dao.MajuModasDAOImplVerificarUsuario;

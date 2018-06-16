@@ -1,3 +1,7 @@
+/**
+ * @autor Rodrigo Santos Santiago
+ * Interface DAO Venda
+ */
 package dao;
 
 import java.util.List;

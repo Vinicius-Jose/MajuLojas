@@ -1,3 +1,7 @@
+/**
+ * @autor Rodrigo Santos Santiago
+ * Classe que implementa a Interface DAO Encomenda
+ */
 package dao;
 
 import java.sql.Connection;

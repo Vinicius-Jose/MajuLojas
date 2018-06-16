@@ -1,3 +1,7 @@
+/**
+ * @autor Vinícius José
+ * 
+ */
 package view;
 
 import java.awt.Color;

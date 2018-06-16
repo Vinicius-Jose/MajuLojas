@@ -1,3 +1,7 @@
+/**
+ * @autor Alicia Yoshida
+ */
+
 package controller;
 
 import javax.swing.JOptionPane;

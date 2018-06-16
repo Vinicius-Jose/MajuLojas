@@ -1,4 +1,7 @@
-package dao;
+/**
+ * @autor Rodrigo Santos Santiago
+ * Interface DAO Modelo
+ */package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

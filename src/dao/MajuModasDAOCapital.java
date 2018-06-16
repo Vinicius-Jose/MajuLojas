@@ -1,3 +1,7 @@
+/**
+ * @autor Rodrigo Santos Santiago
+ * Interface DAO Capital
+ */
 package dao;
 
 import java.util.HashMap;
