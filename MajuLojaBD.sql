@@ -206,10 +206,10 @@ insert into Capital values
 ('06/12/2017',3000)
 
 insert into Fornecedor values
-('Alberto Gonçalves', '971763490'),
-('Carlos Alberto de Andrade', '982867455'),
-('Bruno Marcondes', '980867523'),
-('Joana Albuquerque', '984200567')
+('Alberto Gonçalves', '011971763490'),
+('Carlos Alberto de Andrade', '011982867455'),
+('Bruno Marcondes', '011980867523'),
+('Joana Albuquerque', '011984200567')
 
  insert into Aviamento values
  ('12/01/2018', 0.20, 'Ziper', 1),
@@ -279,16 +279,16 @@ insert into Estoque values
 
 
 insert into Cliente values
-('José Pereira Souza', '947296576'),
-('Sabrina Alencar', '989342390'),
-('Caroline Batista', '956576320'),
-('Fernando Augusto Brito', '997621024'),
-('Marcela da Silva', '976429807')
+('José Pereira Souza', '011947296576'),
+('Sabrina Alencar', '011989342390'),
+('Caroline Batista', '011956576320'),
+('Fernando Augusto Brito', '011997621024'),
+('Marcela da Silva', '011976429807')
 
 insert into Motorista values
-('João Pedro da Silva', 'KDB6632','986872340'),
-('Marcos Antônio de Oliveira', 'CJK2052', '980742301'),
-('Gilberto dos Santos', 'FJM9067', '981845645')
+('João Pedro da Silva', 'KDB6632','011986872340'),
+('Marcos Antônio de Oliveira', 'CJK2052', '011980742301'),
+('Gilberto dos Santos', 'FJM9067', '011981845645')
 
 
 insert into lucro(data_Lucro,lucro_Mensal,Capitalcodigo) values
@@ -301,15 +301,15 @@ insert into lucro(data_Lucro,lucro_Mensal,Capitalcodigo) values
 
 
 insert into Encomenda values
-('23/01/2018', '27/01/2018', 200.00, 'Retirado', 1000, 1, 'CJK2052'),
-('24/01/2018', '28/01/2018', 100.00, 'Retirado', 1000, 2, 'FJM9067'),
-('15/02/2018', '18/02/2018', 75.00, 'Retirado', 1001, 3, 'FJM9067'),
-('13/03/2018', '16/03/2018', 125.00, 'Retirado', 1002, 4, 'KDB6632'),
-('05/04/2018', '07/04/2018', 225.00, 'Retirado', 1003, 5, 'CJK2052'),
-('20/05/2018', '23/05/2018', 175.00, 'Retirado',1004, 4, 'CJK2052'),
-('01/06/2018', '05/06/2018', 100.00, 'Retirado', 1004, 3, 'KDB6632'),
-('04/06/2018', '12/06/2018', 150.00, 'A retirar', 1004, 1, 'KDB6632'),
-('06/06/2018', '11/06/2018', 25.00, 'Cancelado', 1004, 2, 'FJM9067')
+('23/01/2018', '27/01/2018', 200.00, 'RETIRADO', 1000, 1, 'CJK2052'),
+('24/01/2018', '28/01/2018', 100.00, 'RETIRADO', 1000, 2, 'FJM9067'),
+('15/02/2018', '18/02/2018', 75.00, 'RETIRADO', 1001, 3, 'FJM9067'),
+('13/03/2018', '16/03/2018', 125.00, 'RETIRADO', 1002, 4, 'KDB6632'),
+('05/04/2018', '07/04/2018', 225.00, 'RETIRADO', 1003, 5, 'CJK2052'),
+('20/05/2018', '23/05/2018', 175.00, 'RETIRADO',1004, 4, 'CJK2052'),
+('01/06/2018', '05/06/2018', 100.00, 'RETIRADO', 1004, 3, 'KDB6632'),
+('04/06/2018', '12/06/2018', 150.00, 'ARETIRAR', 1004, 1, 'KDB6632'),
+('06/06/2018', '11/06/2018', 25.00, 'CANCELADO', 1004, 2, 'FJM9067')
 
 insert into Item_Encomenda values
 (1, 4, 50.00, 1000),
@@ -358,8 +358,14 @@ insert into Item_Venda values
 (2, 1008, 4, 25.00),
 (1, 1009, 4, 50.00)
 
+insert into Corte_Costura values
+(10.00,5.00,200,'10/05/2018', null),
+(20.00,1.00,150,'08/05/2018', null)
 
---essa aq é a unica q da erro
+insert into Tecido values
+('10/05/2018', 15, 20,'Tecido para moletom', 'Preto', 1, null),
+('08/05/2018', 15, 20,'Tecido de Laicra', 'Azul', 1, null)
+
 insert into Item_Peca values
 (100, 1, 100, 0.20, 1000),
 (101, 2, 100, 9.80, 1000)
@@ -410,13 +416,7 @@ select * from Lucro
 
 select * from Aviamento where nome like 'zi%'
 
-insert into Corte_Costura values
-(10.00,5.00,200,'10/05/2018', null),
-(20.00,1.00,150,'08/05/2018', null)
 
-insert into Tecido values
-('10/05/2018', 15, 20,'Tecido para moletom', 'Preto', 1, null),
-('08/05/2018', 15, 20,'Tecido de Laicra', 'Azul', 1, null)
 
 select * from Corte_Costura where DATEDIFF(MONTH,data,getdate()) = 1
 select * from Tecido where DATEDIFF(MONTH,data_Tecido,getdate()) = 1
@@ -431,8 +431,22 @@ update tecido
 set data_Tecido = ('20/04/2018')
 where data_Tecido = '20/05/2018'
 
-alter table encomenda 
-alter column Lucrocodigo int null
+
+alter table encomenda
+alter column lucrocodigo int null
+
+alter table encomenda
+alter column Motoristanum_Placa varchar(07) null
+
+alter table modelo
+alter column Corte_Costuracodigo int null
+
+alter table grade
+add constraint tamanho unique(letra)
+
+
+alter table modelo
+alter column corte_costuracodigo int null
 
 select * from Capital
 delete from Capital
@@ -462,17 +476,6 @@ select sum(vd.valor_Total) , sum(en.valor_Total) from Venda vd, Lucro l, Encomen
 vd.Lucrocodigo = l.codigo and en.Lucrocodigo = l.codigo 
 group by en.codigo
 
-alter table encomenda
-alter column lucrocodigo int null
-
-alter table encomenda
-alter column Motoristanum_Placa varchar(07) null
-
-alter table modelo
-alter column Corte_Costuracodigo int null
-
-alter table grade
-add constraint tamanho unique(letra)
 
 select * from modelo
 select * from Estoque
@@ -483,6 +486,3 @@ select es.ModeloCodigo as modelo, es.qtd_Grade as quantidade, es.gradeCodigo, gd
 where es.Gradecodigo = gd.codigo and es.Modelocodigo = 1
 select * from modelo
 
-
-alter table modelo
-alter column corte_costuracodigo int null
