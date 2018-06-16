@@ -1,5 +1,7 @@
 package dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Set;
 
 import model.Modelo;
@@ -11,6 +13,7 @@ public interface MajuModasDAOModelo {
 	public void remover(Modelo modelo, Integer codigoAviamento);
 	public void alterar(Modelo modelo);
 	public Set<Modelo> buscarModeloInfoBasica();
+	int ultimoModelo() throws SQLException;
 	
 	
 }

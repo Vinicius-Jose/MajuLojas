@@ -64,14 +64,11 @@ public void adicionar(Modelo modelo) {
 		}
 
 		try {
-			String sql = "select max(codigo) as maximo from modelo";
-			PreparedStatement stmt = con.prepareStatement(sql);
-			ResultSet rt = stmt.executeQuery();
-			rt.next();
-			modelo.setCodigo(rt.getInt("maximo"));
+			String sql;
+			PreparedStatement stmt;
+			modelo.setCodigo(ultimoModelo());
 			sql = "INSERT INTO Item_Peca " + " VALUES ( ?, ?, ?, ?, ? ) ";
 			stmt = con.prepareStatement(sql);
-
 			for (ItemPeca ip : modelo.getItemPeca()) {
 				stmt.setInt(1, ip.getAviamento().getCodigo());
 				stmt.setInt(2, modelo.getCodigo());
@@ -88,6 +85,17 @@ public void adicionar(Modelo modelo) {
 		}
 
 	}
+
+
+
+public int ultimoModelo() throws SQLException {
+	String sql = "select max(codigo) as maximo from modelo";
+	PreparedStatement stmt = con.prepareStatement(sql);
+	ResultSet rt = stmt.executeQuery();
+	rt.next();
+	int max = rt.getInt("maximo");
+	return max;
+}
 
 	@Override
 	public void remover(Modelo modelo, Integer codigoAviamento) {
