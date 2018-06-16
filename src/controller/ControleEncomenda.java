@@ -10,21 +10,27 @@ import model.Encomenda;
 import model.Modelo;
 import model.Motorista;
 import dao.MajuModasDAO;
+import dao.MajuModasDAOCapital;
 import dao.MajuModasDAOCliente;
+import dao.MajuModasDAOEncomenda;
 import dao.MajuModasDAOImpl;
 import dao.MajuModasDAOImplCliente;
+import dao.MajuModasDAOImplEncomenda;
+import dao.MajuModasDAOImplModelo;
 import dao.MajuModasDAOImplMotorista;
+import dao.MajuModasDAOModelo;
 import dao.MajuModasDAOMotorista;
 
 public class ControleEncomenda {
 
 
 	private MajuModasDAOCliente bdCliente = new MajuModasDAOImplCliente();
-	private MajuModasDAO banco = new MajuModasDAOImpl();
 	private MajuModasDAOMotorista bdMotorista = new MajuModasDAOImplMotorista();
-
+	private MajuModasDAOEncomenda bdEncomenda = new MajuModasDAOImplEncomenda();
+	private MajuModasDAOModelo bdModelo = new MajuModasDAOImplModelo();
+	
 	public void finalizarEncomenda(Encomenda encomenda) {
-		banco.adicionar(encomenda);
+		bdEncomenda.adicionar(encomenda);
 		JOptionPane.showMessageDialog(null, "Encomenda adicionado com sucesso",
 				"Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -38,11 +44,11 @@ public class ControleEncomenda {
 	}
 	
 	public Set<Modelo> buscarModelos(){
-		return banco.buscarModelo1();
+		return bdModelo.buscarModeloInfoBasica();
 	}
 
 	public List<Encomenda> buscarEncomendas(Cliente cliente) {
-		return banco.buscarEncomenda();
+		return bdEncomenda.buscarEncomenda(cliente);
 	}
 	
 	

@@ -6,10 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import model.Cliente;
 import model.Encomenda;
 import model.ItemEncomenda;
+import model.Modelo;
 import model.Status;
 
 
@@ -156,15 +160,16 @@ public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
 	}
 
 
-
 	@Override
-	public List<Encomenda> buscarEncomenda() {
+	public List<Encomenda> buscarEncomenda( Cliente cliente) {
 
 		List<Encomenda> encomenda = new ArrayList<>();
 		try {
 			String sql = 
-				"select * from Encomenda";
+				"select  en.codigo, en.Status_encomenda, en.data_Encomenda, en.data_Retirada, mot.nome  from  encomenda en, Cliente cl, Motorista mot "
++ " where en.Clienteid = cl.id and en.Motoristanum_Placa = mot.num_Placa and cl.id = ?";
 			PreparedStatement stmt = con.prepareStatement( sql );
+			stmt.setInt(1,cliente.getId());
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) { 
@@ -173,13 +178,9 @@ public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
 				en.setDataEncomenda( rs.getDate("data_Encomenda")  );
 				en.setDataRetirada( rs.getDate("data_Retirada")  );
 				en.setValorTotalEncomenda(rs.getFloat("valor_Total"));
-				/*
-				 * Ver como ficaria o Status depois
-				 */
-				en.setStatus(Status.valueOf(rs.getString("status")));
-				
-				
+				en.setStatus(Status.valueOf(rs.getString("Status_Encomenda")));
 				encomenda.add(en);
+			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -187,6 +188,35 @@ public class MajuModasDAOImplEncomenda implements MajuModasDAOEncomenda {
 		return encomenda;
 		
 	}
+	
+	
+	private Set<ItemEncomenda> buscarItens(Encomenda encomenda){
+		Set<ItemEncomenda> itens = new HashSet();
+		try {
+			String sql = 
+				"select ien.quantidade, md.codigo, md.modelo, ien.valor_Item_Encomenda from Item_Encomenda  ien, Modelo md where Encomendacodigo = ?";
+			PreparedStatement stmt = con.prepareStatement( sql );
+			stmt.setInt(1,encomenda.getCodigo());
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) { 
+				ItemEncomenda ien = new ItemEncomenda();
+				ien.setQuantidade(rs.getInt("quantidade"));
+				Modelo mod = new Modelo();
+				mod.setCodigo(rs.getInt("codigo"));
+				mod.setModelo(rs.getString("modelo"));
+				ien.setModelo(mod);
+				ien.setValorItemEncomenda(rs.getFloat("valor_item_encomenda") );
+				itens.add(ien); 
+			
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return itens;
+		
+	}
+	}
 
 
-}
+
