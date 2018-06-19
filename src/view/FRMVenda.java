@@ -228,9 +228,7 @@ public class FRMVenda extends JPanel implements ActionListener {
 		txtValortotal.setText("");
 		tabelaVenda.revalidate();
 		DefaultTableModel md = (DefaultTableModel) tabelaVenda.getModel();
-		for (int i = 0; i < md.getRowCount(); i++) {
-			md.removeRow(i);
-		}
+		md.setRowCount(0);
 
 	}
 
