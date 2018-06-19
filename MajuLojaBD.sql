@@ -202,8 +202,8 @@ insert into Capital values
 ('10/04/2018',5000),
 ('09/03/2018',6000),
 ('08/02/2018',7000),
-('07/01/2018',9000),
-('06/12/2017',3000)
+
+
 
 insert into Fornecedor values
 ('Alberto Gonçalves', '011971763490'),
@@ -399,15 +399,7 @@ Order by meses
 UPdate Capital
 set data_Capital = '06/12/2017'
 where MONTH(data_Capital) =12
---(100, 1, 60, 0.20, 1001),
---(100, 1, 70, 0.20, 1002),
---(100, 1, 50, 0.20, 1003),
---(100, 1, 60, 0.20, 1004),
 
---(101, 2, 60, 9.80, 1001),
---(101, 2, 70, 9.80, 1002),
---(101, 2, 50, 9.80, 1003),
---(101, 2, 60, 9.80, 1004)
 
 
 Select Distinct( md.modelo), md.preco_Custo as custoConfeccao, cc.qtd_Peca_Cortada as cortado, cc.valor_Corte as valCorte,  cc.valor_Costura as costura,case when (tec.Capitalcodigo!= cap.codigo) then 0 else tec.valor_Unitario  end as tecido,case when (pl.Capitalcodigo!= cap.codigo) then 0 else pl.valor_Unitario end as piloto , case  when (ml.CapitalCodigo != cap.codigo) then 0 else ml.valor_Unitario end as modelagem from Capital cap , Modelo md , Corte_Costura cc, Tecido tec, Modelagem ml,Piloto pl
