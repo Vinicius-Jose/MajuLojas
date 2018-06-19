@@ -1,6 +1,6 @@
-create database MajuLoja 
+create database MajuLoja03
 go 
-use MajuLoja
+use MajuLoja03
 
 
 CREATE TABLE Fornecedor (
@@ -196,12 +196,29 @@ FOREIGN KEY (Capitalcodigo) REFERENCES Capital (codigo)
 Create Table Usuarios(
 nome varchar(200) not null Primary key,
 senha varchar(200) not null
-)
+);
+
+
+alter table encomenda
+alter column lucrocodigo int null
+
+alter table encomenda
+alter column Motoristanum_Placa varchar(07) null
+
+alter table modelo
+alter column Corte_Costuracodigo int null
+
+alter table grade
+add constraint tamanho unique(letra)
+
+
+alter table modelo
+alter column corte_costuracodigo int null
 
 insert into Capital values
 ('10/04/2018',5000),
 ('09/03/2018',6000),
-('08/02/2018',7000),
+('08/02/2018',7000)
 
 
 
@@ -239,31 +256,31 @@ insert into Piloto values
 (40.00, '08/01/2018', 1000)
 
 
-
 insert into Tecido values
-('14/01/2018', 8.90, 1, 'Moletom', 'Preto', 2, 1000),
-('14/01/2018', 8.90, 1, 'Jeans', 'Cinza', 3, 1000),
-('12/02/2018', 8.90, 2, 'Moletom', 'Azul', 2, 1001),
-('12/02/2018', 8.90, 2, 'Jeans', 'Cinza', 3, 1001),
-('15/03/2018', 8.90, 1, 'Moletom', 'Preto', 2, 1002),
-('15/03/2018', 8.90, 1, 'Jeans', 'Cinza', 3, 1002),
-('18/04/2018', 8.90, 3, 'Moletom', 'Azul', 2, 1003),
-('18/04/2018', 8.90, 3, 'Jeans', 'Cinza', 3, 1003),
-('20/05/2018', 8.90, 2, 'Moletom', 'Preto', 2, 1004),
-('20/05/2018', 8.90, 2, 'Jeans', 'Cinza', 3, 1004)
+('14/01/2018', 8.90, 1, 'Moletom fino', 'Preto', 2, 1000),
+('14/01/2018', 8.90, 1, 'Jeans para calça', 'Cinza', 3, 1000),
+('12/02/2018', 8.90, 2, 'Poliester', 'Azul', 2, 1001),
+('12/02/2018', 8.90, 2, 'Algodao', 'Cinza', 3, 1001),
+('15/03/2018', 8.90, 1, 'Moletom grosso', 'Preto', 2, 1002),
+('15/03/2018', 8.90, 1, 'Jeans para camisa', 'Cinza', 3, 1002),
+('18/04/2018', 8.90, 3, 'Moletom para pijama', 'Azul', 2, 1002),
+('18/04/2018', 8.90, 3, 'Seda ', 'Cinza', 3, 1002),
+('20/05/2018', 8.90, 2, 'Linho', 'Preto', 2, 1002),
+('20/05/2018', 8.90, 2, 'ACRÍLICO', 'Cinza', 3, 1002)
 
 
 insert into Corte_Costura values
 (0.40, 2.80, 350, '15/01/2018', 1000),
 (0.40, 2.80, 220, '05/02/2018', 1001),
 (0.40, 2.80, 240, '01/03/2018', 1002),
-(0.40, 2.80, 320, '01/04/2018', 1003),
-(0.40, 2.80, 400, '01/04/2018', 1004)
+(0.40, 2.80, 320, '01/04/2018', 1002),
+(0.40, 2.80, 400, '01/04/2018', 1001)
 
  insert into Modelo values
-('Conjunto de Moletom', 50.00, 25.00, 100, 100, 100, 100),
-('Saia', 25.00, 12.50, 101, 101, 100, 100)
-
+('Conjunto de Moletom', 50.00, 25.00, 100, 100, 104, 108),
+('Saia', 25.00, 12.50, 101, 101, 103, 107)
+select * from corte_costura
+select * from estoque
 
 
 insert into Estoque values
@@ -293,23 +310,22 @@ insert into Motorista values
 
 insert into lucro(data_Lucro,lucro_Mensal,Capitalcodigo) values
 ('10/04/2018',5000,1000),
-('09/03/2018',60000,1002),
-('08/02/2018',70000,1001),
-('07/01/2018',10000,1003),
-('06/12/2017',30000,1004)
+('09/03/2018',60000,1001),
+('08/02/2018',70000,1002)
 
 
+select * from Encomenda
 
 insert into Encomenda values
-('23/01/2018', '27/01/2018', 200.00, 'RETIRADO', 1000, 1, 'CJK2052'),
-('24/01/2018', '28/01/2018', 100.00, 'RETIRADO', 1000, 2, 'FJM9067'),
-('15/02/2018', '18/02/2018', 75.00, 'RETIRADO', 1001, 3, 'FJM9067'),
-('13/03/2018', '16/03/2018', 125.00, 'RETIRADO', 1002, 4, 'KDB6632'),
-('05/04/2018', '07/04/2018', 225.00, 'RETIRADO', 1003, 5, 'CJK2052'),
-('20/05/2018', '23/05/2018', 175.00, 'RETIRADO',1004, 4, 'CJK2052'),
-('01/06/2018', '05/06/2018', 100.00, 'RETIRADO', 1004, 3, 'KDB6632'),
-('04/06/2018', '12/06/2018', 150.00, 'ARETIRAR', 1004, 1, 'KDB6632'),
-('06/06/2018', '11/06/2018', 25.00, 'CANCELADO', 1004, 2, 'FJM9067')
+('23/04/2018', '27/01/2018', 200.00, 'RETIRADO', 1000, 1, 'CJK2052'),
+('24/04/2018', '28/01/2018', 100.00, 'RETIRADO', 1000, 2, 'FJM9067'),
+('15/03/2018', '18/02/2018', 75.00, 'RETIRADO', 1001, 3, 'FJM9067'),
+('13/03/2018', '16/03/2018', 125.00, 'RETIRADO', 1001, 4, 'KDB6632'),
+('05/03/2018', '07/04/2018', 225.00, 'RETIRADO', 1001, 5, 'CJK2052'),
+('20/02/2018', '23/05/2018', 175.00, 'RETIRADO',1002, 4, 'CJK2052'),
+('01/02/2018', '05/06/2018', 100.00, 'RETIRADO', 1002, 3, 'KDB6632'),
+('04/02/2018', '12/06/2018', 150.00, 'ARETIRAR', 1002, 1, 'KDB6632'),
+('06/02/2018', '11/06/2018', 25.00, 'CANCELADO', 1002, 2, 'FJM9067')
 
 insert into Item_Encomenda values
 (1, 4, 50.00, 1000),
@@ -328,16 +344,16 @@ insert into Item_Encomenda values
 
 
 insert into Venda values
-('25/01/2018', 25.00, 1000),
-('30/01/2018', 100.00, 1000),
-('13/02/2018', 250.00, 1001),
-('18/02/2018', 300.00, 1001),
-('04/03/2018', 50.00, 1002),
-('05/03/2018', 200.00, 1002),
-('23/04/2018', 125.00, 1003),
-('27/04/2018', 175.00, 1003),
-('15/05/2018', 400.00, 1004),
-('20/05/2018', 200.00, 1004)
+('25/04/2018', 25.00, 1000),
+('30/04/2018', 100.00, 1000),
+('13/04/2018', 250.00, 1000),
+('18/04/2018', 300.00, 1000),
+('04/03/2018', 50.00, 1001),
+('05/03/2018', 200.00, 1001),
+('23/03/2018', 125.00, 1001),
+('27/03/2018', 175.00, 1001),
+('15/02/2018', 400.00, 1002),
+('20/02/2018', 200.00, 1002)
 
 
 insert into Item_Venda values
@@ -376,21 +392,6 @@ insert into Usuarios values
 ('Maju' , PWDENCRYPT('Lojas'))
 
 
-alter table encomenda
-alter column lucrocodigo int null
-
-alter table encomenda
-alter column Motoristanum_Placa varchar(07) null
-
-alter table modelo
-alter column Corte_Costuracodigo int null
-
-alter table grade
-add constraint tamanho unique(letra)
-
-
-alter table modelo
-alter column corte_costuracodigo int null
 
 
 Select Month(data_Capital) as meses from Capital
@@ -453,9 +454,7 @@ select * from encomenda
 where DATEDIFF(MONTH,data_Venda,getdate()) = 1
 select * from Encomenda where Lucrocodigo = 1013
 
-update Capital
-set data_Capital = '12/05/2018'
-where data_Capital = '12/06/2018'
+
 
 select max(codigo) +1 from Lucro
 
