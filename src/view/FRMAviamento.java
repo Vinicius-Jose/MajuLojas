@@ -190,6 +190,7 @@ public class FRMAviamento extends JPanel implements ActionListener {
 			cbFornecedor.setSelectedItem(av.getFornecedor());
 			fttData.setText(sdf.format(av.getDataCompra()));
 			txtAviamento.setText(av.getNome());
+			id = av.getCodigo();
 		}
 	}
 
@@ -208,6 +209,8 @@ public class FRMAviamento extends JPanel implements ActionListener {
 			aviamento
 					.setFornecedor((Fornecedor) cbFornecedor.getSelectedItem());
 		}
+		aviamento.setCodigo(id);
+		id = -1;
 		return aviamento;
 	}
 

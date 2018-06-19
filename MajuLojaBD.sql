@@ -438,13 +438,6 @@ update tecido
 set data_Tecido = ('20/04/2018')
 where data_Tecido = '20/05/2018'
 
-
-
-
-
-
-
-
 select max(codigo) +1 from Lucro
 
 select * from Lucro
