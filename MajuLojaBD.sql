@@ -1,6 +1,6 @@
-create database MajuLoja03
+create database MajuLoja
 go 
-use MajuLoja03
+use MajuLoja
 
 
 CREATE TABLE Fornecedor (
@@ -397,9 +397,7 @@ insert into Usuarios values
 Select Month(data_Capital) as meses from Capital
 Order by meses
 
-UPdate Capital
-set data_Capital = '06/12/2017'
-where MONTH(data_Capital) =12
+
 
 
 
@@ -416,8 +414,7 @@ Select valor_Capital  from Capital where MONTH(data_Capital) = 4 and YEAR(data_C
 
 
 
-select vd.valor_Total + en.valor_Total as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv , lucro l where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and l.codigo = vd.Lucrocodigo and en.Lucrocodigo = l.codigo and Month(l.data_Lucro) = 6 and YEAR(l.data_Lucro) =2018
-group by md.modelo, md.margem_Custo
+
 
 Select  DISTINCT(md.modelo), md.preco_Custo as custoConfeccao, cc.qtd_Peca_Cortada as cortado, cc.valor_Corte as valCorte,  cc.valor_Costura as costura, tec.valor_Unitario  as tecido,case when (pl.Capitalcodigo!= cap.codigo) then 0 else pl.valor_Unitario end as piloto , case  when (ml.CapitalCodigo != cap.codigo) then 0 else ml.valor_Unitario end as modelagem from Capital cap , Modelo md , Corte_Costura cc, Tecido tec, Modelagem ml,Piloto pl where MONTH(data_Capital) = 6 and YEAR(data_Capital) = 2018 and md.Tecidocodigo = tec.codigo and cc.codigo = md.Corte_Costuracodigo and ml.codigo = md.Modelagemcodigo
 
@@ -443,16 +440,8 @@ where data_Tecido = '20/05/2018'
 
 
 
-select * from Capital
-delete from Capital
-where codigo = 1004
-select * from Capital
-select * from Lucro
-select * from Capital 
-select * from Venda
-select * from encomenda
-where DATEDIFF(MONTH,data_Venda,getdate()) = 1
-select * from Encomenda where Lucrocodigo = 1013
+
+
 
 
 
@@ -461,13 +450,6 @@ select max(codigo) +1 from Lucro
 select * from Lucro
 truncate table Venda
 
-
-select md.modelo as modelo,Sum(ien.quantidade) + Sum(iv.qtd_Modelo_Vendido)as qtd, md.margem_Custo as preco,  Sum(vd.valor_Total) + Sum(en.valor_Total)as valor_Ganho from Modelo md, Venda vd, Encomenda en, Item_Encomenda ien, Item_Venda iv , lucro l where ien.Modelocodigo = md.codigo and iv.Modelocodigo = md.codigo and vd.codigo = iv.Vendacodigo and en.codigo = ien.Encomendacodigo and l.codigo = vd.Lucrocodigo and en.Lucrocodigo = l.codigo and Month(l.data_Lucro) = 6 and YEAR(l.data_Lucro) =2018
-group by md.modelo, md.margem_Custo
-
-select sum(vd.valor_Total) , sum(en.valor_Total) from Venda vd, Lucro l, Encomenda en  where l.codigo = 1013 and
-vd.Lucrocodigo = l.codigo and en.Lucrocodigo = l.codigo 
-group by en.codigo
 
 
 select * from modelo
